@@ -1,9 +1,26 @@
 .App {
+  
+}
+
+.App-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.App-header {
+  background-color: #f1f1f1;
+  width: 80%;
+  line-height: 200px;
+  margin: 10px;
   text-align: center;
 }
 
+
+/*
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+  animation: App-logo-spin infinite 100s linear;
   height: 80px;
 }
 
@@ -26,3 +43,4 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+*/
