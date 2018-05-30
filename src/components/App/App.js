@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import logo from '../../logo.svg';
+//import logo from '../../logo.svg';
 import '../../styles/App.css';
+import ProfilePicture from '../../images/profile-picture.jpg';
+import Header from '../Header/Header'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      profilePicture: ProfilePicture
+    };
+  }
   render() {
     return (
       <div className="App App-container">
-        <header className="App-header">
-          <h1 className="App-title">Hello World, my name is Shaun Daroya</h1>
-        </header>
+        <Header profilePicture={this.state.profilePicture} />
       </div>
     );
   }

@@ -1,7 +1,3 @@
-.App {
-  
-}
-
 .App-container {
   display: flex;
   flex-direction: column;
@@ -9,13 +5,79 @@
   align-items: center;
 }
 
-.App-header {
-  background-color: #f1f1f1;
-  width: 80%;
-  line-height: 200px;
-  margin: 10px;
-  text-align: center;
+
+/* Header component */
+.Header-profile-image {
+  border-radius: 50%;
+  width: 60%;
+  border-width: 3px;
+  border-color: maroon;
+  border-style: solid;
 }
+
+.Header {
+  border-radius: 5px;
+  background-color: wheat;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 1024px;
+  min-height: 300px;
+  margin-top: 20px;
+  border-width: 3px;
+  border-color: maroon;
+  border-style: solid;
+}
+
+.Header .Header-left-box {
+  width: 30%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align:center;
+}
+
+.Header .Header-middle-box {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+}
+
+.Header .Header-middle-box .Dev-name {
+  font-size: 3.0em;
+  margin-bottom: 5px;
+}
+
+.Header .Header-middle-box .Dev-skills {
+  font-size: 1.0em;
+  margin-bottom: 5px;
+}
+
+.Header .Header-middle-box .Dev-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.Header .Header-middle-box .Dev-links img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.Header .Header-right-box {
+  width: 30%;
+}
+
+
+
+
+
 
 
 /*
