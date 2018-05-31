@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-//import logo from '../../logo.svg';
 import '../../styles/App.css';
 import ProfilePicture from '../../images/profile-picture.jpg';
-import Header from '../Header/Header'
+import Header from '../Header/Header';
+import Body from '../Body/Body';
 
 class App extends Component {
   constructor(props) {
@@ -15,6 +15,7 @@ class App extends Component {
     return (
       <div className="App App-container">
         <Header profilePicture={this.state.profilePicture} />
+        <Body />
       </div>
     );
   }

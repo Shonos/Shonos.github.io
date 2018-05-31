@@ -3,30 +3,29 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #5CDB95;
 }
-
 
 /* Header component */
 .Header-profile-image {
   border-radius: 50%;
   width: 60%;
   border-width: 3px;
-  border-color: maroon;
+  border-color: #05386B;
   border-style: solid;
 }
 
 .Header {
   border-radius: 5px;
-  background-color: wheat;
+  background-color: #EDF5E1;
   width: 80%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  max-width: 1024px;
   min-height: 300px;
   margin-top: 20px;
   border-width: 3px;
-  border-color: maroon;
+  border-color: #05386B;
   border-style: solid;
 }
 
@@ -49,11 +48,14 @@
 .Header .Header-middle-box .Dev-name {
   font-size: 3.0em;
   margin-bottom: 5px;
+  color: #05386B;
 }
 
-.Header .Header-middle-box .Dev-skills {
+.Header .Header-middle-box .Dev-description {
   font-size: 1.0em;
-  margin-bottom: 5px;
+  margin-bottom: 1em;
+  color: #05386B;
+  padding: 5px;
 }
 
 .Header .Header-middle-box .Dev-links {
@@ -72,7 +74,79 @@
 
 .Header .Header-right-box {
   width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  border-left: 2px solid #379683;
+  padding-left: 1em;
 }
+
+.Header .Header-right-box .Box {
+  display:flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  margin: 5% 0% 0% 0%;
+  padding: 1em;
+}
+
+.Header .Header-right-box .Box .Key {
+  padding: 4px;
+  font-size: 1em;
+  color: #379683;
+}
+
+.Header .Header-right-box .Box .Item {
+  padding: 4px;
+  font-size: 1.3em;
+  color: #05386B;
+  margin-bottom: 1em;
+}
+
+/* Body Section */
+
+.Body-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  background-color: #5CDB95;
+  height:100vh;
+  width: 80%;
+  margin-top: 1em;
+}
+
+.Body-section .Left-items {
+  display:flex;
+  flex-direction: column;
+  background-color: #5CDB95;
+  width: 20%;
+}
+
+.Body-section .Left-items .Box {
+  display:flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  margin: 5% 0% 0% 0%;
+  border: 4px solid #05386B;
+  background-color: #EDF5E1;
+  padding: 1em;
+}
+
+.Body-section .Left-items .Box .Key {
+  font-size: 1em;
+  margin-bottom: 5px;
+  color: #379683;
+}
+
+.Body-section .Left-items .Box .Value {
+  padding: 4px;
+  font-size: 1.3em;
+  color: #05386B;
+  margin-bottom: 1em;
+}
+
 
 
 
