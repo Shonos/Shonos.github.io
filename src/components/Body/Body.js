@@ -19,17 +19,35 @@ let leftItemBoxes = [
     }
 ];
 
+let rightItemBoxes = [
+    {
+        "id": 1,
+        "key": "shonos.github.io",
+        "item": "source code for this page you are viewing",
+        "link": "https://github.com/Shonos/Shonos.github.io"
+    }
+]
+
+
+
 export class Body extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            leftItemBoxes: leftItemBoxes
+            leftItemBoxes: leftItemBoxes,
+            rightItemBoxes: rightItemBoxes
         };
     }
     render() {
         return  <div className="Body-section">
                     <div className="Left-items">
                         { leftItemBoxes.map(x => {return <BoxKeyValuePair key={x.id} box={x} />;}) }  
+                    </div>
+                    <div className="Middle-items">
+
+                    </div>
+                    <div className="Right-items">
+                        { rightItemBoxes.map(x => {return <BoxKeyValuePair key={x.id} box={x} />;}) }
                     </div>
                 </div>
     }

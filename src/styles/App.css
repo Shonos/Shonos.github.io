@@ -11,7 +11,7 @@
   border-radius: 50%;
   width: 60%;
   border-width: 3px;
-  border-color: #05386B;
+  border: 4px solid #05386B;
   border-style: solid;
 }
 
@@ -22,9 +22,9 @@
   align-items: center;
   min-height: 300px;
   margin-top: 20px;
-  border-width: 3px;
-  border-color: #05386B;
-  border-style: solid;
+  border: 4px solid #05386B;
+  border-top-width: 1px; 
+  border-left-width: 1px; 
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -112,9 +112,9 @@
   flex-direction: row;
   justify-content: left;
   background-color: #5CDB95;
-  height:100vh;
   width: 80%;
   margin-top: 1em;
+  justify-content: space-between;
 }
 
 .Body-section .Left-items {
@@ -124,29 +124,56 @@
   width: 20%;
 }
 
-.Body-section .Left-items .Box {
+.Body-section .Box {
   display:flex;
   flex-direction: column;
   justify-content: left;
   align-items: left;
-  margin: 5% 0% 0% 0%;
+  margin: 0% 0% 5% 0%;
   border: 4px solid #05386B;
+  border-top-width: 1px; 
+  border-left-width: 1px; 
   background-color: #EDF5E1;
   padding: 1em;
 }
 
-.Body-section .Left-items .Box .Key {
+.Body-section .Box .Key {
   font-size: 1em;
   margin-bottom: 5px;
   color: #379683;
 }
 
-.Body-section .Left-items .Box .Value {
+.Body-section .Box .Value {
   padding: 4px;
   font-size: 1.3em;
   color: #05386B;
   margin-bottom: 1em;
 }
+
+.Body-section .Middle-items {
+  background-color: #5CDB95;
+  width: 50%;
+  /*
+  border: 4px solid #05386B;
+  border-top-width: 1px; 
+  border-left-width: 1px; 
+  background-color: #EDF5E1;
+  */
+  flex-direction: column;
+  justify-content: left;
+}
+
+.Body-section .Right-items {
+  background-color: #5CDB95;
+  width: 25%;
+  /*
+  border: 4px solid #05386B;
+  border-top-width: 1px; 
+  border-left-width: 1px; 
+  background-color: #EDF5E1;
+  */
+}
+
 
 @media screen and (max-width: 1050px) {
   .Header {
