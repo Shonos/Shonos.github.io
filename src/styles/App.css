@@ -19,14 +19,15 @@
   border-radius: 5px;
   background-color: #EDF5E1;
   width: 80%;
-  display: flex;
-  flex-direction: row;
   align-items: center;
   min-height: 300px;
   margin-top: 20px;
   border-width: 3px;
   border-color: #05386B;
   border-style: solid;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .Header .Header-left-box {
@@ -34,7 +35,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align:center;
+  text-align: center;
+  min-width: 250px;
 }
 
 .Header .Header-middle-box {
@@ -43,6 +45,7 @@
   flex-direction: column;
   justify-content: left;
   align-items: left;
+  min-width: 350px;
 }
 
 .Header .Header-middle-box .Dev-name {
@@ -55,7 +58,6 @@
   font-size: 1.0em;
   margin-bottom: 1em;
   color: #05386B;
-  padding: 5px;
 }
 
 .Header .Header-middle-box .Dev-links {
@@ -73,13 +75,13 @@
 }
 
 .Header .Header-right-box {
-  width: 30%;
-  display: flex;
-  flex-direction: column;
+  width: 25%;
   justify-content: left;
-  align-items: left;
-  border-left: 2px solid #379683;
   padding-left: 1em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
 }
 
 .Header .Header-right-box .Box {
@@ -87,8 +89,7 @@
   flex-direction: column;
   justify-content: left;
   align-items: left;
-  margin: 5% 0% 0% 0%;
-  padding: 1em;
+  flex-wrap: wrap;
 }
 
 .Header .Header-right-box .Box .Key {
@@ -101,7 +102,7 @@
   padding: 4px;
   font-size: 1.3em;
   color: #05386B;
-  margin-bottom: 1em;
+  margin-bottom: em;
 }
 
 /* Body Section */
@@ -147,36 +148,77 @@
   margin-bottom: 1em;
 }
 
+@media screen and (max-width: 1050px) {
+  .Header {
+    width: 90%;
+    padding-top: 10px;
+  }
+  .Header .Header-middle-box .Dev-links img {
+    width: 25px;
+  }
+  .Body-section {
+    width: 90%;
+  }
+  .Body {
+    width: 90%;
+  }
+  .Header .Header-left-box {
+    width: 30%;
+  }
+  .Header .Header-middle-box {
+    width: 50%;
+  }
+  .Header .Header-right-box {
+    width: 100%;
+  }
+  .Header .Header-right-box .Box {
+    width:50%;
+    align-items: center;
+  }
 
-
-
-
-
-
-
-/*
-.App-logo {
-  animation: App-logo-spin infinite 100s linear;
-  height: 80px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
+@media screen and (max-width: 700px) {
+    .Header {
+      width: 97%;
+      padding-top: 10px;
+    }
+    .Header .Header-middle-box .Dev-links img {
+      width: 25px;
+    }
+    .Body {
+      width: 90%;
+    }
+    .Header .Header-left-box {
+      width: 100%;
+    }
+    .Header .Header-left-box .Header-profile-image {
+      max-width: 150px;
+    }
+    .Header .Header-middle-box {
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .Header .Header-middle-box .Dev-links {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .Header .Header-right-box {
+      width: 100%;
+    }
+    .Header .Header-right-box .Box {
+      width:50%;
+      align-items: center;
+    }
 
-.App-title {
-  font-size: 1.5em;
-}
+    .Body-section {
+      width: 97%;
+    }
 
-.App-intro {
-  font-size: large;
+    .Body-section .Left-items {
+      width: 100%;
+    }
 }
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-*/

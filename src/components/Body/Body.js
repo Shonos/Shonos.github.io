@@ -10,7 +10,7 @@ let leftItemBoxes = [
     {
         "id": 2,
         "key": "learning/trying",
-        "item": "ReactJS, SASS"
+        "item": "ReactJS, SASS, Angular(5+?)"
     },
     {
         "id": 3,
