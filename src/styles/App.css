@@ -173,7 +173,7 @@ body {
 
 }
 
-.Body-section .AboutBox {
+.Body-section .ContactForm {
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -186,6 +186,33 @@ body {
   padding: 1em;
 }
 
+.Body-section .ContactForm form {
+  width: 100%;
+}
+
+.Body-section .ContactForm form .container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.Body-section .ContactForm form .container label {
+  width: 100%;
+}
+
+.Body-section .ContactForm form .container .firstName {
+  width: 48.5%;
+}
+
+.Body-section .ContactForm form .container .lastName {
+  width: 48.5%;
+}
+
+.Body-section .ContactForm form .container input {
+  width: 100%;
+}
 
 @media screen and (max-width: 1050px) {
   .Header {

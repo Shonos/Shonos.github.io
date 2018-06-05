@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BoxKeyValuePair from '../BoxKeyValuePair/BoxKeyValuePair';
-import About from '../About/About';
+import ContactForm from '../ContactForm/ContactForm';
 
 let leftItemBoxes = [
     {
@@ -69,7 +69,7 @@ export class Body extends Component {
                         { leftItemBoxes.map(x => {return <BoxKeyValuePair key={x.id} box={x} setPageHandler={this.props.setPageHandler} />;}) }  
                     </div>
                     <div className="Middle-items">
-                        <About />
+                        <ContactForm />
                     </div>
                     <div className="Right-items">
                         { rightItemBoxes.map(x => {return <BoxKeyValuePair key={x.id} box={x} setPageHandler={this.props.setPageHandler} />;}) }
