@@ -34,7 +34,7 @@ export class Header extends Component {
                             Shaun Daroya
                         </span>
                         <span className="Dev-description">
-                            Web Developer from Manila/Quezon City, Philippines! I can do it Full Stack but I prefer doing front end stuff nowadays.
+                            Web Developer from Manila/Quezon City, Philippines
                         </span>
                         <span className="Dev-links">
                             <a href="https://twitter.com/ShaunTheRoya">

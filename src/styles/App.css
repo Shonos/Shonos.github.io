@@ -1,3 +1,12 @@
+body {
+    font-family: 'Raleway-bold';
+    margin: 0px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+
 .App-container {
   display: flex;
   flex-direction: column;
@@ -11,7 +20,7 @@
   border-radius: 50%;
   width: 60%;
   border-width: 3px;
-  border: 4px solid #05386B;
+  border: 4px solid rgba(5, 56, 107, 0.089);
   border-style: solid;
 }
 
@@ -102,7 +111,7 @@
   padding: 4px;
   font-size: 1.3em;
   color: #05386B;
-  margin-bottom: em;
+  margin-bottom: 1em;
 }
 
 /* Body Section */
@@ -138,14 +147,14 @@
 }
 
 .Body-section .Box .Key {
-  font-size: 1em;
+  font-size: 1.3em;
   margin-bottom: 5px;
   color: #379683;
 }
 
-.Body-section .Box .Value {
+.Body-section .Box .Item {
   padding: 4px;
-  font-size: 1.3em;
+  font-size: 1em;
   color: #05386B;
   margin-bottom: 1em;
 }
@@ -239,13 +248,21 @@
     .Header .Header-right-box .Box {
       width:50%;
       align-items: center;
+      text-align: center;
     }
 
     .Body-section {
       width: 97%;
+      flex-direction: column;
     }
 
     .Body-section .Left-items {
+      width: 100%;
+    }
+    .Body-section .Middle-items {
+      width: 100%;
+    }
+    .Body-section .Right-items {
       width: 100%;
     }
 }
