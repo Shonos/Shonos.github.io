@@ -14,7 +14,12 @@ let rightItemBoxes = [
         "id": 2,
         "key": "website last updated",
         "item": "May 31, 2018"
-    }
+    },
+    {
+        "id": 3,
+        "key": "work",
+        "item": "Software Engineer at Blast Asia"
+    },
 ];
 
 export class Header extends Component {
@@ -55,4 +60,4 @@ export class Header extends Component {
     }
 }
 
-export default Header; //<img className="Header-profile-image" src={this.props.profilePicture}/>
+export default Header;

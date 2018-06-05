@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BoxKeyValuePair from '../BoxKeyValuePair/BoxKeyValuePair';
+import About from '../About/About';
 
 let leftItemBoxes = [
     {
@@ -20,6 +21,10 @@ let leftItemBoxes = [
 ];
 
 let centerItemBoxes = [
+    
+]
+
+let rightItemBoxes = [
     {
         "id": 1,
         "key": "Gurukool",
@@ -39,14 +44,11 @@ let centerItemBoxes = [
             "dateEnd": "",
             "toolsUsed": "AngularJS, HTML5/CSS, C#, SQL Reporting Services"
         }
-    }
-]
-
-let rightItemBoxes = [
+    },
     {
-        "id": 1,
+        "id": 3,
         "key": "shonos.github.io",
-        "item": "source code for this page you are viewing",
+        "item": "source code for this page you are viewing. This was made with the create-react-app boilerplate.",
         "link": "https://github.com/Shonos/Shonos.github.io/tree/develop"
     }
 ]
@@ -67,7 +69,7 @@ export class Body extends Component {
                         { leftItemBoxes.map(x => {return <BoxKeyValuePair key={x.id} box={x} setPageHandler={this.props.setPageHandler} />;}) }  
                     </div>
                     <div className="Middle-items">
-                        { centerItemBoxes.map(x => {return <BoxKeyValuePair key={x.id} box={x} setPageHandler={this.props.setPageHandler} />;}) }   
+                        <About />
                     </div>
                     <div className="Right-items">
                         { rightItemBoxes.map(x => {return <BoxKeyValuePair key={x.id} box={x} setPageHandler={this.props.setPageHandler} />;}) }

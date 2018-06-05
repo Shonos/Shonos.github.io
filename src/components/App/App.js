@@ -18,8 +18,8 @@ class App extends Component {
   setPageHandler(e, page, param) {
     e.preventDefault();
     this.setState({
-      currentPage: page,
-      project: "param"
+      currentPage: "home",
+      project: param
     })
   }
 
@@ -32,7 +32,7 @@ class App extends Component {
     }
     else if(this.state.currentPage === "projectView") {
       return  <div className="App App-container">
-                <Body setPageHandler={this.setPageHandler} />
+                  <Body setPageHandler={this.setPageHandler} />
               </div>
     }
   }
