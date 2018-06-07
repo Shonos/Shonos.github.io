@@ -5,6 +5,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     overflow-wrap: break-word;
+    font-size: 0.9em;
 }
 
 
@@ -183,7 +184,7 @@ body {
   border-top-width: 1px; 
   border-left-width: 1px; 
   background-color: #EDF5E1;
-  padding: 1em;
+  padding: .5em;
 }
 
 .Body-section .ContactForm form {
@@ -195,23 +196,75 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 100%;
+  width: 95%;
+  margin: auto;
+  box-sizing: border-box;
+}
+
+.Body-section .ContactForm form .container .title {
+  font-weight: 400;
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
 }
 
 .Body-section .ContactForm form .container label {
   width: 100%;
 }
 
+.Body-section .ContactForm form .container label.caption {
+  font-size:0.7em;
+}
+
 .Body-section .ContactForm form .container .firstName {
-  width: 48.5%;
+  width: 48%;
 }
 
 .Body-section .ContactForm form .container .lastName {
-  width: 48.5%;
+  width: 48%;
+  padding-right:.5%;
 }
 
 .Body-section .ContactForm form .container input {
   width: 100%;
+}
+
+.Body-section .ContactForm form .container textarea {
+  width: 100%;
+  margin-top: 0.5em;
+}
+
+.Body-section .ContactForm form .form-submit {
+  background-color: #05386B;
+  color: #EDF5E1;
+  border-radius: 3px;
+  border-width: 2px;
+  border-style: solid;
+  letter-spacing: 1px;
+  padding: 1em 2.5em;
+  transition: background 0.5s ease-in-out;
+  text-transform: uppercase;
+}
+
+.Body-section .ContactForm form .form-submit:hover:not([disabled]) {
+  background-color: #5CDB95;
+  color: #05386B;
+  cursor: pointer;
+}
+
+.Body-section .ContactForm form .form-submit:disabled {
+  background-color: grey;
+  cursor: no-drop;
+}
+
+.has-error {
+  border-color: #a94442;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+.error-message {
+  color: #a94442;
+  font-size: 0.8em;
+  margin: 0;
 }
 
 @media screen and (max-width: 1050px) {

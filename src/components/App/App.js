@@ -17,10 +17,11 @@ class App extends Component {
 
   setPageHandler(e, page, param) {
     e.preventDefault();
-    this.setState({
+    alert("Demo for " + param + " coming soon - shaun");
+    /*this.setState({
       currentPage: "home",
       project: param
-    })
+    })*/
   }
 
   renderPage() {
