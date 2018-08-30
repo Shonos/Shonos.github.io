@@ -13,7 +13,7 @@ let rightItemBoxes = [
     {
         "id": 2,
         "key": "website last updated",
-        "item": "May 31, 2018"
+        "item": "August 31, 2018"
     },
     {
         "id": 3,
