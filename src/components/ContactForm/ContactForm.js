@@ -88,7 +88,7 @@ class ContactForm extends Component {
     }
 
     handleSubmit(event) {
-        alert("Email sent!");
+        alert("You will be redirected to a formspree page to continue sending the email.");
     }
   
     render() {
