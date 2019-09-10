@@ -6,12 +6,12 @@ let leftItemBoxes = [
     {
         "id": 1,
         "key": "skills/languages",
-        "item": "VanillaJS, C#, CSS, HTML, AngularJS, SQL Server"
+        "item": "VanillaJS, C#, CSS/SASS, HTML, Angular JS, Angular 2+, SQL Server"
     },
     {
         "id": 2,
         "key": "learning/trying",
-        "item": "ReactJS, SASS, Angular(5+?)"
+        "item": "React, Vue, Web Components, Dev Ops, Docker"
     },
     {
         "id": 3,
