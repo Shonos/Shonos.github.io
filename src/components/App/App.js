@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../../styles/App.css';
-import ProfilePicture from '../../images/profile-picture.jpg';
 import Header from '../Header/Header';
 import Body from '../Body/Body';
 
@@ -8,7 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      profilePicture: ProfilePicture,
+      profilePicture: 'https://media.licdn.com/dms/image/C5103AQFyeQ6iwGggaA/profile-displayphoto-shrink_200_200/0?e=1573689600&v=beta&t=Px_ybwXT9JSAhkFhvc0GLDawIOT3K99g7UUGtMtXgiY',
       currentPage: "home",
       project: ""
     };
