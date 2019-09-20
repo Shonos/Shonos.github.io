@@ -7,7 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      profilePicture: 'https://media.licdn.com/dms/image/C5103AQFyeQ6iwGggaA/profile-displayphoto-shrink_200_200/0?e=1573689600&v=beta&t=Px_ybwXT9JSAhkFhvc0GLDawIOT3K99g7UUGtMtXgiY',
+      profilePicture: 'https://media.licdn.com/dms/image/C5103AQEoshDwXBY0vQ/profile-displayphoto-shrink_200_200/0?e=1574294400&v=beta&t=m1A07kUHz41Zcu45yzaoS7eJPj4q2NL06Bfiv_9lPKc',
       currentPage: "home",
       project: ""
     };
