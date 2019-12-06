@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import '../../styles/App.css';
 import Header from '../Header/Header';
 import Body from '../Body/Body';
+import profilePicture from '../../images/profile-picture.jpg';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      profilePicture: 'https://media.licdn.com/dms/image/C5103AQEoshDwXBY0vQ/profile-displayphoto-shrink_200_200/0?e=1574294400&v=beta&t=m1A07kUHz41Zcu45yzaoS7eJPj4q2NL06Bfiv_9lPKc',
+      profilePicture: profilePicture,
       currentPage: "home",
       project: ""
     };
