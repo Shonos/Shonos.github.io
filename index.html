@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaun Alonzo | Full Stack Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description"
+        content="Shaun Alonzo - Full Stack Developer with over 9 years of experience in .NET, AWS, React and Angular, specialized in crafting high-performance web applications and microservices.">
+    <meta name="keywords" content="Full Stack Developer, .NET Developer, C#, AWS, React, Angular, Software Engineer">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Shaun Alonzo">
+    <link rel="canonical" href="https://shaunalonzo.com">
+    <meta property="og:title" content="Shaun Alonzo | Full Stack Developer">
+    <meta property="og:description"
+        content="Full Stack Developer with over 9 years of experience in .NET, AWS, React and Angular">
+    <meta property="og:image" content="https://shaunalonzo.com/your-profile-image.jpg">
+    <meta property="og:url" content="https://shaunalonzo.com">
+    <style>
+        :root {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --accent: #64ffda;
+            --accent-hover: #4db6ac;
+            --card-bg: #1e1e1e;
+            --section-bg: #1a1a1a;
+            --border: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5rem 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-subtitle {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .hero-name {
+            color: var(--accent);
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .skill-tag {
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .experience-timeline {
+            position: relative;
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 24px;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background-color: var(--border);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-position {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .timeline-description ul {
+            list-style-position: outside;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .timeline-description li {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .project-tech span {
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        .contact {
+            background-color: var(--section-bg);
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background-color: var(--bg-primary);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .highlight {
+            color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                right: -100%;
+                flex-direction: column;
+                background-color: var(--bg-primary);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+                gap: 2rem;
+                border-top: 1px solid var(--border);
+                height: 100vh;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Add these styles to fix mobile layout issues */
+        html,
+        body {
+            overflow-x: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        /* Adjust the mobile menu styling */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                right: -100%;
+                flex-direction: column;
+                background-color: var(--bg-primary);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+                gap: 2rem;
+                border-top: 1px solid var(--border);
+                height: calc(100vh - 72px);
+                /* Adjust height to exclude header */
+                overflow-y: auto;
+                /* Allow scrolling if menu is too tall */
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            /* Fix container padding on mobile */
+            .container {
+                padding: 0 1rem;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            /* Fix hero section spacing */
+            .hero-title {
+                font-size: 2.5rem;
+                word-wrap: break-word;
+            }
+
+            .hero-description {
+                font-size: 1.1rem;
+                word-wrap: break-word;
+            }
+
+            /* Ensure project cards don't overflow */
+            .project-card {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            /* Adjust section padding on mobile */
+            section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">SA</div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#about" data-route="/about">About</a></li>
+                    <li><a href="#experience" data-route="/experience">Experience</a></li>
+                    <li><a href="#skills" data-route="/skills">Skills</a></li>
+                    <li><a href="#projects" data-route="/projects">Projects</a></li>
+                    <li><a href="#contact" data-route="/contact">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="menuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="about">
+            <div class="container">
+                <div class="hero-content">
+                    <p class="hero-subtitle">Hello, I'm</p>
+                    <h1 class="hero-title">
+                        <span class="hero-name">Shaun Alonzo</span>
+                    </h1>
+                    <p class="hero-description">
+                        A Full Stack Developer specialized in .NET, AWS, React and Angular with over 9 years of
+                        experience crafting high-performance web applications and microservices.
+                    </p>
+                    <a href="#contact" class="btn">Get In Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title">Skills & Technologies</h2>
+                <div class="skills-container">
+                    <span class="skill-tag">.NET / C#</span>
+                    <span class="skill-tag">ASP.NET Core</span>
+                    <span class="skill-tag">React.js</span>
+                    <span class="skill-tag">Angular</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Microsoft Azure</span>
+                    <span class="skill-tag">SQL Server</span>
+                    <span class="skill-tag">Redis</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Next.js</span>
+                    <span class="skill-tag">Technical Design</span>
+                    <span class="skill-tag">Code Review</span>
+                    <span class="skill-tag">CI/CD Pipelines</span>
+                    <span class="skill-tag">Jenkins</span>
+                    <span class="skill-tag">Azure DevOps</span>
+                    <span class="skill-tag">Microservices</span>
+                    <span class="skill-tag">Agile / Scrum</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <h2 class="section-title">Work Experience</h2>
+                <div class="experience-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Jul 2024 - Present</div>
+                        <div class="timeline-company">Domain</div>
+                        <div class="timeline-position">Senior Engineer</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Led and contributed to migrating several services to .NET 8, improving performance
+                                    and maintainability.</li>
+                                <li>Implemented pricing logic updates, contract adjustments, billing overrides, and rate
+                                    calculations for Domain Billing, Booking, Report, and Agency API.</li>
+                                <li>Refactored order item dispatching patterns, improved subscription modification
+                                    rules, and optimized agency-level listing plan handling.</li>
+                                <li>Introduced logging scopes, retry policies, and deadlock simulations to enhance
+                                    system resilience.</li>
+                                <li>Built features like Social Boost Quotes, Listing Quote APIs, and Agency Note
+                                    Endpoints to expand platform capabilities.</li>
+                                <li>Refactored existing codebases, optimized database queries, and contributed to test
+                                    automation.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Mar 2023 - Jul 2024</div>
+                        <div class="timeline-company">Domain</div>
+                        <div class="timeline-position">Software Engineer</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Led the migration of Trade Platform microservices from .NET Core to .NET 6,
+                                    improving performance and maintainability.</li>
+                                <li>Transitioned CI/CD pipelines from TeamCity and Octopus to the internal standard
+                                    Jenkins pipeline, significantly enhancing log visibility and metrics monitoring.
+                                </li>
+                                <li>Ensured the stability of critical services, optimized background jobs, and improved
+                                    error handling mechanisms.</li>
+                                <li>Migrated multiple microservices to Jenkins-based deployments, aligning with Domain's
+                                    internal best practices.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Nov 2021 - Mar 2023</div>
+                        <div class="timeline-company">carsales.com.au</div>
+                        <div class="timeline-position">Senior Software Engineer</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Led the transition of Redbook.com.au from a dated 2000s design to a modern,
+                                    responsive interface, improving customer retention and increasing website traffic.
+                                </li>
+                                <li>Developed "Can't Find Your Car" feature allowing users to list vehicles without
+                                    selecting from a predefined model database, resulting in 200+ new advertisements.
+                                </li>
+                                <li>Designed and distributed A/B Testing and Customer Satisfaction Survey protocols,
+                                    enabling product teams to measure feature effectiveness.</li>
+                                <li>Worked across C#, Angular, React.js, and AWS, ensuring seamless integration of new
+                                    features while maintaining high performance.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Aug 2020 - Nov 2021</div>
+                        <div class="timeline-company">MONEYME</div>
+                        <div class="timeline-position">Senior C# .Net Developer Specialist</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Developed the MoneyMe+ WooCommerce plugin, generating over 1000 leads within first 2
+                                    months of launch from e-commerce space.</li>
+                                <li>Maintained APIs for loan application submissions with automated text and email
+                                    communications at various stages of the loan process.</li>
+                                <li>Created public API for third-party loan application submissions from House and Lot
+                                    Sellers and E-commerce companies, ensuring compliance with legal regulations.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Dec 2019 - Jul 2020</div>
+                        <div class="timeline-company">Nowcom Global Services, LLC</div>
+                        <div class="timeline-position">Lead Software Engineer</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Oversaw customer deal submissions from UI to third-party lender APIs.</li>
+                                <li>Optimized automated deal submission worker, improving response time from 8 to 2
+                                    seconds on service with 15,000 daily transactions.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Jul 2019 - Dec 2019</div>
+                        <div class="timeline-company">Nowcom Global Services, LLC</div>
+                        <div class="timeline-position">Mid Software Engineer</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Worked as part of a cross-functional team on the Deals module of dealercenter.com
+                                </li>
+                                <li>Led implementation of reports designed by Business Analysts, providing insights into
+                                    warehouse stock and customer activity.</li>
+                                <li>Contributed to customizable table reports, allowing users to modify columns and save
+                                    configurations.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 2017 - Jul 2019</div>
+                        <div class="timeline-company">BlastAsia, Inc.</div>
+                        <div class="timeline-position">Dev Lead / Software Engineer III</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Development Lead for the CAAPS project, delegating tasks and contributing to
+                                    business-critical features.</li>
+                                <li>Led project creating templates for future company projects using Angular, .NET Core,
+                                    and microservices with multi-tenancy support.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Jul 2016 - Jun 2017</div>
+                        <div class="timeline-company">BlastAsia, Inc.</div>
+                        <div class="timeline-position">Software Engineer II</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Worked on Gurukool Web App and wrote documentation for future development.</li>
+                                <li>Developed main web solution and internal config-changing applications for CAAPS.
+                                </li>
+                                <li>Received recognition leading to hiring of two additional developers for the CAAPS
+                                    team.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Feb 2016 - Jul 2016</div>
+                        <div class="timeline-company">BlastAsia, Inc.</div>
+                        <div class="timeline-position">Software Engineer I</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Completed comprehensive training in .NET, Angular JS, and SQL Server.</li>
+                                <li>Gained experience through shadow development on the Gurukool quiz duel web
+                                    application.</li>
+                                <li>Contributed to new features like leaderboards and expanded question types to enhance
+                                    user experience.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Jun 2015 - Jan 2016</div>
+                        <div class="timeline-company">Accenture</div>
+                        <div class="timeline-position">Associate Software Engineer</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">Apr 2014 - Jun 2014</div>
+                        <div class="timeline-company">Exakt, Inc.</div>
+                        <div class="timeline-position">IT Intern</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Created reports from database using SQL commands and report generating tool in
+                                    Microsoft Visual Studio.</li>
+                                <li>Documented a C# project by Exakt.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3 class="project-title">
+                                <a href="https://www.redbook.com.au" target="_blank"
+                                    style="text-decoration: none; color: inherit;">Redbook Website Redesign <i
+                                        class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i></a>
+                            </h3>
+                            <p class="project-description">
+                                Led the transition of Redbook.com.au from a 2000s aesthetic to a modern design,
+                                revitalizing website appearance while maintaining existing customers and boosting
+                                website views.
+                            </p>
+                            <div class="project-tech">
+                                <span>C#</span>
+                                <span>Angular</span>
+                                <span>AWS</span>
+                                <span>.NET</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3 class="project-title">
+                                <a href="https://wphive.com/plugins/moneyme-payments-for-woocommerce/" target="_blank"
+                                    style="text-decoration: none; color: inherit;">MoneyMe+ WooCommerce Plugin <i
+                                        class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i></a>
+                            </h3>
+                            <p class="project-description">
+                                Developed an e-commerce plugin that generated over 1000 leads within first 2 months of
+                                launch, connecting sellers with financing options.
+                            </p>
+                            <div class="project-tech">
+                                <span>C#</span>
+                                <span>JavaScript</span>
+                                <span>Azure</span>
+                                <span>.NET Core</span>
+                                <span>WordPress</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <h2 class="contact-title">Get In Touch</h2>
+                    <p class="contact-subtitle">
+                        I'm currently open to new opportunities and would love to hear from you.
+                    </p>
+                    <a href="mailto:shaunalonzodev@gmail.com" class="btn">Say Hello</a>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/shaunalonzo/" class="social-link"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/Shonos" class="social-link"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">Designed & Built by <span class="highlight">Shaun Alonzo</span> © 2025</p>
+        </div>
+    </footer>
+
+    <!-- Structured Data for Person -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Shaun Alonzo",
+      "jobTitle": "Full Stack Developer",
+      "url": "https://yourdomain.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/shaunalonzo/",
+        "https://github.com/Shonos"
+      ],
+      "knowsAbout": [".NET", "C#", "React.js", "Angular", "AWS", "Microsoft Azure", "Microservices"],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Domain"
+      }
+    }
+    </script>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+
+            // Change icon based on menu state
+            const icon = menuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = menuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    const headerOffset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add active class to nav links on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Simple client-side router
+        const routes = {
+            '/': '#about',
+            '/about': '#about',
+            '/experience': '#experience',
+            '/skills': '#skills',
+            '/projects': '#projects',
+            '/contact': '#contact'
+        };
+
+        // Handle routing
+        function handleRouting() {
+            // Get the path after the domain
+            let path = window.location.pathname;
+
+            // Default to '/' if no path or just domain
+            if (path === '' || path === '/') {
+                path = '/';
+            } else {
+                // Remove trailing slash if exists
+                path = path.endsWith('/') ? path.slice(0, -1) : path;
+            }
+
+            // Check if the path exists in our routes
+            const targetId = routes[path] || routes['/'];
+
+            // Find the element and scroll to it
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerOffset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Handle navigation using History API
+        function handleNavigation() {
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const href = this.getAttribute('href');
+                    const route = Object.keys(routes).find(key => routes[key] === href);
+
+                    if (route) {
+                        history.pushState({}, '', route);
+                        handleRouting();
+                    }
+                });
+            });
+        }
+
+        // Run on page load
+        window.addEventListener('load', () => {
+            handleRouting();
+            handleNavigation();
+        });
+
+        // Handle browser navigation (back/forward)
+        window.addEventListener('popstate', handleRouting);
+
+    </script>
+</body>
+
+</html>
