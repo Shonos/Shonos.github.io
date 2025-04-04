@@ -546,6 +546,88 @@
                 padding: 3rem 0;
             }
         }
+
+        .hero {
+            position: relative;
+        }
+        
+        .hero-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-image-container {
+            flex: 0.5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .profile-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(100, 255, 218, 0.2);
+        }
+        
+        .github-contrib {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .github-contrib:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Mobile responsive adjustments */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 3rem;
+            }
+            
+            .hero-image-container {
+                margin-bottom: 2rem;
+            }
+            
+            .profile-image {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .github-contrib {
+                max-width: 90%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .github-contrib {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -572,15 +654,21 @@
         <section class="hero" id="about">
             <div class="container">
                 <div class="hero-content">
-                    <p class="hero-subtitle">Hello, I'm</p>
-                    <h1 class="hero-title">
-                        <span class="hero-name">Shaun Alonzo</span>
-                    </h1>
-                    <p class="hero-description">
-                        A Full Stack Developer specialized in .NET, AWS, React and Angular with over 9 years of
-                        experience crafting high-performance web applications and microservices.
-                    </p>
-                    <a href="#contact" class="btn">Get In Touch</a>
+                    <div class="hero-text">
+                        <p class="hero-subtitle">Hello, I'm</p>
+                        <h1 class="hero-title">
+                            <span class="hero-name">Shaun Alonzo</span>
+                        </h1>
+                        <p class="hero-description">
+                            A Full Stack Developer specialized in .NET, AWS, React and Angular with over 9 years of
+                            experience crafting high-performance web applications and microservices.
+                        </p>
+                        <a href="#contact" class="btn">Get In Touch</a>
+                    </div>
+                    <div class="hero-image-container">
+                        <img src="assets/shaunalonzo.jpg" alt="Shaun Alonzo" class="profile-image">
+                        <img src="assets/github-contrib-2025.jpg" alt="GitHub Contributions" class="github-contrib">
+                    </div>
                 </div>
             </div>
         </section>
