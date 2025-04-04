@@ -899,9 +899,28 @@
         };
 
         function handleRouting() {
-            let path = window.location.pathname;
-            path = path === '' || path === '/' ? '/' : path.replace(/\/$/, '');
-        
+            // Get full path including any query parameters
+            let fullPath = window.location.pathname + window.location.search;
+            
+            // Check if we're handling a redirect from 404.html (format: /?/path)
+            if (window.location.search.startsWith('?/')) {
+                // Extract the actual path from the query parameter
+                const actualPath = window.location.search.substring(1); // removes the leading '?'
+                
+                // Replace the URL with the clean path (remove the '?')
+                history.replaceState({}, '', actualPath);
+                
+                // Update the path for routing
+                fullPath = actualPath;
+            } else {
+                // Regular path handling
+                fullPath = window.location.pathname;
+            }
+            
+            // Clean up the path
+            let path = fullPath === '' || fullPath === '/' ? '/' : fullPath.replace(/\/$/, '');
+            
+            // Continue with existing routing logic
             const targetId = routes[path] || routes['/'];
             const targetElement = document.querySelector(targetId);
         
