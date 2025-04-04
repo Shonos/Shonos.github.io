@@ -51,13 +51,32 @@
         }
 
         header {
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
             background-color: rgba(18, 18, 18, 0.95);
             backdrop-filter: blur(10px);
             z-index: 100;
             padding: 1rem 0;
             border-bottom: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+
+        /* Class to hide the header when scrolling down */
+        header.hide {
+            transform: translateY(-100%);
+        }
+
+        /* Add padding to the top of main to account for fixed header */
+        main {
+            padding-top: 72px;
+            /* Match header height */
+        }
+
+        /* Adjust the first section to account for header height */
+        .hero {
+            min-height: calc(100vh - 72px);
         }
 
         nav {
@@ -387,48 +406,48 @@
         }
 
         /* External link styling */
-    .external-link {
-        text-decoration: none;
-        color: inherit;
-        position: relative;
-        transition: color 0.3s ease;
-        padding-right: 1.2rem;
-        display: inline-flex;
-        align-items: center;
-    }
-    
-    .external-link:hover {
-        color: var(--accent);
-    }
-    
-    .external-link i {
-        font-size: 0.8rem;
-        opacity: 0.6;
-        margin-left: 0.3rem;
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        position: relative;
-    }
-    
-    .external-link:hover i {
-        opacity: 1;
-        transform: translateY(-1px);
-    }
-    
-    /* Add a subtle underline effect on hover */
-    .external-link::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 1px;
-        bottom: 0;
-        left: 0;
-        background-color: var(--accent);
-        transition: width 0.3s ease;
-    }
-    
-    .external-link:hover::after {
-        width: calc(100% - 1rem);
-    }
+        .external-link {
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            transition: color 0.3s ease;
+            padding-right: 1.2rem;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .external-link:hover {
+            color: var(--accent);
+        }
+
+        .external-link i {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-left: 0.3rem;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        .external-link:hover i {
+            opacity: 1;
+            transform: translateY(-1px);
+        }
+
+        /* Add a subtle underline effect on hover */
+        .external-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .external-link:hover::after {
+            width: calc(100% - 1rem);
+        }
 
         /* Mobile responsive styles */
         @media (max-width: 768px) {
@@ -839,7 +858,8 @@
                     <div class="project-card">
                         <div class="project-content">
                             <h3 class="project-title">
-                                <a href="https://wphive.com/plugins/moneyme-payments-for-woocommerce/" target="_blank" class="external-link">
+                                <a href="https://wphive.com/plugins/moneyme-payments-for-woocommerce/" target="_blank"
+                                    class="external-link">
                                     MoneyMe+ WooCommerce Plugin <i class="fas fa-external-link-alt"></i>
                                 </a>
                             </h3>
@@ -989,34 +1009,34 @@
         function handleRouting() {
             // Get full path including any query parameters
             let fullPath = window.location.pathname + window.location.search;
-            
+
             // Check if we're handling a redirect from 404.html (format: /?/path)
             if (window.location.search.startsWith('?/')) {
                 // Extract the actual path from the query parameter
                 const actualPath = window.location.search.substring(1); // removes the leading '?'
-                
+
                 // Replace the URL with the clean path (remove the '?')
                 history.replaceState({}, '', actualPath);
-                
+
                 // Update the path for routing
                 fullPath = actualPath;
             } else {
                 // Regular path handling
                 fullPath = window.location.pathname;
             }
-            
+
             // Clean up the path
             let path = fullPath === '' || fullPath === '/' ? '/' : fullPath.replace(/\/$/, '');
-            
+
             // Continue with existing routing logic
             const targetId = routes[path] || routes['/'];
             const targetElement = document.querySelector(targetId);
-        
+
             if (targetElement) {
                 const headerOffset = 80;
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        
+
                 // Delay scroll slightly to ensure layout is ready
                 setTimeout(() => {
                     window.scrollTo({
@@ -1024,6 +1044,20 @@
                         behavior: 'smooth'
                     });
                 }, 50); // tweak this value if needed
+            }
+
+            // After updating the route, send a page view to Google Analytics
+            if (typeof gtag === 'function') {
+                const pagePath = path === '/' ? '/about' : path;
+                const pageTitle = path === '/' ? 'About - Shaun Alonzo' :
+                    path.substring(1).charAt(0).toUpperCase() +
+                    path.substring(1).slice(1) + ' - Shaun Alonzo';
+
+                gtag('event', 'page_view', {
+                    page_title: pageTitle,
+                    page_path: pagePath,
+                    send_to: 'G-EG4TMY27NZ'
+                });
             }
         }
 
@@ -1044,6 +1078,43 @@
             });
         }
 
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        // Threshold in pixels - how far user needs to scroll before header hides
+        const scrollThreshold = 20;
+
+        function updateHeader() {
+            const header = document.querySelector('header');
+            const currentScrollY = window.scrollY;
+
+            // Hide header when scrolling down, show when scrolling up
+            if (currentScrollY > lastScrollY + scrollThreshold) {
+                // Scrolling down
+                header.classList.add('hide');
+                lastScrollY = currentScrollY;
+            } else if (currentScrollY < lastScrollY - (scrollThreshold / 2)) {
+                // Scrolling up - use lower threshold for quicker reveal
+                header.classList.remove('hide');
+                lastScrollY = currentScrollY;
+            }
+
+            // Always show header at the top of the page
+            if (currentScrollY <= 0) {
+                header.classList.remove('hide');
+            }
+
+            ticking = false;
+        }
+
+        // Throttle scroll event for better performance
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateHeader);
+                ticking = true;
+            }
+        });
+
         // Run on page load
         window.addEventListener('load', () => {
             handleRouting();
@@ -1053,6 +1124,48 @@
         // Handle browser navigation (back/forward)
         window.addEventListener('popstate', handleRouting);
 
+        // Add this after your existing scripts
+        document.addEventListener('DOMContentLoaded', function () {
+            // Track "Say Hello" button clicks
+            const contactButton = document.querySelector('.contact .btn');
+            if (contactButton) {
+                contactButton.addEventListener('click', function () {
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'contact_click', {
+                            'event_category': 'engagement',
+                            'event_label': 'Email Contact',
+                            'value': 1
+                        });
+                    }
+                });
+            }
+
+            // Track other social link clicks
+            document.querySelectorAll('.social-links .social-link').forEach(link => {
+                link.addEventListener('click', function () {
+                    if (typeof gtag === 'function') {
+                        const platform = this.querySelector('i').classList.contains('fa-linkedin') ? 'LinkedIn' : 'GitHub';
+                        gtag('event', 'social_click', {
+                            'event_category': 'engagement',
+                            'event_label': platform,
+                            'value': 1
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EG4TMY27NZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-EG4TMY27NZ', {
+            send_page_view: false
+        });
     </script>
 </body>
 
