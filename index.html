@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shaun Alonzo | Full Stack Developer</title>
@@ -15,7 +16,6 @@
     <meta property="og:title" content="Shaun Alonzo | Full Stack Developer">
     <meta property="og:description"
         content="Full Stack Developer with over 9 years of experience in .NET, AWS, React and Angular">
-    <meta property="og:image" content="https://shaunalonzo.com/your-profile-image.jpg">
     <meta property="og:url" content="https://shaunalonzo.com">
     <style>
         :root {
@@ -386,6 +386,50 @@
             cursor: pointer;
         }
 
+        /* External link styling */
+    .external-link {
+        text-decoration: none;
+        color: inherit;
+        position: relative;
+        transition: color 0.3s ease;
+        padding-right: 1.2rem;
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    .external-link:hover {
+        color: var(--accent);
+    }
+    
+    .external-link i {
+        font-size: 0.8rem;
+        opacity: 0.6;
+        margin-left: 0.3rem;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        position: relative;
+    }
+    
+    .external-link:hover i {
+        opacity: 1;
+        transform: translateY(-1px);
+    }
+    
+    /* Add a subtle underline effect on hover */
+    .external-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--accent);
+        transition: width 0.3s ease;
+    }
+    
+    .external-link:hover::after {
+        width: calc(100% - 1rem);
+    }
+
         /* Mobile responsive styles */
         @media (max-width: 768px) {
             .hero-title {
@@ -553,7 +597,11 @@
                 <div class="experience-timeline">
                     <div class="timeline-item">
                         <div class="timeline-date">Jul 2024 - Present</div>
-                        <div class="timeline-company">Domain</div>
+                        <div class="timeline-company">
+                            <a href="https://www.domain.com.au" target="_blank" class="external-link">
+                                Domain <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                         <div class="timeline-position">Senior Engineer</div>
                         <div class="timeline-description">
                             <ul>
@@ -575,7 +623,11 @@
 
                     <div class="timeline-item">
                         <div class="timeline-date">Mar 2023 - Jul 2024</div>
-                        <div class="timeline-company">Domain</div>
+                        <div class="timeline-company">
+                            <a href="https://www.domain.com.au" target="_blank" class="external-link">
+                                Domain <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                         <div class="timeline-position">Software Engineer</div>
                         <div class="timeline-description">
                             <ul>
@@ -594,7 +646,11 @@
 
                     <div class="timeline-item">
                         <div class="timeline-date">Nov 2021 - Mar 2023</div>
-                        <div class="timeline-company">carsales.com.au</div>
+                        <div class="timeline-company">
+                            <a href="https://www.carsales.com.au" target="_blank" class="external-link">
+                                carsales.com.au <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                         <div class="timeline-position">Senior Software Engineer</div>
                         <div class="timeline-description">
                             <ul>
@@ -614,7 +670,11 @@
 
                     <div class="timeline-item">
                         <div class="timeline-date">Aug 2020 - Nov 2021</div>
-                        <div class="timeline-company">MONEYME</div>
+                        <div class="timeline-company">
+                            <a href="https://www.moneyme.com.au" target="_blank" class="external-link">
+                                MONEYME <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                         <div class="timeline-position">Senior C# .Net Developer Specialist</div>
                         <div class="timeline-description">
                             <ul>
@@ -630,7 +690,11 @@
 
                     <div class="timeline-item">
                         <div class="timeline-date">Dec 2019 - Jul 2020</div>
-                        <div class="timeline-company">Nowcom Global Services, LLC</div>
+                        <div class="timeline-company">
+                            <a href="https://www.nowcom.com" target="_blank" class="external-link">
+                                Nowcom Global Services, LLC <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                         <div class="timeline-position">Lead Software Engineer</div>
                         <div class="timeline-description">
                             <ul>
@@ -643,7 +707,11 @@
 
                     <div class="timeline-item">
                         <div class="timeline-date">Jul 2019 - Dec 2019</div>
-                        <div class="timeline-company">Nowcom Global Services, LLC</div>
+                        <div class="timeline-company">
+                            <a href="https://www.blastasia.com" target="_blank" class="external-link">
+                                BlastAsia, Inc. <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                         <div class="timeline-position">Mid Software Engineer</div>
                         <div class="timeline-description">
                             <ul>
@@ -659,7 +727,11 @@
 
                     <div class="timeline-item">
                         <div class="timeline-date">May 2017 - Jul 2019</div>
-                        <div class="timeline-company">BlastAsia, Inc.</div>
+                        <div class="timeline-company">
+                            <a href="https://www.blastasia.com" target="_blank" class="external-link">
+                                BlastAsia, Inc. <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                         <div class="timeline-position">Dev Lead / Software Engineer III</div>
                         <div class="timeline-description">
                             <ul>
@@ -673,7 +745,11 @@
 
                     <div class="timeline-item">
                         <div class="timeline-date">Jul 2016 - Jun 2017</div>
-                        <div class="timeline-company">BlastAsia, Inc.</div>
+                        <div class="timeline-company">
+                            <a href="https://www.blastasia.com" target="_blank" class="external-link">
+                                BlastAsia, Inc. <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                         <div class="timeline-position">Software Engineer II</div>
                         <div class="timeline-description">
                             <ul>
@@ -688,7 +764,11 @@
 
                     <div class="timeline-item">
                         <div class="timeline-date">Feb 2016 - Jul 2016</div>
-                        <div class="timeline-company">BlastAsia, Inc.</div>
+                        <div class="timeline-company">
+                            <a href="https://www.blastasia.com" target="_blank" class="external-link">
+                                BlastAsia, Inc. <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                         <div class="timeline-position">Software Engineer I</div>
                         <div class="timeline-description">
                             <ul>
@@ -703,13 +783,21 @@
 
                     <div class="timeline-item">
                         <div class="timeline-date">Jun 2015 - Jan 2016</div>
-                        <div class="timeline-company">Accenture</div>
+                        <div class="timeline-company">
+                            <a href="https://www.accenture.com" target="_blank" class="external-link">
+                                Accenture <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                         <div class="timeline-position">Associate Software Engineer</div>
                     </div>
 
                     <div class="timeline-item">
                         <div class="timeline-date">Apr 2014 - Jun 2014</div>
-                        <div class="timeline-company">Exakt, Inc.</div>
+                        <div class="timeline-company">
+                            <a href="https://exakt.com.ph/" target="_blank" class="external-link">
+                                Exakt Inc. <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                         <div class="timeline-position">IT Intern</div>
                         <div class="timeline-description">
                             <ul>
@@ -730,9 +818,9 @@
                     <div class="project-card">
                         <div class="project-content">
                             <h3 class="project-title">
-                                <a href="https://www.redbook.com.au" target="_blank"
-                                    style="text-decoration: none; color: inherit;">Redbook Website Redesign <i
-                                        class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i></a>
+                                <a href="https://www.redbook.com.au" target="_blank" class="external-link">
+                                    Redbook Website Redesign <i class="fas fa-external-link-alt"></i>
+                                </a>
                             </h3>
                             <p class="project-description">
                                 Led the transition of Redbook.com.au from a 2000s aesthetic to a modern design,
@@ -741,7 +829,7 @@
                             </p>
                             <div class="project-tech">
                                 <span>C#</span>
-                                <span>Angular</span>
+                                <span>React</span>
                                 <span>AWS</span>
                                 <span>.NET</span>
                             </div>
@@ -751,9 +839,9 @@
                     <div class="project-card">
                         <div class="project-content">
                             <h3 class="project-title">
-                                <a href="https://wphive.com/plugins/moneyme-payments-for-woocommerce/" target="_blank"
-                                    style="text-decoration: none; color: inherit;">MoneyMe+ WooCommerce Plugin <i
-                                        class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i></a>
+                                <a href="https://wphive.com/plugins/moneyme-payments-for-woocommerce/" target="_blank" class="external-link">
+                                    MoneyMe+ WooCommerce Plugin <i class="fas fa-external-link-alt"></i>
+                                </a>
                             </h3>
                             <p class="project-description">
                                 Developed an e-commerce plugin that generated over 1000 leads within first 2 months of
