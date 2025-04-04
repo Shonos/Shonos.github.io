@@ -550,18 +550,18 @@
         .hero {
             position: relative;
         }
-        
+
         .hero-content {
             display: flex;
             flex-direction: row;
             align-items: center;
             gap: 2rem;
         }
-        
+
         .hero-text {
             flex: 1;
         }
-        
+
         .hero-image-container {
             flex: 0.5;
             display: flex;
@@ -569,7 +569,7 @@
             align-items: center;
             gap: 1.5rem;
         }
-        
+
         .profile-image {
             width: 200px;
             height: 200px;
@@ -579,23 +579,23 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .profile-image:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(100, 255, 218, 0.2);
         }
-        
+
         .github-contrib {
             max-width: 100%;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
         }
-        
+
         .github-contrib:hover {
             transform: translateY(-3px);
         }
-        
+
         /* Mobile responsive adjustments */
         @media (max-width: 992px) {
             .hero-content {
@@ -603,27 +603,27 @@
                 text-align: center;
                 gap: 3rem;
             }
-            
+
             .hero-image-container {
                 margin-bottom: 2rem;
             }
-            
+
             .profile-image {
                 width: 180px;
                 height: 180px;
             }
-            
+
             .github-contrib {
                 max-width: 90%;
             }
         }
-        
+
         @media (max-width: 576px) {
             .profile-image {
                 width: 150px;
                 height: 150px;
             }
-            
+
             .github-contrib {
                 max-width: 100%;
             }
@@ -1063,25 +1063,77 @@
         });
 
         // Add active class to nav links on scroll
+        // Add a debounce function to prevent excessive URL updates
+        function debounce(func, wait) {
+            let timeout;
+            return function (...args) {
+                const context = this;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), wait);
+            };
+        }
+
+        // Track the last section we updated the URL for to prevent unnecessary updates
+        let lastUpdatedSection = '';
+
+        // Debounced function to update URL and analytics
+        const updateUrlAndAnalytics = debounce((sectionId, route) => {
+            // Only update if it's different from the last update
+            if (sectionId !== lastUpdatedSection) {
+                lastUpdatedSection = sectionId;
+
+                // Update URL without creating history entry
+                history.replaceState({}, '', route);
+
+                // Track page view in analytics (with debounce to prevent flooding)
+                if (typeof gtag === 'function') {
+                    const pageTitle = route === '/' ? 'About - Shaun Alonzo' :
+                        route.substring(1).charAt(0).toUpperCase() +
+                        route.substring(1).slice(1) + ' - Shaun Alonzo';
+
+                    gtag('event', 'page_view', {
+                        page_title: pageTitle,
+                        page_path: route,
+                        send_to: 'G-EG4TMY27NZ'
+                    });
+                }
+            }
+        }, 300); // 300ms debounce time
+
+        // Modified scroll event listener
         window.addEventListener('scroll', () => {
             let current = '';
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-links a');
 
+            // Find which section is in view
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - 200) {
+                const scrollPosition = window.pageYOffset;
+
+                // Check if this section is in the viewport
+                if (scrollPosition >= sectionTop - 200) {
                     current = section.getAttribute('id');
                 }
             });
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
+            // If we have a current section, update navigation and URL
+            if (current) {
+                // Update navigation highlighting
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+
+                        // Get the route and update URL with debounce
+                        const route = link.getAttribute('data-route');
+                        if (route) {
+                            updateUrlAndAnalytics(current, route);
+                        }
+                    }
+                });
+            }
         });
 
         // Simple client-side router
