@@ -211,6 +211,46 @@
             color: var(--accent);
         }
 
+        .hero-role {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            max-width: 600px;
+        }
+        
+        .hero-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .hero-location i {
+            color: var(--accent);
+            font-size: 1rem;
+        }
+        
+        /* Adjust responsive styles */
+        @media (max-width: 992px) {
+            .hero-role {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-location {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-role {
+                font-size: 1rem;
+            }
+        }
+
         .hero-description {
             font-size: 1.25rem;
             color: var(--text-secondary);
@@ -634,10 +674,6 @@
                 gap: 3rem;
             }
 
-            .hero-image-container {
-                margin-bottom: 2rem;
-            }
-
             .profile-image {
                 width: 180px;
                 height: 180px;
@@ -753,10 +789,15 @@
                         <h1 class="hero-title">
                             <span class="hero-name">Shaun Alonzo</span>
                         </h1>
+                        <div class="hero-role">
+                            Software Engineer | AI-Enhanced Efficiency
+                        </div>
                         <p class="hero-description">
-                            A Full Stack Developer specialized in .NET, AWS, React and Angular with over 9 years of
-                            experience crafting high-performance web applications and microservices.
+                            Senior Software Engineer with 9+ years of experience in .NET, AWS, React, and SQL. Focused on platform stability, API reliability, and clean architecture — enhanced by AI tools like Copilot and ChatGPT for faster, smarter delivery.
                         </p>
+                        <div class="hero-location">
+                            <i class="fas fa-map-marker-alt"></i> Manila, Philippines
+                        </div>
                     </div>
                     <div class="hero-image-container">
                         <img src="assets/shaunalonzo.jpg" alt="Shaun Alonzo" class="profile-image">
