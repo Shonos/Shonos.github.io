@@ -19,15 +19,68 @@
     <meta property="og:url" content="https://shaunalonzo.com">
     <style>
         :root {
-            --bg-primary: #121212;
-            --bg-secondary: #1e1e1e;
+            /* Dark theme (default) */
+            --bg-primary: rgb(3, 7, 18);
+            /* Deep blue-black */
+            --bg-secondary: rgb(10, 15, 30);
+            /* Slightly lighter blue-black */
             --text-primary: #f0f0f0;
+            /* Off-white for main text */
             --text-secondary: #a0a0a0;
+            /* Light gray for secondary text */
             --accent: #64ffda;
+            /* Teal accent - works well with dark blue */
             --accent-hover: #4db6ac;
-            --card-bg: #1e1e1e;
-            --section-bg: #1a1a1a;
-            --border: #333;
+            /* Slightly darker teal for hover states */
+            --card-bg: rgb(15, 20, 35);
+            /* Card background - subtly lighter than secondary */
+            --section-bg: rgb(7, 12, 25);
+            /* Section background - between primary and secondary */
+            --border: rgb(30, 40, 60);
+            /* Subtle border color that complements the blues */
+        }
+
+        /* Light theme */
+        [data-theme="light"] {
+            --bg-primary: #f5f7fa;
+            /* Light gray-blue background */
+            --bg-secondary: #eef1f5;
+            /* Slightly darker background for contrast */
+            --text-primary: #2d3748;
+            /* Dark blue-gray for main text */
+            --text-secondary: #4a5568;
+            /* Medium gray for secondary text */
+            --accent: #0d9488;
+            /* Teal accent - darker for light mode */
+            --accent-hover: #0f766e;
+            /* Darker teal for hover states */
+            --card-bg: #ffffff;
+            /* White card background */
+            --section-bg: #edf2f7;
+            /* Light gray section background */
+            --border: #cbd5e0;
+            /* Light gray border */
+        }
+
+        /* Add this to your existing styles */
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            margin-left: 1rem;
+            border-radius: 50%;
+            transition: background-color 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translateY(-2px);
         }
 
         * {
@@ -55,12 +108,11 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(18, 18, 18, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            padding: 1rem 0;
+            z-index: 1000;
+            background-color: var(--bg-primary);
             border-bottom: 1px solid var(--border);
-            transition: transform 0.3s ease;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
         }
 
         /* Class to hide the header when scrolling down */
@@ -628,6 +680,102 @@
                 max-width: 100%;
             }
         }
+
+        /* Add to your existing CSS */
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-label {
+            font-size: 0.9rem;
+        }
+
+        .btn i {
+            margin-right: 0.5rem;
+        }
+
+        /* Adjust for mobile */
+        @media (max-width: 576px) {
+            .btn {
+                font-size: 0.9rem;
+                padding: 0.75rem 1rem;
+            }
+        }
+
+        /* Add to your existing styles */
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Adjust mobile layout */
+        @media (max-width: 768px) {
+            .theme-toggle {
+                margin-right: 1rem;
+            }
+        }
+
+        /* Contact section styles */
+        .contact-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--accent);
+            position: relative;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(var(--accent-rgb, 100, 255, 218, 0.1));
+        }
+
+        .tooltip {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent);
+            color: var(--bg-primary);
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .tooltip::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid var(--accent);
+        }
+
+        .tooltip.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* For better mobile experience */
+        @media (max-width: 576px) {
+            .contact-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -643,9 +791,14 @@
                     <li><a href="#projects" data-route="/projects">Projects</a></li>
                     <li><a href="#contact" data-route="/contact">Contact</a></li>
                 </ul>
-                <button class="mobile-menu-btn" id="menuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <div class="nav-buttons">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="mobile-menu-btn" id="menuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
             </nav>
         </div>
     </header>
@@ -663,11 +816,40 @@
                             A Full Stack Developer specialized in .NET, AWS, React and Angular with over 9 years of
                             experience crafting high-performance web applications and microservices.
                         </p>
-                        <a href="#contact" class="btn">Get In Touch</a>
                     </div>
                     <div class="hero-image-container">
                         <img src="assets/shaunalonzo.jpg" alt="Shaun Alonzo" class="profile-image">
-                        <img src="assets/github-contrib-2025.jpg" alt="GitHub Contributions" class="github-contrib">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <h2 class="contact-title">Get In Touch</h2>
+                    <p class="contact-subtitle">
+                        I'm currently open to new opportunities and would love to hear from you.
+                    </p>
+                    <div class="contact-actions">
+                        <a href="mailto:contact@shaunalonzo.com" class="btn">
+                            <i class="far fa-envelope"></i> Email Me
+                        </a>
+                        <button id="copyEmailBtn" class="btn btn-secondary" aria-label="Copy email address">
+                            <i class="far fa-copy"></i> Copy Email
+                            <span class="tooltip" id="copyTooltip">Copied!</span>
+                        </button>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/shaunalonzo/" class="social-link"
+                            aria-label="LinkedIn Profile">
+                            <i class="fab fa-linkedin"></i>
+                            <span class="social-label">LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/Shonos" class="social-link" aria-label="GitHub Profile">
+                            <i class="fab fa-github"></i>
+                            <span class="social-label">GitHub</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -963,23 +1145,6 @@
                                 <span>WordPress</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact">
-            <div class="container">
-                <div class="contact-content">
-                    <h2 class="contact-title">Get In Touch</h2>
-                    <p class="contact-subtitle">
-                        I'm currently open to new opportunities and would love to hear from you.
-                    </p>
-                    <a href="mailto:contact@shaunalonzo.com" class="btn">Say Hello</a>
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/shaunalonzo/" class="social-link"><i
-                                class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/Shonos" class="social-link"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
@@ -1280,6 +1445,39 @@
                 });
             }
 
+            // Email copy functionality
+            const copyEmailBtn = document.getElementById('copyEmailBtn');
+            const copyTooltip = document.getElementById('copyTooltip');
+
+            copyEmailBtn.addEventListener('click', () => {
+                // The email to copy
+                const email = 'contact@shaunalonzo.com';
+
+                // Copy to clipboard
+                navigator.clipboard.writeText(email)
+                    .then(() => {
+                        // Show tooltip
+                        copyTooltip.classList.add('show');
+
+                        // Hide tooltip after 2 seconds
+                        setTimeout(() => {
+                            copyTooltip.classList.remove('show');
+                        }, 2000);
+
+                        // Track event in analytics
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'copy_email', {
+                                'event_category': 'engagement',
+                                'event_label': 'email_copied',
+                                'value': 1
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Could not copy text: ', err);
+                    });
+            });
+
             // Track other social link clicks
             document.querySelectorAll('.social-links .social-link').forEach(link => {
                 link.addEventListener('click', function () {
@@ -1294,6 +1492,74 @@
                 });
             });
         });
+    </script>
+
+    <script>
+        // Theme switcher functionality
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        // Function to set theme
+        const setTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            updateThemeIcon(theme);
+        };
+
+        // Function to update the theme toggle icon
+        const updateThemeIcon = (theme) => {
+            const icon = themeToggleBtn.querySelector('i');
+            if (theme === 'light') {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                themeToggleBtn.setAttribute('aria-label', 'Switch to dark mode');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                themeToggleBtn.setAttribute('aria-label', 'Switch to light mode');
+            }
+        };
+
+        // Initialize theme based on user preference or system preference
+        const initializeTheme = () => {
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme) {
+                // Use saved theme
+                setTheme(savedTheme);
+            } else {
+                // Use system preference
+                setTheme(prefersDarkScheme.matches ? 'dark' : 'light');
+            }
+        };
+
+        // Toggle theme when button is clicked
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            setTheme(newTheme);
+
+            // Track theme change in analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'theme_change', {
+                    'event_category': 'preferences',
+                    'event_label': newTheme,
+                    'value': 1
+                });
+            }
+        });
+
+        // Listen for system preference changes
+        prefersDarkScheme.addEventListener('change', (e) => {
+            // Only change theme if user hasn't manually set a preference
+            if (!localStorage.getItem('theme')) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Initialize theme on page load
+        initializeTheme();
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
