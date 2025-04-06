@@ -18,83 +18,53 @@
         content="Full Stack Developer with over 9 years of experience in .NET, AWS, React and Angular">
     <meta property="og:url" content="https://shaunalonzo.com">
     <style>
+        /* ========== Variables & Themes ========== */
         :root {
             /* Dark theme (default) */
             --bg-primary: rgb(3, 7, 18);
-            /* Deep blue-black */
             --bg-secondary: rgb(10, 15, 30);
-            /* Slightly lighter blue-black */
             --text-primary: #f0f0f0;
-            /* Off-white for main text */
             --text-secondary: #a0a0a0;
-            /* Light gray for secondary text */
             --accent: #64ffda;
-            /* Teal accent - works well with dark blue */
             --accent-hover: #4db6ac;
-            /* Slightly darker teal for hover states */
             --card-bg: rgb(15, 20, 35);
-            /* Card background - subtly lighter than secondary */
             --section-bg: rgb(7, 12, 25);
-            /* Section background - between primary and secondary */
             --border: rgb(30, 40, 60);
-            /* Subtle border color that complements the blues */
         }
 
-        /* Light theme */
         [data-theme="light"] {
+            /* Light theme */
             --bg-primary: #f5f7fa;
-            /* Light gray-blue background */
             --bg-secondary: #eef1f5;
-            /* Slightly darker background for contrast */
             --text-primary: #2d3748;
-            /* Dark blue-gray for main text */
             --text-secondary: #4a5568;
-            /* Medium gray for secondary text */
             --accent: #0d9488;
-            /* Teal accent - darker for light mode */
             --accent-hover: #0f766e;
-            /* Darker teal for hover states */
             --card-bg: #ffffff;
-            /* White card background */
             --section-bg: #edf2f7;
-            /* Light gray section background */
             --border: #cbd5e0;
-            /* Light gray border */
         }
 
-        /* Add this to your existing styles */
-        .theme-toggle {
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            margin-left: 1rem;
-            border-radius: 50%;
-            transition: background-color 0.2s, transform 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .theme-toggle:hover {
-            background-color: rgba(100, 255, 218, 0.1);
-            transform: translateY(-2px);
-        }
-
+        /* ========== Base Styles ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+                Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            position: relative;
+            width: 100%;
         }
 
         body {
             background-color: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
         .container {
@@ -103,6 +73,15 @@
             padding: 0 1.5rem;
         }
 
+        section {
+            padding: 5rem 0;
+        }
+
+        .highlight {
+            color: var(--accent);
+        }
+
+        /* ========== Header & Navigation ========== */
         header {
             position: fixed;
             top: 0;
@@ -115,20 +94,8 @@
             transition: all 0.3s ease;
         }
 
-        /* Class to hide the header when scrolling down */
         header.hide {
             transform: translateY(-100%);
-        }
-
-        /* Add padding to the top of main to account for fixed header */
-        main {
-            padding-top: 72px;
-            /* Match header height */
-        }
-
-        /* Adjust the first section to account for header height */
-        .hero {
-            min-height: calc(100vh - 72px);
         }
 
         nav {
@@ -177,16 +144,53 @@
             width: 100%;
         }
 
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ========== Hero Section ========== */
+        main {
+            padding-top: 72px;
+            /* Match header height */
+        }
+
         .hero {
-            min-height: calc(100vh - 80px);
+            min-height: calc(100vh - 72px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 5rem 0;
+            position: relative;
         }
 
         .hero-content {
             max-width: 800px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-image-container {
+            flex: 0.5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
         }
 
         .hero-subtitle {
@@ -214,6 +218,33 @@
             max-width: 600px;
         }
 
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(100, 255, 218, 0.2);
+        }
+
+        .github-contrib {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .github-contrib:hover {
+            transform: translateY(-3px);
+        }
+
+        /* ========== Buttons ========== */
         .btn {
             display: inline-block;
             background-color: transparent;
@@ -233,10 +264,42 @@
             transform: translateY(-2px);
         }
 
-        section {
-            padding: 5rem 0;
+        .btn i {
+            margin-right: 0.5rem;
         }
 
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--accent);
+            position: relative;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(var(--accent-rgb, 100, 255, 218, 0.1));
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            margin-left: 1rem;
+            border-radius: 50%;
+            transition: background-color 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* ========== Section Styles ========== */
         .section-title {
             font-size: 2rem;
             margin-bottom: 2.5rem;
@@ -254,6 +317,7 @@
             background-color: var(--accent);
         }
 
+        /* ========== Skills Section ========== */
         .skills-container {
             display: flex;
             flex-wrap: wrap;
@@ -276,6 +340,7 @@
             transform: translateY(-2px);
         }
 
+        /* ========== Experience Section ========== */
         .experience-timeline {
             position: relative;
         }
@@ -344,6 +409,7 @@
             margin-bottom: 0.5rem;
         }
 
+        /* ========== Projects Section ========== */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -391,6 +457,7 @@
             color: var(--accent);
         }
 
+        /* ========== Contact Section ========== */
         .contact {
             background-color: var(--section-bg);
             border-top: 1px solid var(--border);
@@ -415,6 +482,13 @@
             max-width: 600px;
         }
 
+        .contact-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
         .social-links {
             display: flex;
             gap: 1.5rem;
@@ -425,6 +499,9 @@
             color: var(--text-primary);
             font-size: 1.5rem;
             transition: color 0.3s ease, transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .social-link:hover {
@@ -432,6 +509,34 @@
             transform: translateY(-3px);
         }
 
+        .social-label {
+            font-size: 0.9rem;
+        }
+
+        /* Location styles */
+        .location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .location i {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        /* Adjust for mobile */
+        @media (max-width: 576px) {
+            .location {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ========== Footer ========== */
         footer {
             background-color: var(--bg-primary);
             padding: 2rem 0;
@@ -444,20 +549,7 @@
             font-size: 0.9rem;
         }
 
-        .highlight {
-            color: var(--accent);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* External link styling */
+        /* ========== External Links ========== */
         .external-link {
             text-decoration: none;
             color: inherit;
@@ -485,7 +577,6 @@
             transform: translateY(-1px);
         }
 
-        /* Add a subtle underline effect on hover */
         .external-link::after {
             content: '';
             position: absolute;
@@ -501,241 +592,7 @@
             width: calc(100% - 1rem);
         }
 
-        /* Mobile responsive styles */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 72px;
-                right: -100%;
-                flex-direction: column;
-                background-color: var(--bg-primary);
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-                padding: 2rem 0;
-                gap: 2rem;
-                border-top: 1px solid var(--border);
-                height: 100vh;
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .project-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Add these styles to fix mobile layout issues */
-        html,
-        body {
-            overflow-x: hidden;
-            position: relative;
-            width: 100%;
-        }
-
-        /* Adjust the mobile menu styling */
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 72px;
-                right: -100%;
-                flex-direction: column;
-                background-color: var(--bg-primary);
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-                padding: 2rem 0;
-                gap: 2rem;
-                border-top: 1px solid var(--border);
-                height: calc(100vh - 72px);
-                /* Adjust height to exclude header */
-                overflow-y: auto;
-                /* Allow scrolling if menu is too tall */
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            /* Fix container padding on mobile */
-            .container {
-                padding: 0 1rem;
-                width: 100%;
-                box-sizing: border-box;
-            }
-
-            /* Fix hero section spacing */
-            .hero-title {
-                font-size: 2.5rem;
-                word-wrap: break-word;
-            }
-
-            .hero-description {
-                font-size: 1.1rem;
-                word-wrap: break-word;
-            }
-
-            /* Ensure project cards don't overflow */
-            .project-card {
-                width: 100%;
-                box-sizing: border-box;
-            }
-
-            /* Adjust section padding on mobile */
-            section {
-                padding: 3rem 0;
-            }
-        }
-
-        .hero {
-            position: relative;
-        }
-
-        .hero-content {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .hero-text {
-            flex: 1;
-        }
-
-        .hero-image-container {
-            flex: 0.5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .profile-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .profile-image:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(100, 255, 218, 0.2);
-        }
-
-        .github-contrib {
-            max-width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .github-contrib:hover {
-            transform: translateY(-3px);
-        }
-
-        /* Mobile responsive adjustments */
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column-reverse;
-                text-align: center;
-                gap: 3rem;
-            }
-
-            .hero-image-container {
-                margin-bottom: 2rem;
-            }
-
-            .profile-image {
-                width: 180px;
-                height: 180px;
-            }
-
-            .github-contrib {
-                max-width: 90%;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .profile-image {
-                width: 150px;
-                height: 150px;
-            }
-
-            .github-contrib {
-                max-width: 100%;
-            }
-        }
-
-        /* Add to your existing CSS */
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .social-label {
-            font-size: 0.9rem;
-        }
-
-        .btn i {
-            margin-right: 0.5rem;
-        }
-
-        /* Adjust for mobile */
-        @media (max-width: 576px) {
-            .btn {
-                font-size: 0.9rem;
-                padding: 0.75rem 1rem;
-            }
-        }
-
-        /* Add to your existing styles */
-        .nav-buttons {
-            display: flex;
-            align-items: center;
-        }
-
-        /* Adjust mobile layout */
-        @media (max-width: 768px) {
-            .theme-toggle {
-                margin-right: 1rem;
-            }
-        }
-
-        /* Contact section styles */
-        .contact-actions {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--accent);
-            position: relative;
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(var(--accent-rgb, 100, 255, 218, 0.1));
-        }
-
+        /* ========== Tooltips ========== */
         .tooltip {
             position: absolute;
             bottom: -40px;
@@ -769,8 +626,92 @@
             visibility: visible;
         }
 
-        /* For better mobile experience */
+        /* ========== Responsive Styles ========== */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .hero-image-container {
+                margin-bottom: 2rem;
+            }
+
+            .profile-image {
+                width: 180px;
+                height: 180px;
+            }
+
+            .github-contrib {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                right: -100%;
+                flex-direction: column;
+                background-color: var(--bg-primary);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+                gap: 2rem;
+                border-top: 1px solid var(--border);
+                height: calc(100vh - 72px);
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            .theme-toggle {
+                margin-right: 1rem;
+            }
+        }
+
         @media (max-width: 576px) {
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .github-contrib {
+                max-width: 100%;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 0.75rem 1rem;
+            }
+
             .contact-actions {
                 flex-direction: column;
                 width: 100%;
@@ -786,10 +727,10 @@
                 <div class="logo">SA</div>
                 <ul class="nav-links" id="navLinks">
                     <li><a href="#about" data-route="/about">About</a></li>
+                    <li><a href="#contact" data-route="/contact">Contact</a></li>
                     <li><a href="#experience" data-route="/experience">Experience</a></li>
                     <li><a href="#skills" data-route="/skills">Skills</a></li>
                     <li><a href="#projects" data-route="/projects">Projects</a></li>
-                    <li><a href="#contact" data-route="/contact">Contact</a></li>
                 </ul>
                 <div class="nav-buttons">
                     <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">
@@ -831,6 +772,10 @@
                     <p class="contact-subtitle">
                         I'm currently open to new opportunities and would love to hear from you.
                     </p>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Manila, Philippines</span>
+                    </div>
                     <div class="contact-actions">
                         <a href="mailto:contact@shaunalonzo.com" class="btn">
                             <i class="far fa-envelope"></i> Email Me
