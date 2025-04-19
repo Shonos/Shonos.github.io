@@ -13,7 +13,8 @@
     <meta name="robots" content="index, follow">
     <meta name="author" content="Shaun Alonzo">
     <link rel="canonical" href="https://shaunalonzo.com">
-    <meta property="og:title" content="Shaun Alonzo | Full Stack Developer">
+    <meta property="og:title"
+        content="Shaun Alonzo | Senior Software Engineer | .NET | Platform And API Reliability | AI-Ready">
     <meta property="og:description"
         content="Full Stack Developer with over 9 years of experience in .NET, AWS, React and Angular">
     <meta property="og:url" content="https://shaunalonzo.com">
@@ -955,6 +956,10 @@
                 right: 0;
             }
         }
+
+        .dev-feature {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -1346,7 +1351,7 @@
         </div>
     </footer>
 
-    <div class="chat-widget">
+    <div class="chat-widget dev-feature">
         <button class="chat-button" id="chatButton" aria-label="Open chat">
             <i class="fas fa-comment"></i>
         </button>
@@ -1361,7 +1366,8 @@
                 <!-- Messages will be added here dynamically -->
             </div>
             <div class="chat-input-container">
-                <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." aria-label="Type a message">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..."
+                    aria-label="Type a message">
                 <button class="chat-submit" id="chatSubmit" disabled aria-label="Send message">
                     <i class="fas fa-paper-plane"></i>
                 </button>
