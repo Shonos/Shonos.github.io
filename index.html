@@ -13,7 +13,8 @@
     <meta name="robots" content="index, follow">
     <meta name="author" content="Shaun Alonzo">
     <link rel="canonical" href="https://shaunalonzo.com">
-    <meta property="og:title" content="Shaun Alonzo | Full Stack Developer">
+    <meta property="og:title"
+        content="Shaun Alonzo | Senior Software Engineer | .NET | Platform And API Reliability | AI-Ready">
     <meta property="og:description"
         content="Full Stack Developer with over 9 years of experience in .NET, AWS, React and Angular">
     <meta property="og:url" content="https://shaunalonzo.com">
@@ -218,7 +219,7 @@
             font-weight: 500;
             max-width: 600px;
         }
-        
+
         .hero-location {
             display: flex;
             align-items: center;
@@ -227,24 +228,24 @@
             font-size: 1rem;
             margin-top: 1.5rem;
         }
-        
+
         .hero-location i {
             color: var(--accent);
             font-size: 1rem;
         }
-        
+
         /* Adjust responsive styles */
         @media (max-width: 992px) {
             .hero-role {
                 margin-left: auto;
                 margin-right: auto;
             }
-            
+
             .hero-location {
                 justify-content: center;
             }
         }
-        
+
         @media (max-width: 576px) {
             .hero-role {
                 font-size: 1rem;
@@ -753,6 +754,212 @@
                 width: 100%;
             }
         }
+
+        /* Chat component styles */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            color: var(--bg-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.05);
+        }
+
+        .chat-container {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 320px;
+            height: 400px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .chat-container.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .chat-header {
+            padding: 15px;
+            background-color: var(--accent);
+            color: var(--bg-primary);
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: var(--bg-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .message.received {
+            align-self: flex-start;
+            background-color: var(--section-bg);
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.sent {
+            align-self: flex-end;
+            background-color: var(--accent);
+            color: var(--bg-primary);
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-input-container {
+            padding: 15px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .chat-submit {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            color: var(--bg-primary);
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .chat-submit:disabled {
+            background-color: var(--border);
+            cursor: not-allowed;
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            align-self: flex-start;
+            background-color: var(--section-bg);
+            padding: 8px 15px;
+            border-radius: 18px;
+            border-bottom-left-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background-color: var(--text-secondary);
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 1px;
+            opacity: 0.6;
+        }
+
+        .typing-indicator span:nth-child(1) {
+            animation: blink 1s infinite 0.2s;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation: blink 1s infinite 0.4s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation: blink 1s infinite 0.6s;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.2;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .chat-container {
+                width: 280px;
+                height: 350px;
+                right: 0;
+            }
+        }
+
+        .dev-feature {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -793,10 +1000,12 @@
                             Software Engineer | AI-Enhanced Efficiency
                         </div>
                         <p class="hero-description">
-                            Senior Software Engineer with 9+ years of experience in .NET, AWS, React, and SQL. Focused on platform stability, API reliability, and clean architecture — enhanced by AI tools like Copilot and ChatGPT for faster, smarter delivery.
+                            Senior Software Engineer with 9+ years of experience in .NET, AWS, React, and SQL. Focused
+                            on platform stability, API reliability, and clean architecture — enhanced by AI tools like
+                            Copilot and ChatGPT for faster, smarter delivery.
                         </p>
                         <a href="#contact" class="btn">Get In Touch</a>
-                        
+
                     </div>
                     <div class="hero-image-container">
                         <img src="assets/shaunalonzo.jpg" alt="Shaun Alonzo" class="profile-image">
@@ -1141,6 +1350,30 @@
             <p class="footer-text">Designed & Built by <span class="highlight">Shaun Alonzo</span> © 2025</p>
         </div>
     </footer>
+
+    <div class="chat-widget dev-feature">
+        <button class="chat-button" id="chatButton" aria-label="Open chat">
+            <i class="fas fa-comment"></i>
+        </button>
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-header">
+                <div>Chat with Shaun's Assistant</div>
+                <button class="chat-close" id="chatClose" aria-label="Close chat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be added here dynamically -->
+            </div>
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..."
+                    aria-label="Type a message">
+                <button class="chat-submit" id="chatSubmit" disabled aria-label="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Structured Data for Person -->
     <script type="application/ld+json">
@@ -1545,6 +1778,158 @@
 
         // Initialize theme on page load
         initializeTheme();
+
+        // Chat component functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const chatButton = document.getElementById('chatButton');
+            const chatContainer = document.getElementById('chatContainer');
+            const chatClose = document.getElementById('chatClose');
+            const chatInput = document.getElementById('chatInput');
+            const chatSubmit = document.getElementById('chatSubmit');
+            const chatMessages = document.getElementById('chatMessages');
+
+            // Static messages to be displayed when the chat opens
+            const staticMessages = [
+                { text: "Hi there! I'm Shaun's assistant. How can I help you today?", type: "received", delay: 500 },
+                { text: "I can tell you more about Shaun's skills, experience, or projects. Just let me know what you're interested in!", type: "received", delay: 2000 }
+            ];
+
+            // Toggle chat window
+            chatButton.addEventListener('click', function () {
+                chatContainer.classList.add('active');
+
+                // Only show welcome messages if chat is empty
+                if (chatMessages.childElementCount === 0) {
+                    displayStaticMessages();
+                }
+
+                // Focus on input
+                setTimeout(() => chatInput.focus(), 300);
+            });
+
+            // Close chat window
+            chatClose.addEventListener('click', function () {
+                chatContainer.classList.remove('active');
+            });
+
+            // Listen for Enter key in input
+            chatInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter' && chatInput.value.trim() !== '') {
+                    sendMessage();
+                }
+            });
+
+            // Send button click
+            chatSubmit.addEventListener('click', function () {
+                if (chatInput.value.trim() !== '') {
+                    sendMessage();
+                }
+            });
+
+            // Input validation
+            chatInput.addEventListener('input', function () {
+                chatSubmit.disabled = chatInput.value.trim() === '';
+            });
+
+            // Function to display static welcome messages
+            function displayStaticMessages() {
+                // Use setTimeout to show messages sequentially
+                staticMessages.forEach((msg, index) => {
+                    setTimeout(() => {
+                        // Show typing indicator before message
+                        if (index > 0) {
+                            showTypingIndicator();
+                        }
+
+                        // Display the message after typing indicator
+                        setTimeout(() => {
+                            hideTypingIndicator();
+                            addMessage(msg.text, msg.type);
+                        }, index > 0 ? 1500 : 0);
+                    }, msg.delay);
+                });
+            }
+
+            // Function to send a message
+            function sendMessage() {
+                const text = chatInput.value.trim();
+                addMessage(text, 'sent');
+                chatInput.value = '';
+                chatSubmit.disabled = true;
+
+                // Show typing indicator
+                setTimeout(showTypingIndicator, 1000);
+
+                // Simulate a response after a delay
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    respondToMessage(text);
+                }, 3000);
+            }
+
+            // Function to add a message to the chat
+            function addMessage(text, type) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', type);
+                messageElement.textContent = text;
+                chatMessages.appendChild(messageElement);
+
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // Function to show typing indicator
+            function showTypingIndicator() {
+                if (!document.querySelector('.typing-indicator')) {
+                    const indicator = document.createElement('div');
+                    indicator.classList.add('typing-indicator');
+                    indicator.innerHTML = '<span></span><span></span><span></span>';
+                    chatMessages.appendChild(indicator);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            }
+
+            // Function to hide typing indicator
+            function hideTypingIndicator() {
+                const indicator = document.querySelector('.typing-indicator');
+                if (indicator) {
+                    indicator.remove();
+                }
+            }
+
+            // Function to respond with static responses
+            function respondToMessage(message) {
+                // Convert message to lowercase for easier matching
+                const lowerMessage = message.toLowerCase();
+
+                let response;
+
+                // Very simple response logic based on keywords
+                if (lowerMessage.includes('experience') || lowerMessage.includes('work')) {
+                    response = "Shaun has over 9 years of experience working with .NET, AWS, React, and Angular. He's currently a Senior Engineer at Domain. Would you like to know more about a specific role?";
+                }
+                else if (lowerMessage.includes('skill') || lowerMessage.includes('tech')) {
+                    response = "Shaun is proficient in .NET/C#, ASP.NET Core, React.js, Angular, AWS, Azure, SQL Server, and more. He specializes in building high-performance web applications and microservices.";
+                }
+                else if (lowerMessage.includes('contact') || lowerMessage.includes('hire') || lowerMessage.includes('email')) {
+                    response = "You can contact Shaun via email at contact@shaunalonzo.com or connect with him on LinkedIn. Would you like me to help you with anything else?";
+                }
+                else if (lowerMessage.includes('project') || lowerMessage.includes('portfolio')) {
+                    response = "Shaun has worked on various projects, including the Redbook website redesign and the MoneyMe+ WooCommerce plugin. You can find more details in the Projects section of this site.";
+                }
+                else if (lowerMessage.includes('location') || lowerMessage.includes('where')) {
+                    response = "Shaun is based in Manila, Philippines but is open to remote opportunities.";
+                }
+                else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                    response = "Hello! How can I help you learn more about Shaun today?";
+                }
+                else {
+                    response = "That's an interesting question! For specific details, it might be best to contact Shaun directly at contact@shaunalonzo.com. Is there anything else I can help with?";
+                }
+
+                addMessage(response, 'received');
+            }
+        });
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
