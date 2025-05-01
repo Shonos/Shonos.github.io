@@ -957,6 +957,31 @@
             }
         }
 
+        .email-display {
+            margin-bottom: 1rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .email-address {
+            font-size: 1.25rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .email-buttons {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        @media (max-width: 576px) {
+            .email-buttons {
+                flex-direction: column;
+            }
+        }
+
         .dev-feature {
             display: none !important;
         }
@@ -1026,13 +1051,18 @@
                         <span>Manila, Philippines</span>
                     </div>
                     <div class="contact-actions">
-                        <a href="mailto:contact@shaunalonzo.com" class="btn">
-                            <i class="far fa-envelope"></i> Email Me
-                        </a>
-                        <button id="copyEmailBtn" class="btn btn-secondary" aria-label="Copy email address">
-                            <i class="far fa-copy"></i> Copy Email
-                            <span class="tooltip" id="copyTooltip">Copied!</span>
-                        </button>
+                        <div class="email-display">
+                            <span class="email-address">contact@shaunalonzo.com</span>
+                        </div>
+                        <div class="email-buttons">
+                            <a href="mailto:contact@shaunalonzo.com" class="btn">
+                                <i class="far fa-envelope"></i> Email Me
+                            </a>
+                            <button id="copyEmailBtn" class="btn btn-secondary" aria-label="Copy email address">
+                                <i class="far fa-copy"></i> Copy Email
+                                <span class="tooltip" id="copyTooltip">Copied!</span>
+                            </button>
+                        </div>
                     </div>
                     <div class="social-links">
                         <a href="https://www.linkedin.com/in/shaunalonzo/" class="social-link"
@@ -1274,7 +1304,7 @@
                         <div class="timeline-position">Associate Software Engineer</div>
                         <div class="timeline-description">
                             <ul>
-                                <li>Tech Support for SAP Modules of Uniliver </li>
+                                <li>Tech Support for SAP Modules of Unilever </li>
                             </ul>
                         </div>
                     </div>
@@ -1672,34 +1702,26 @@
             const copyEmailBtn = document.getElementById('copyEmailBtn');
             const copyTooltip = document.getElementById('copyTooltip');
 
-            copyEmailBtn.addEventListener('click', () => {
-                // The email to copy
-                const email = 'contact@shaunalonzo.com';
+            if (copyEmailBtn) {
+                copyEmailBtn.addEventListener('click', () => {
+                    // The email to copy
+                    const email = 'contact@shaunalonzo.com';
 
-                // Copy to clipboard
-                navigator.clipboard.writeText(email)
-                    .then(() => {
-                        // Show tooltip
-                        copyTooltip.classList.add('show');
-
-                        // Hide tooltip after 2 seconds
-                        setTimeout(() => {
-                            copyTooltip.classList.remove('show');
-                        }, 2000);
-
-                        // Track event in analytics
-                        if (typeof gtag === 'function') {
-                            gtag('event', 'copy_email', {
-                                'event_category': 'engagement',
-                                'event_label': 'email_copied',
-                                'value': 1
+                    // Try the modern clipboard API first
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(email)
+                            .then(() => {
+                                showCopySuccess();
+                            })
+                            .catch(err => {
+                                console.error('Clipboard API failed:', err);
+                                fallbackCopy(email);
                             });
-                        }
-                    })
-                    .catch(err => {
-                        console.error('Could not copy text: ', err);
-                    });
-            });
+                    } else {
+                        fallbackCopy(email);
+                    }
+                });
+            }
 
             // Track other social link clicks
             document.querySelectorAll('.social-links .social-link').forEach(link => {
@@ -1715,6 +1737,68 @@
                 });
             });
         });
+
+        // Fallback copy method using textarea
+        function fallbackCopy(text) {
+            // Create a temporary textarea
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+
+            // Make it non-editable to avoid focus and style issues
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'absolute';
+            textarea.style.left = '-9999px';
+
+            document.body.appendChild(textarea);
+
+            // Check if there's any selection already
+            const selected = document.getSelection().rangeCount > 0 ?
+                document.getSelection().getRangeAt(0) : false;
+
+            // Select the text
+            textarea.select();
+            textarea.setSelectionRange(0, textarea.value.length);
+
+            // Copy to clipboard
+            let success = false;
+            try {
+                success = document.execCommand('copy');
+            } catch (err) {
+                console.error('Fallback copy failed:', err);
+            }
+
+            // Clean up
+            document.body.removeChild(textarea);
+
+            // Restore previous selection if any
+            if (selected) {
+                document.getSelection().removeAllRanges();
+                document.getSelection().addRange(selected);
+            }
+
+            if (success) {
+                showCopySuccess();
+            }
+        }
+
+        // Function to show success tooltip
+        function showCopySuccess() {
+            copyTooltip.classList.add('show');
+
+            // Hide tooltip after 2 seconds
+            setTimeout(() => {
+                copyTooltip.classList.remove('show');
+            }, 2000);
+
+            // Track event in analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'copy_email', {
+                    'event_category': 'engagement',
+                    'event_label': 'email_copied',
+                    'value': 1
+                });
+            }
+        }
     </script>
 
     <script>
