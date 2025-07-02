@@ -1,0 +1,15 @@
+name: CDN Warm-Up
+
+on:
+  schedule:
+    - cron: '*/15 * * * *' # Every 15 minutes
+  workflow_dispatch:       # Allows manual triggering
+
+jobs:
+  warmup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Curl your GitHub Pages site
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" https://shaunalonzo.com
