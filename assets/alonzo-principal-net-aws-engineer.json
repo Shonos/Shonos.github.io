@@ -1,0 +1,698 @@
+{
+  "picture": {
+    "hidden": false,
+    "url": "",
+    "size": 80,
+    "rotation": 0,
+    "aspectRatio": 1,
+    "borderRadius": 0,
+    "borderColor": "rgba(0, 0, 0, 0.5)",
+    "borderWidth": 0,
+    "shadowColor": "rgba(0, 0, 0, 0.5)",
+    "shadowWidth": 0
+  },
+  "basics": {
+    "name": "Shaun Alonzo",
+    "headline": "Senior/Principal Software Engineer | .NET & AWS | Architecture, Security & Engineering Leadership",
+    "email": "contact@shaunalonzo.com",
+    "phone": "+639562495295",
+    "location": "Philippines",
+    "website": {
+      "url": "https://shaunalonzo.com",
+      "label": "shaunalonzo.com"
+    },
+    "customFields": [
+      {
+        "id": "019ec9bd-fbd6-735c-802c-b5706c85b8ee",
+        "icon": "linkedin-logo",
+        "text": "/in/shaunalonzo",
+        "link": "https://www.linkedin.com/in/shaunalonzo/"
+      }
+    ]
+  },
+  "summary": {
+    "title": "",
+    "icon": "",
+    "columns": 1,
+    "hidden": false,
+    "content": "<ul><li><p>10+ years building and evolving .NET distributed systems — from greenfield design to modernizing legacy platforms carrying millions of transactions. Operate at the intersection of hands-on engineering and technical leadership.</p></li><li><p>Established architectural foundations at scale: authored RFCs and coding standards adopted across multiple squads, led a .NET 8 / ECS migration resolving 5+ years of debt, and designed event-driven multi-tenant systems on AWS (EventBridge, SQS, SNS, Lambda, DynamoDB).</p></li><li><p>Drive measurable outcomes: reduced API latency 4x (8s → 2s) on a 150K tpd platform, grew traffic 20% via a frontend rewrite, and lifted team velocity 40% through LLM-assisted development workflows — without compromising 80%+ test coverage.</p></li><li><p>Experienced in high-compliance environments (SOC2), production incident response, and mentoring engineers toward senior-level thinking.</p></li></ul><p></p>"
+  },
+  "sections": {
+    "profiles": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": true,
+      "items": [
+        {
+          "id": "019d03aa-2594-7619-a960-e165f8353a24",
+          "hidden": false,
+          "icon": "acorn",
+          "iconColor": "",
+          "network": "LinkedIn",
+          "username": "shaunalonzo",
+          "website": {
+            "url": "https://www.linkedin.com/in/shaunalonzo/",
+            "label": "",
+            "inlineLink": false
+          }
+        }
+      ]
+    },
+    "experience": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "019d03ab-3619-74ed-b9bf-049735efc662",
+          "hidden": false,
+          "company": "Domain (domain.com.au)",
+          "position": "Senior Software Engineer",
+          "location": "Remote",
+          "period": "March 2023 - Present",
+          "website": {
+            "url": "https://domain.com.au",
+            "label": "",
+            "inlineLink": true
+          },
+          "description": "<ul><li><p>Wrote the team's first RFCs and coding standards from scratch; the architectural patterns are still in use 2+ years later across multiple squads.</p></li><li><p>Owned the modernization roadmap for mission-critical services, migrating from .NET Framework 4.6 on AWS EC2 (Windows) to .NET 8 on Amazon ECS (Linux containers) to resolve 5+ years of technical debt and eliminate OS licensing overhead.</p></li><li><p>Designed a multi-tenant Pricing &amp; Billing Engine with Event Sourcing on AWS (EventBridge, SQS, SNS) and guided the team through adopting event-driven architecture.</p></li><li><p>Ran production incident response and post-mortems; built deadlock simulations and observability tooling to catch issues before they reached customers.</p></li><li><p>Reworked order dispatching and subscription logic for agency-level listing plans to handle growing data volumes without degradation.</p></li><li><p>Brought LLM-assisted code reviews and automated test generation into the development workflow (Copilot, Gemini), keeping 80% test coverage while boosting team output by 40%.</p></li></ul><p></p>",
+          "roles": []
+        },
+        {
+          "id": "019d03ac-ed42-7443-944e-b220029a12bb",
+          "hidden": false,
+          "company": "Carsales (carsales.com.au)",
+          "position": "Senior Software Engineer",
+          "location": "Remote",
+          "period": "November 2021 – March 2023",
+          "website": {
+            "url": "https://carsales.com.au",
+            "label": "",
+            "inlineLink": true
+          },
+          "description": "<ul><li><p>Broke apart a monolithic Editorial API into separate read (Research Data API with distributed caching) and write paths (MS SQL CMS), consumed by multiple teams across the org.</p></li><li><p>Led the <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"http://Redbook.com.au\">Redbook.com.au</a> frontend rewrite — replaced legacy pages with responsive interfaces, driving a 20% traffic increase.</p></li><li><p>Shipped the \"Can't Find Your Car\" feature end-to-end, generating 200+ new ad listings within 90 days of launch.</p></li></ul><p></p>",
+          "roles": []
+        },
+        {
+          "id": "019d03ae-74c1-76fd-986d-a25031061d9c",
+          "hidden": false,
+          "company": "Moneyme (moneyme.com.au)",
+          "position": "Senior C# .NET Specialist",
+          "location": "Pasig, Philippines",
+          "period": "August 2020 – November 2021 ",
+          "website": {
+            "url": "https://moneyme.com.au",
+            "label": "",
+            "inlineLink": true
+          },
+          "description": "<ul><li><p>Led the MoneyMe+ WooCommerce plugin team; the integration brought in 1,000+ e-commerce leads within its first 60 days.</p></li><li><p>Designed SOC2-compliant public APIs for third-party loan submissions, balancing security requirements with developer experience.</p></li></ul><p></p>",
+          "roles": []
+        }
+      ]
+    },
+    "education": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "019d09a2-3bad-733f-91bc-25a338416830",
+          "hidden": false,
+          "school": "University of Santo Tomas",
+          "degree": "Bachelor of Science",
+          "area": "Computer Science",
+          "grade": "",
+          "location": "Manila",
+          "period": "2011 - 2015",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": ""
+        }
+      ]
+    },
+    "projects": {
+      "title": "Personal Projects",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "019d09a3-95da-740e-b348-d9e3ac13731d",
+          "hidden": false,
+          "name": "Cards Guide PH",
+          "period": "2026",
+          "website": {
+            "url": "https://ccwatcher.shaunalonzo.com",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<p>Credit card comparison tool for the Philippine market. Uses AI agents to extract and sync card catalogs monthly from bank websites.<br>Tech Stack: Vercel, React, NodeJs, PostgreSQL, Python, Ollama + Mistral</p>"
+        },
+        {
+          "id": "019d09a8-f882-751a-b1e1-0bfccab3dd0c",
+          "hidden": false,
+          "name": "Currency Converter: AI-Assisted Technical Demo",
+          "period": "2026",
+          "website": {
+            "url": "https://github.com/Shonos/currency-converter-demo",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<p>Full-stack .NET + React application with Docker, built to demonstrate clean architecture and AI-assisted development practices.</p><p>Tech Stack: .NET, React, Docker Compose</p>"
+        }
+      ]
+    },
+    "skills": {
+      "title": "Skills",
+      "icon": "",
+      "columns": 2,
+      "hidden": false,
+      "items": [
+        {
+          "id": "019ec9ac-4c56-7049-97fd-6fbfcf1826c8",
+          "hidden": false,
+          "icon": "building-apartment",
+          "iconColor": "",
+          "name": "Architecture and Design",
+          "proficiency": "",
+          "level": 0,
+          "keywords": [
+            "Event Sourcing",
+            "CQRS",
+            "Distributed Systems",
+            "Multi-tenant Architecture",
+            "Microservices",
+            "Monolith Decomposition",
+            "API Design",
+            "RFC / ADR Authoring",
+            "SOC2-compliant Design"
+          ]
+        },
+        {
+          "id": "019ec9b1-9e9e-72e6-b8fa-6fb448c2f864",
+          "hidden": false,
+          "icon": "head-circuit",
+          "iconColor": "",
+          "name": "Leadership",
+          "proficiency": "",
+          "level": 0,
+          "keywords": [
+            "RFC Authoring",
+            "Coding Standards",
+            "Technical Mentoring",
+            "Design Reviews",
+            "Incident Response",
+            "Squad Leadership",
+            "Technical Interviews"
+          ]
+        },
+        {
+          "id": "019ec95b-a3a5-7719-81d1-ad7a6651e81a",
+          "hidden": false,
+          "icon": "angular-logo",
+          "iconColor": "",
+          "name": "Programming Languages",
+          "proficiency": "",
+          "level": 0,
+          "keywords": [
+            "C#",
+            "Python",
+            "Typescript",
+            "SQL"
+          ]
+        },
+        {
+          "id": "019ec99b-3193-75fc-842f-ccf253687ea8",
+          "hidden": false,
+          "icon": "cloud",
+          "iconColor": "",
+          "name": "Cloud and Infrastructure",
+          "proficiency": "",
+          "level": 0,
+          "keywords": [
+            "AWS",
+            "ECS",
+            "EventBridge",
+            "SQS/SNS",
+            "Lambda",
+            "API Gateway",
+            "CloudWatch",
+            "Azure",
+            "App Service",
+            "Service Bus",
+            "Functions"
+          ]
+        },
+        {
+          "id": "019ec99f-093d-715a-9854-d866ea155376",
+          "hidden": false,
+          "icon": "cpu",
+          "iconColor": "",
+          "name": "Containers & Orchestration",
+          "proficiency": "",
+          "level": 0,
+          "keywords": [
+            "Docker",
+            "AWS ECS",
+            "AWS EKS"
+          ]
+        },
+        {
+          "id": "019ec99f-def9-7751-8669-6f99eb342d94",
+          "hidden": false,
+          "icon": "envelope",
+          "iconColor": "",
+          "name": "Messaging & Streaming",
+          "proficiency": "",
+          "level": 0,
+          "keywords": [
+            "AWS SQS",
+            "AWS SNS",
+            "RabbitMQ",
+            "Kafka"
+          ]
+        },
+        {
+          "id": "019ec9a6-7867-711b-957d-d25bbbf9cf68",
+          "hidden": false,
+          "icon": "airplane-takeoff",
+          "iconColor": "",
+          "name": "CI/CD and Automation",
+          "proficiency": "",
+          "level": 0,
+          "keywords": [
+            "GitHub Actions",
+            "Jenkins",
+            "ArgoCD",
+            "AWS CDK (TypeScript)"
+          ]
+        },
+        {
+          "id": "019ec9a7-da63-7388-a6fe-642f46be6eb5",
+          "hidden": false,
+          "icon": "eye",
+          "iconColor": "",
+          "name": "Observability & Monitoring",
+          "proficiency": "",
+          "level": 0,
+          "keywords": [
+            "Serilog",
+            "Kibana",
+            "Elasticsearch",
+            "Elastic APM",
+            "CloudWatch"
+          ]
+        },
+        {
+          "id": "019ec9aa-d522-739a-972c-cd9946697dee",
+          "hidden": false,
+          "icon": "acorn",
+          "iconColor": "",
+          "name": "Testing and QA",
+          "proficiency": "",
+          "level": 0,
+          "keywords": [
+            "xUnit",
+            "Playwright",
+            "Integration Testing"
+          ]
+        },
+        {
+          "id": "019ec9ae-84e1-74d1-9dce-104b25e25b80",
+          "hidden": false,
+          "icon": "shield",
+          "iconColor": "",
+          "name": "Security and Compliance",
+          "proficiency": "",
+          "level": 0,
+          "keywords": [
+            "SOC2",
+            "AWS IAM",
+            "AWS Secrets Manager",
+            "Multi-tenant Isolation",
+            "API Security"
+          ]
+        },
+        {
+          "id": "019ec9b6-d3a9-72b5-960e-41c58f5501f8",
+          "hidden": false,
+          "icon": "database",
+          "iconColor": "",
+          "name": "Persistence and Caching",
+          "proficiency": "",
+          "level": 0,
+          "keywords": [
+            "MySQL",
+            "PostgresSQL",
+            "MSSQL",
+            "AWS DynamoDB",
+            "Redis"
+          ]
+        },
+        {
+          "id": "019ec9b8-3eb8-744f-bd04-5a1bf6e0c17c",
+          "hidden": false,
+          "icon": "image-square",
+          "iconColor": "",
+          "name": "Frontend",
+          "proficiency": "",
+          "level": 0,
+          "keywords": [
+            "React",
+            "Angular",
+            "Retool",
+            "ASP.NET MVC"
+          ]
+        },
+        {
+          "id": "019ec9b6-05ca-7398-a38d-72ffb17cb50b",
+          "hidden": false,
+          "icon": "robot",
+          "iconColor": "",
+          "name": "AI/LLM",
+          "proficiency": "",
+          "level": 0,
+          "keywords": [
+            "Copilot",
+            "Gemini",
+            "RAG",
+            "MCP"
+          ]
+        }
+      ]
+    },
+    "languages": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": true,
+      "items": [
+        {
+          "id": "019d03af-9dc8-7072-9476-73547aab972d",
+          "hidden": false,
+          "language": "English",
+          "fluency": "",
+          "level": 0
+        }
+      ]
+    },
+    "interests": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "awards": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "019ecdcc-38e9-75c3-8d2d-34dc9ba8e8c0",
+          "hidden": false,
+          "title": "2nd Runner Up, Domain Leap Hackathon",
+          "awarder": "Domain",
+          "date": "2024",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<p>In a team with Data Analysts and Product Owners, I created working demo of an integrated cost-of-living analysis tool for real estate listings, empowering buyers with localized expenses beyond property prices.</p>"
+        },
+        {
+          "id": "019ece1f-d11d-719a-8b77-8f6194e4950e",
+          "hidden": false,
+          "title": "2nd Runner Up, Carsales Hackathon",
+          "awarder": "Carsales.com.au",
+          "date": "2021",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<p>Designed and implemented a secure edge-networking topology for internal and external carsales APIs. Integrated Amazon API Gateway with AWS WAF and leveraged ambient AWS Shield protections, which would theoretically reduce attack surfaces and establish a standardized security baseline for core services.</p>"
+        }
+      ]
+    },
+    "certifications": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "019d93c4-3b3d-749c-8e78-a76e90a402cb",
+          "hidden": false,
+          "title": "AWS Certified Solutions Architect – Associate",
+          "issuer": "Amazon Web Services",
+          "date": "April 2026",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": ""
+        }
+      ]
+    },
+    "publications": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "volunteer": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "references": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    }
+  },
+  "customSections": [
+    {
+      "title": "Select Projects",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "id": "019ecae5-7851-72fa-a582-862219c76170",
+      "type": "projects",
+      "items": [
+        {
+          "id": "019ece26-9bd0-768b-b4bf-e4bcf4506ba0",
+          "hidden": false,
+          "name": ".NET HTTP Extensions for Domain",
+          "period": "2026",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<p>Developed a standardized .NET 8 HTTP client library using <code>IHttpClientFactory</code> and pure DI to streamline secure, high-performance service communication. Integrated automated OAuth2 token injection and architected a configurable resilience pipeline (circuit breakers, timeouts, and retries) using <code>Microsoft.Extensions.Http.Resilience</code> while optimizing network efficiency via <code>SocketsHttpHandler</code> connection pooling.</p>"
+        },
+        {
+          "id": "019ece2a-1747-76ec-9563-c55933ef9c45",
+          "hidden": false,
+          "name": ".NET Fluent Cache Wrapper Library",
+          "period": "2024",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<p>Developed a .NET library for Domain devs implementing a fluent API wrapper for <code>IDistributedCache</code> to standardize and simplify distributed caching strategies. Engineered chainable configurations for automated cache-miss data fetching, conditional storage policies, and flexible expiration windows (absolute and sliding), significantly reducing boilerplate code and improving application maintainability.</p>"
+        }
+      ]
+    },
+    {
+      "title": "Past Work Experience",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "id": "019ece2d-9ac5-72fa-8245-deb6e53bd9c5",
+      "type": "experience",
+      "items": [
+        {
+          "id": "019ece2e-3c2a-756d-8083-7dbb3f5458ae",
+          "hidden": false,
+          "company": "BlastAsia",
+          "position": "",
+          "location": "Pasig",
+          "period": "2016-2019",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<ul><li><p>Led in planning, estimating, and delegating tasks to junior project members from the start to end of project lifecycle.</p></li><li><p>Designed and developed user-friendly web user interfaces and efficient API e.g. chat, notifications, and other CRUD operations</p></li></ul><p></p>",
+          "roles": [
+            {
+              "id": "019ece30-3e18-734b-a5e6-179edd99c2b6",
+              "position": "Software Engineer II / Lead Full Stack Developer",
+              "period": "January 2017- May 2018",
+              "description": "<ul><li><p>Led in planning, estimating, and delegating tasks to project members from new client requests every sprint</p></li><li><p>Designed and developed new UI modules for the existing CAAPS solution</p></li><li><p>Designed and developed the “User Tables” web app which is used to modify database tables for the admin users and exporting audit trails of all modifications done to tables</p></li><li><p>Designed and developed the “Seed Data” web app which helps in generating a test data for customized solutions of new clients of AcumenData</p></li></ul><p></p>"
+            },
+            {
+              "id": "019ece31-b02e-757f-a23c-cf3f3bc7b38c",
+              "position": "Software Engineer I",
+              "period": "April 2016 - January 2017",
+              "description": "<ul><li><p>Developed modules such as quiz duels, score tracking, and notifications professionally implemented from frontend to backend</p></li><li><p>Provided maintenance for modules of the web app</p></li></ul><p></p>"
+            }
+          ]
+        },
+        {
+          "id": "019ece33-31a6-724b-8ccd-f66ac4a03851",
+          "hidden": false,
+          "company": "Accenture",
+          "position": "Associate Software Engineer",
+          "location": "Taguig",
+          "period": "June 2015 - February 2016",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<ul><li><p>Developed and supported SAP modules for Keystone projects</p></li></ul><p></p>",
+          "roles": []
+        }
+      ]
+    },
+    {
+      "title": "Experience (continued)",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "id": "019ece3d-c716-716e-a24e-59141aaca3e4",
+      "type": "experience",
+      "items": []
+    },
+    {
+      "title": "Experience",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "id": "019ece3e-cc0d-7526-9a2e-3dc7a845d635",
+      "type": "experience",
+      "items": [
+        {
+          "id": "019d03b4-4e1c-713d-85f6-a5f6ad514afd",
+          "hidden": false,
+          "company": "Nowcom Global Services",
+          "position": "Lead Software Engineer",
+          "location": "Pasig, Philippines",
+          "period": "December 2019 – July 2020",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<ul><li><p>Led a squad of 10 (6 devs, 2 QAs, 1 BA) — handled grooming, wrote technical specs, and ran a weekly release cadence with on-call rotation.</p></li><li><p>Cut lender API response times from 8s to 2s on a platform handling 150,000 transactions per day.</p></li><li><p>Owned the integration layer between frontend components and third-party lender APIs for deal submission workflows.</p></li></ul><p></p>",
+          "roles": []
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "template": "azurill",
+    "layout": {
+      "sidebarWidth": 35,
+      "pages": [
+        {
+          "fullWidth": true,
+          "main": [
+            "profiles",
+            "summary",
+            "experience"
+          ],
+          "sidebar": []
+        },
+        {
+          "fullWidth": true,
+          "main": [
+            "019ece3e-cc0d-7526-9a2e-3dc7a845d635",
+            "019ecae5-7851-72fa-a582-862219c76170",
+            "skills",
+            "publications",
+            "languages",
+            "references",
+            "interests",
+            "volunteer",
+            "certifications"
+          ],
+          "sidebar": []
+        },
+        {
+          "fullWidth": true,
+          "main": [
+            "projects",
+            "awards",
+            "019ece2d-9ac5-72fa-8245-deb6e53bd9c5",
+            "education",
+            "019ece3d-c716-716e-a24e-59141aaca3e4"
+          ],
+          "sidebar": []
+        }
+      ]
+    },
+    "page": {
+      "gapX": 4,
+      "gapY": 6,
+      "marginX": 14,
+      "marginY": 12,
+      "format": "a4",
+      "locale": "en-US",
+      "hideLinkUnderline": false,
+      "hideIcons": false,
+      "hideSectionIcons": true
+    },
+    "design": {
+      "level": {
+        "icon": "star",
+        "type": "circle"
+      },
+      "colors": {
+        "primary": "rgba(0, 132, 209, 1)",
+        "text": "rgba(0, 0, 0, 1)",
+        "background": "rgba(255, 255, 255, 1)"
+      }
+    },
+    "typography": {
+      "body": {
+        "fontFamily": "IBM Plex Serif",
+        "fontWeights": [
+          "400",
+          "500"
+        ],
+        "fontSize": 9.5,
+        "lineHeight": 1.5
+      },
+      "heading": {
+        "fontFamily": "IBM Plex Serif",
+        "fontWeights": [
+          "600"
+        ],
+        "fontSize": 14,
+        "lineHeight": 1.5
+      }
+    },
+    "notes": "",
+    "styleRules": []
+  }
+}

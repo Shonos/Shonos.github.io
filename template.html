@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        // Prevent theme flash — apply saved theme before first paint
+        (function () { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); })();
+    </script>
+    <title><!-- BUILD:META_TITLE -->Shaun Alonzo | Senior Software Engineer<!-- /BUILD:META_TITLE --></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/styles.css">
+    <meta name="description"
+        content="<!-- BUILD:META_DESC -->Shaun Alonzo - Senior Software Engineer specializing in .NET, AWS, and distributed systems.<!-- /BUILD:META_DESC -->">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">SA</div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#about" data-route="/about">About</a></li>
+                    <li><a href="#contact" data-route="/contact">Contact</a></li>
+                    <li><a href="#experience" data-route="/experience">Experience</a></li>
+                    <li><a href="#skills" data-route="/skills">Skills</a></li>
+                    <li><a href="#projects" data-route="/projects">Projects</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="mobile-menu-btn" id="menuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="about">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <p class="hero-subtitle">Hello, I'm</p>
+                        <h1 class="hero-title">
+                            <span class="hero-name"><!-- BUILD:HERO_NAME -->Shaun Alonzo<!-- /BUILD:HERO_NAME --></span>
+                        </h1>
+                        <div class="hero-role"><!-- BUILD:HERO_ROLE -->Senior Software Engineer<!-- /BUILD:HERO_ROLE --></div>
+                        <p class="hero-description"><!-- BUILD:HERO_DESC -->Senior Software Engineer with 10+ years of experience in .NET, AWS, and distributed systems.<!-- /BUILD:HERO_DESC --></p>
+                        <a href="#contact" class="btn">Get In Touch</a>
+                    </div>
+                    <div class="hero-image-container">
+                        <img src="assets/shaunalonzo.jpg" alt="Shaun Alonzo" class="profile-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <h2 class="contact-title">Get In Touch</h2>
+                    <p class="contact-subtitle">
+                        I'm currently open to new opportunities and would love to hear from you.
+                    </p>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span><!-- BUILD:CONTACT_LOCATION -->Manila, Philippines<!-- /BUILD:CONTACT_LOCATION --></span>
+                    </div>
+                    <div class="contact-actions">
+                        <div class="email-display">
+                            <span class="email-address"><!-- BUILD:CONTACT_EMAIL -->contact@shaunalonzo.com<!-- /BUILD:CONTACT_EMAIL --></span>
+                        </div>
+                        <div class="email-buttons">
+                            <a href="mailto:<!-- BUILD:CONTACT_EMAIL -->contact@shaunalonzo.com<!-- /BUILD:CONTACT_EMAIL -->" class="btn">
+                                <i class="far fa-envelope"></i> Email Me
+                            </a>
+                            <button id="copyEmailBtn" class="btn btn-secondary" aria-label="Copy email address">
+                                <i class="far fa-copy"></i> Copy Email
+                                <span class="tooltip" id="copyTooltip">Copied!</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/shaunalonzo/" class="social-link"
+                            aria-label="LinkedIn Profile">
+                            <i class="fab fa-linkedin"></i>
+                            <span class="social-label">LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/Shonos" class="social-link" aria-label="GitHub Profile">
+                            <i class="fab fa-github"></i>
+                            <span class="social-label">GitHub</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title">Skills & Technologies</h2>
+                <div class="skills-container">
+                    <!-- BUILD:SKILLS -->
+                    <!-- /BUILD:SKILLS -->
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <h2 class="section-title">Work Experience</h2>
+                <div class="experience-timeline">
+                    <!-- BUILD:EXPERIENCE -->
+                    <!-- /BUILD:EXPERIENCE -->
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="project-grid">
+                    <!-- BUILD:PROJECTS -->
+                    <!-- /BUILD:PROJECTS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">Designed & Built by <span class="highlight"><!-- BUILD:FOOTER_NAME -->Shaun Alonzo<!-- /BUILD:FOOTER_NAME --></span> © <!-- BUILD:FOOTER_YEAR -->2025<!-- /BUILD:FOOTER_YEAR --></p>
+        </div>
+    </footer>
+
+    <div class="chat-widget dev-feature">
+        <button class="chat-button" id="chatButton" aria-label="Open chat">
+            <i class="fas fa-comment"></i>
+        </button>
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-header">
+                <div>Chat with Shaun's Assistant</div>
+                <button class="chat-close" id="chatClose" aria-label="Close chat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be added here dynamically -->
+            </div>
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..."
+                    aria-label="Type a message">
+                <button class="chat-submit" id="chatSubmit" disabled aria-label="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Structured Data for Person -->
+    <script type="application/ld+json">
+    <!-- BUILD:JSONLD -->
+    <!-- /BUILD:JSONLD -->
+    </script>
+
+    <script defer src="assets/main.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EG4TMY27NZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-EG4TMY27NZ', {
+            send_page_view: false
+        });
+    </script>
+</body>
+
+</html>
