@@ -939,6 +939,10 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
     header {
         padding-top: max(0.75rem, env(safe-area-inset-top));
     }
