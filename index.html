@@ -4,7 +4,7 @@
 <head>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Shaun Alonzo — Senior .NET & AWS Engineer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/styles.css">
@@ -41,7 +41,7 @@
                     <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">
                         <i class="fas fa-moon"></i>
                     </button>
-                    <button class="mobile-menu-btn" id="menuBtn">
+                    <button class="mobile-menu-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -89,11 +89,14 @@
                         </div>
                         <h3 class="service-title">.NET Modernization</h3>
                         <p class="service-description">
-                            Legacy .NET Framework on Windows EC2 → containerized .NET 10 on AWS ECS/EKS.
-                            Zero-downtime migrations, phased traffic routing, .NET Standard compatibility
-                            bridges. I've done this at scale — eliminated 5+ years of technical debt with
-                            zero customer impact.
+                            Move legacy .NET Framework workloads from Windows EC2 to containerized .NET on AWS without disrupting customers.
                         </p>
+                        <div class="service-fit"><strong>Best for:</strong> teams carrying risky legacy services, slow release cycles, or unsupported framework versions.</div>
+                        <ul class="service-proof">
+                            <li>Phased traffic routing and .NET Standard compatibility bridges</li>
+                            <li>5+ years of technical debt eliminated with zero customer impact</li>
+                        </ul>
+                        <p class="service-outcome">Outcome: safer releases, clearer ownership, and a platform ready for modern AWS operations.</p>
                     </div>
                     <div class="service-card">
                         <div class="service-icon">
@@ -101,10 +104,14 @@
                         </div>
                         <h3 class="service-title">AWS Architecture & Cloud-Native Design</h3>
                         <p class="service-description">
-                            Event-driven architectures (SQS/SNS, EventBridge), serverless (Lambda, API
-                            Gateway), container orchestration (ECS Fargate, EKS), infrastructure-as-code
-                            (AWS CDK). AWS Solutions Architect Associate certified.
+                            Design event-driven, serverless, and containerized AWS systems that match the team’s operating model.
                         </p>
+                        <div class="service-fit"><strong>Best for:</strong> product teams moving beyond lift-and-shift cloud hosting.</div>
+                        <ul class="service-proof">
+                            <li>SQS/SNS, EventBridge, Lambda, API Gateway, ECS Fargate, EKS, and AWS CDK</li>
+                            <li>AWS Solutions Architect Associate certified</li>
+                        </ul>
+                        <p class="service-outcome">Outcome: cloud architecture that is observable, resilient, and easier to change.</p>
                     </div>
                     <div class="service-card">
                         <div class="service-icon">
@@ -112,11 +119,14 @@
                         </div>
                         <h3 class="service-title">AI-Augmented Engineering</h3>
                         <p class="service-description">
-                            I help teams integrate AI tooling (Claude Code, GitHub Copilot) into their
-                            full SDLC — from architecture design and automated test generation to code
-                            reviews. Established AI best practices later adopted across multiple squads
-                            at Domain.
+                            Help teams use Claude Code and GitHub Copilot responsibly across architecture, coding, tests, and reviews.
                         </p>
+                        <div class="service-fit"><strong>Best for:</strong> teams that want AI speed without weakening engineering judgment or review quality.</div>
+                        <ul class="service-proof">
+                            <li>AI practices established across architecture, code generation, and automated testing</li>
+                            <li>Best practices later adopted by multiple squads at Domain</li>
+                        </ul>
+                        <p class="service-outcome">Outcome: faster delivery loops with clearer guardrails for quality and maintainability.</p>
                     </div>
                     <div class="service-card">
                         <div class="service-icon">
@@ -124,96 +134,186 @@
                         </div>
                         <h3 class="service-title">Fractional Senior/Principal Engineer</h3>
                         <p class="service-description">
-                            Need a senior .NET/AWS engineer embedded on your team for a critical project?
-                            I step in for 3-6 months to lead architecture, mentor developers, and ship.
-                            No onboarding overhead — I've done this remotely across timezones.
+                            Add senior .NET/AWS judgment to a critical project without waiting for a full-time hire.
                         </p>
+                        <div class="service-fit"><strong>Best for:</strong> 3-6 month modernization, architecture, delivery, or mentoring gaps.</div>
+                        <ul class="service-proof">
+                            <li>Remote delivery across APAC, Australia, UK, and US time zones</li>
+                            <li>Architecture leadership, mentoring, implementation, and delivery support</li>
+                        </ul>
+                        <p class="service-outcome">Outcome: a critical project gets senior ownership while your team keeps moving.</p>
                     </div>
                 </div>
+            </div>
+            <div class="next-section">
+                <a href="#outcomes" class="btn">See Proof <i class="fas fa-chevron-down"></i></a>
+            </div>
+        </section>
+
+        <section id="outcomes" class="outcomes" aria-labelledby="outcomes-title">
+            <div class="container">
+                <div class="outcomes-header">
+                    <h2 class="section-title" id="outcomes-title">Selected Outcomes</h2>
+                    <p class="outcomes-intro">
+                        Evidence from modernization, cloud architecture, and delivery work where reliability,
+                        speed, and business continuity mattered.
+                    </p>
+                </div>
+                <div class="migration-runway" aria-labelledby="runway-title">
+                    <div class="runway-heading">
+                        <h3 id="runway-title">A safer path from legacy to cloud-native</h3>
+                        <p>Modernization is staged so teams can improve the platform without betting the customer experience on one release.</p>
+                    </div>
+                    <ol class="runway-steps">
+                        <li class="runway-step">
+                            <span class="runway-node" aria-hidden="true">01</span>
+                            <div>
+                                <h4>Stabilize</h4>
+                                <p>Make current services observable and safe to change.</p>
+                            </div>
+                        </li>
+                        <li class="runway-step">
+                            <span class="runway-node" aria-hidden="true">02</span>
+                            <div>
+                                <h4>Bridge</h4>
+                                <p>Protect compatibility while new components take shape.</p>
+                            </div>
+                        </li>
+                        <li class="runway-step">
+                            <span class="runway-node" aria-hidden="true">03</span>
+                            <div>
+                                <h4>Containerize</h4>
+                                <p>Move workloads toward repeatable AWS deployment paths.</p>
+                            </div>
+                        </li>
+                        <li class="runway-step">
+                            <span class="runway-node" aria-hidden="true">04</span>
+                            <div>
+                                <h4>Route & learn</h4>
+                                <p>Shift traffic in phases, measure behavior, and keep improving.</p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <div class="outcomes-grid">
+                    <article class="outcome-card">
+                        <div class="outcome-meta">Modernization risk</div>
+                        <h3 class="outcome-title">Legacy .NET moved without customer disruption</h3>
+                        <p class="outcome-result">Eliminated 5+ years of technical debt with zero customer impact.</p>
+                        <p class="outcome-context">Led phased migration from .NET Framework on Windows EC2 to containerized .NET on AWS EKS at Domain.</p>
+                    </article>
+                    <article class="outcome-card">
+                        <div class="outcome-meta">Order operations</div>
+                        <h3 class="outcome-title">Manual sales handoffs automated through AWS events</h3>
+                        <p class="outcome-result">Accelerated order processing by removing manual steps from the sales pipeline.</p>
+                        <p class="outcome-context">Architected an EventBridge, SNS, and SQS order orchestration engine for Salesforce ingestion.</p>
+                    </article>
+                    <article class="outcome-card">
+                        <div class="outcome-meta">Marketplace growth</div>
+                        <h3 class="outcome-title">Redbook inquiry traffic lifted through React rebuild</h3>
+                        <p class="outcome-result">Drove a 20% traffic increase to inquiry pages.</p>
+                        <p class="outcome-context">Led the Redbook.com.au frontend rewrite in React and TypeScript while standardizing page delivery.</p>
+                    </article>
+                    <article class="outcome-card">
+                        <div class="outcome-meta">Product execution</div>
+                        <h3 class="outcome-title">Card Guide PH launched with real marketplace inventory</h3>
+                        <p class="outcome-result">Generated 200+ credit-card listings in 90 days.</p>
+                        <p class="outcome-context">Built an AI-assisted fintech comparison platform with Claude Code, Playwright, and automated content workflows.</p>
+                    </article>
+                </div>
+            </div>
+            <div class="mobile-contact-cta">
+                <span>Need senior ownership for a critical .NET or AWS project?</span>
+                <a href="#contact" class="btn">Start a Conversation</a>
             </div>
             <div class="next-section">
                 <a href="#skills" class="btn">View Skills <i class="fas fa-chevron-down"></i></a>
             </div>
         </section>
 
-        <section id="skills">
+        <section id="skills" class="skills" aria-labelledby="skills-title">
             <div class="container">
-                <h2 class="section-title">Skills</h2>
+                <h2 class="section-title" id="skills-title">Skills</h2>
+                <p class="skills-intro">A focused view of the capabilities I use to modernize .NET systems, operate AWS platforms, and improve delivery. Core strengths are shown first; supporting tools remain available below.</p>
 
-                <div class="skills-category">
-                    <h3 class="skills-category-title">Backend</h3>
+                <div class="skills-category skills-core">
+                    <h3 class="skills-category-title">Signature capabilities</h3>
+                    <p class="skills-category-description">The areas where I bring the most senior-level ownership to modernization and delivery work.</p>
                     <div class="skills-container">
-                        <span class="skill-tag">C#</span>
-                        <span class="skill-tag">.NET 10</span>
-                        <span class="skill-tag">ASP.NET Core</span>
-                        <span class="skill-tag">Entity Framework</span>
-                        <span class="skill-tag">Dapper</span>
-                        <span class="skill-tag">REST APIs</span>
-                        <span class="skill-tag">CQRS</span>
-                        <span class="skill-tag">Microservices</span>
+                        <span class="skill-tag skill-tag-primary">.NET 10</span>
+                        <span class="skill-tag skill-tag-primary">AWS</span>
+                        <span class="skill-tag skill-tag-primary">C#</span>
+                        <span class="skill-tag skill-tag-primary">ASP.NET Core</span>
+                        <span class="skill-tag skill-tag-primary">Microservices</span>
                     </div>
                 </div>
 
                 <div class="skills-category">
-                    <h3 class="skills-category-title">AWS</h3>
+                    <h3 class="skills-category-title">Modernization & architecture</h3>
+                    <p class="skills-category-description">Shape systems that are easier to change, scale, and operate without replacing everything at once.</p>
+                    <div class="skills-container">
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">CQRS</span>
+                        <span class="skill-tag">Server-Driven UI</span>
+                        <span class="skill-tag">Query Optimization</span>
+                    </div>
+                    <details class="skills-more">
+                        <summary>Also used</summary>
+                        <div class="skills-container">
+                            <span class="skill-tag">Entity Framework</span>
+                            <span class="skill-tag">Dapper</span>
+                            <span class="skill-tag">Responsive Design</span>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="skills-category">
+                    <h3 class="skills-category-title">Cloud & delivery</h3>
+                    <p class="skills-category-description">Build observable AWS delivery paths that help teams ship changes with confidence.</p>
                     <div class="skills-container">
                         <span class="skill-tag">ECS Fargate</span>
                         <span class="skill-tag">EKS</span>
                         <span class="skill-tag">Lambda</span>
                         <span class="skill-tag">SQS/SNS</span>
                         <span class="skill-tag">EventBridge</span>
-                        <span class="skill-tag">API Gateway</span>
-                        <span class="skill-tag">S3</span>
-                        <span class="skill-tag">DynamoDB</span>
-                        <span class="skill-tag">CDK</span>
-                        <span class="skill-tag">CloudWatch</span>
+                        <span class="skill-tag">Docker</span>
                     </div>
+                    <details class="skills-more">
+                        <summary>Also used</summary>
+                        <div class="skills-container">
+                            <span class="skill-tag">API Gateway</span>
+                            <span class="skill-tag">S3</span>
+                            <span class="skill-tag">DynamoDB</span>
+                            <span class="skill-tag">CDK</span>
+                            <span class="skill-tag">GitHub Actions</span>
+                            <span class="skill-tag">ArgoCD</span>
+                            <span class="skill-tag">CloudWatch</span>
+                            <span class="skill-tag">Serilog</span>
+                            <span class="skill-tag">Elastic APM</span>
+                            <span class="skill-tag">xUnit</span>
+                            <span class="skill-tag">Playwright</span>
+                        </div>
+                    </details>
                 </div>
 
                 <div class="skills-category">
-                    <h3 class="skills-category-title">Frontend</h3>
-                    <div class="skills-container">
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">TypeScript</span>
-                        <span class="skill-tag">Server-Driven UI</span>
-                        <span class="skill-tag">Responsive Design</span>
-                    </div>
-                </div>
-
-                <div class="skills-category">
-                    <h3 class="skills-category-title">Data & Caching</h3>
+                    <h3 class="skills-category-title">Data & AI workflows</h3>
+                    <p class="skills-category-description">Use reliable data foundations and practical AI tooling to improve product delivery.</p>
                     <div class="skills-container">
                         <span class="skill-tag">SQL Server</span>
                         <span class="skill-tag">PostgreSQL</span>
                         <span class="skill-tag">Redis</span>
-                        <span class="skill-tag">DynamoDB</span>
-                        <span class="skill-tag">Query Optimization</span>
-                    </div>
-                </div>
-
-                <div class="skills-category">
-                    <h3 class="skills-category-title">AI-Augmented Development</h3>
-                    <div class="skills-container">
                         <span class="skill-tag">Claude Code</span>
                         <span class="skill-tag">GitHub Copilot</span>
-                        <span class="skill-tag">MCP Architecture</span>
-                        <span class="skill-tag">Prompt Engineering</span>
-                        <span class="skill-tag">LLM API Integration</span>
                     </div>
-                </div>
-
-                <div class="skills-category">
-                    <h3 class="skills-category-title">DevOps & Observability</h3>
-                    <div class="skills-container">
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">GitHub Actions</span>
-                        <span class="skill-tag">ArgoCD</span>
-                        <span class="skill-tag">Serilog</span>
-                        <span class="skill-tag">Elastic APM</span>
-                        <span class="skill-tag">CloudWatch</span>
-                        <span class="skill-tag">xUnit</span>
-                        <span class="skill-tag">Playwright</span>
-                    </div>
+                    <details class="skills-more">
+                        <summary>Also used</summary>
+                        <div class="skills-container">
+                            <span class="skill-tag">MCP Architecture</span>
+                            <span class="skill-tag">Prompt Engineering</span>
+                            <span class="skill-tag">LLM API Integration</span>
+                        </div>
+                    </details>
                 </div>
             </div>
             <div class="next-section">
@@ -298,7 +398,7 @@
 
                     <div class="timeline-item timeline-earlier">
                         <div class="timeline-description">
-                            <p style="color: var(--text-secondary); font-style: italic;">
+                            <p class="timeline-earlier-copy">
                                 Earlier: BlastAsia (Software Engineer I → Dev Lead, 2016-2019) · Accenture (Associate SE, 2015-2016)
                             </p>
                         </div>
@@ -395,7 +495,7 @@
                         sprint, AWS architecture consulting, embedding as a fractional senior engineer,
                         or a full-time role on a mission-driven team.
                     </p>
-                    <p class="contact-subtitle" style="font-size: 1rem; margin-top: -0.5rem;">
+                    <p class="contact-subtitle contact-location-note">
                         Based in the Philippines (UTC+8), working remotely with teams in Australia,
                         the UK, and the US.
                     </p>
@@ -489,23 +589,22 @@
         const navLinks = document.getElementById('navLinks');
 
         menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+            const isOpen = navLinks.classList.toggle('active');
 
-            // Change icon based on menu state
+            // Change icon and accessible state based on menu state
             const icon = menuBtn.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
+            menuBtn.setAttribute('aria-expanded', String(isOpen));
+            menuBtn.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+            icon.classList.toggle('fa-bars', !isOpen);
+            icon.classList.toggle('fa-times', isOpen);
         });
 
         // Close menu when clicking on a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.setAttribute('aria-label', 'Open navigation menu');
                 const icon = menuBtn.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
