@@ -1,47 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{metadata.language}}">
 
 <head>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Shaun Alonzo — Senior .NET & AWS Engineer</title>
+    <script src="__THEME_SCRIPT__"></script>
+    <link rel="icon" type="image/x-icon" href="{{base identity.favicon}}">
+    <title>{{text metadata.title}}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/styles.css">
-    <meta name="description"
-        content="Senior .NET & AWS engineer available for contract, consulting, and full-time roles. .NET modernization, AWS architecture, and AI-augmented engineering. Remote, Philippines-based.">
-
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="Shaun Alonzo — Senior .NET & AWS Engineer">
-    <meta property="og:description"
-        content="Senior .NET & AWS engineer available for contract, consulting, and full-time roles. .NET modernization, AWS architecture, and AI-augmented engineering.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://shaunalonzo.com">
-    <meta property="og:image" content="https://shaunalonzo.com/assets/shaunalonzo.jpg">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Shaun Alonzo — Senior .NET & AWS Engineer">
-    <meta name="twitter:description"
-        content="Senior .NET & AWS engineer available for contract, consulting, and full-time roles.">
+    <link rel="stylesheet" href="./assets/styles.css">
+    <meta name="description" content="{{metadata.description}}">
+    <meta property="og:title" content="{{text metadata.title}}">
+    <meta property="og:description" content="{{metadata.openGraphDescription}}">
+    <meta property="og:type" content="{{metadata.openGraphType}}">
+    <meta property="og:url" content="{{identity.url}}">
+    <meta property="og:image" content="{{openGraphImage}}">
+    <meta name="twitter:card" content="{{metadata.twitterCard}}">
+    <meta name="twitter:title" content="{{text metadata.title}}">
+    <meta name="twitter:description" content="{{metadata.twitterDescription}}">
 </head>
 
 <body>
     <header>
         <div class="container">
             <nav>
-                <div class="logo">SA</div>
+                <div class="logo">{{identity.initials}}</div>
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="#about" data-route="/about">About</a></li>
-                    <li><a href="#services" data-route="/services">Services</a></li>
-                    <li><a href="#skills" data-route="/skills">Skills</a></li>
-                    <li><a href="#experience" data-route="/experience">Experience</a></li>
-                    <li><a href="#projects" data-route="/projects">Projects</a></li>
-                    <li><a href="#contact" data-route="/contact">Contact</a></li>
+                    {{#each navigation}}
+                    <li><a href="#{{id}}" data-route="{{route}}">{{label}}</a></li>
+                    {{/each}}
                 </ul>
                 <div class="nav-buttons">
-                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+                    <button id="themeToggle" class="theme-toggle" aria-label="{{ui.themeToggle}}" data-dark-label="{{ui.switchToDark}}" data-light-label="{{ui.switchToLight}}">
                         <i class="fas fa-moon"></i>
                     </button>
-                    <button class="mobile-menu-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
+                    <button class="mobile-menu-btn" id="menuBtn" aria-label="{{ui.openMenu}}" data-open-label="{{ui.openMenu}}" data-close-label="{{ui.closeMenu}}" aria-expanded="false" aria-controls="navLinks">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -54,1094 +47,233 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-text">
-                        <p class="hero-subtitle">Hello, I'm</p>
+                        <p class="hero-subtitle">{{hero.greeting}}</p>
                         <h1 class="hero-title">
-                            <span class="hero-name">Shaun Alonzo</span>
+                            <span class="hero-name">{{identity.name}}</span>
                         </h1>
                         <div class="hero-role">
-                            Senior .NET & AWS Engineer
+                            {{identity.role}}
                         </div>
                         <p class="hero-description">
-                            I help engineering teams modernize legacy .NET systems, design cloud-native
-                            architectures on AWS, and ship with AI-augmented workflows. 10+ years building
-                            for fintech, real estate, and marketplace platforms across APAC and Australia.
+                            {{hero.description}}
                         </p>
-                        <a href="#contact" class="btn">Get In Touch</a>
+                        <a href="#{{hero.cta.target}}" class="btn">{{hero.cta.label}}</a>
 
                     </div>
                     <div class="hero-image-container">
-                        <img src="assets/shaunalonzo.jpg" alt="Shaun Alonzo" class="profile-image">
+                        <img src="{{base identity.image.src}}" alt="{{text identity.image.alt}}" class="profile-image">
                     </div>
                 </div>
             </div>
             <div class="next-section">
-                <a href="#services" class="btn">How I Can Help <i class="fas fa-chevron-down"></i></a>
+                <a href="#{{hero.next.target}}" class="btn">{{hero.next.label}} <i class="fas fa-chevron-down"></i></a>
             </div>
         </section>
 
         <section id="services" class="services">
             <div class="container">
-                <h2 class="section-title">How I Can Help Your Team</h2>
+                <h2 class="section-title">{{services.title}}</h2>
                 <div class="services-grid">
+                    {{#each services.items}}
                     <div class="service-card">
                         <div class="service-icon">
-                            <i class="fas fa-sync-alt"></i>
+                            <i class="{{icon}}"></i>
                         </div>
-                        <h3 class="service-title">.NET Modernization</h3>
+                        <h3 class="service-title">{{title}}</h3>
                         <p class="service-description">
-                            Move legacy .NET Framework workloads from Windows EC2 to containerized .NET on AWS without disrupting customers.
+                            {{description}}
                         </p>
-                        <div class="service-fit"><strong>Best for:</strong> teams carrying risky legacy services, slow release cycles, or unsupported framework versions.</div>
+                        <div class="service-fit"><strong>{{@root.ui.bestFor}}</strong> {{fit}}</div>
                         <ul class="service-proof">
-                            <li>Phased traffic routing and .NET Standard compatibility bridges</li>
-                            <li>5+ years of technical debt eliminated with zero customer impact</li>
+                            {{#each proof}}
+                            <li>{{this}}</li>
+                            {{/each}}
                         </ul>
-                        <p class="service-outcome">Outcome: safer releases, clearer ownership, and a platform ready for modern AWS operations.</p>
+                        <p class="service-outcome">{{outcome}}</p>
                     </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-cloud"></i>
-                        </div>
-                        <h3 class="service-title">AWS Architecture & Cloud-Native Design</h3>
-                        <p class="service-description">
-                            Design event-driven, serverless, and containerized AWS systems that match the team’s operating model.
-                        </p>
-                        <div class="service-fit"><strong>Best for:</strong> product teams moving beyond lift-and-shift cloud hosting.</div>
-                        <ul class="service-proof">
-                            <li>SQS/SNS, EventBridge, Lambda, API Gateway, ECS Fargate, EKS, and AWS CDK</li>
-                            <li>AWS Solutions Architect Associate certified</li>
-                        </ul>
-                        <p class="service-outcome">Outcome: cloud architecture that is observable, resilient, and easier to change.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <h3 class="service-title">AI-Augmented Engineering</h3>
-                        <p class="service-description">
-                            Help teams use Claude Code and GitHub Copilot responsibly across architecture, coding, tests, and reviews.
-                        </p>
-                        <div class="service-fit"><strong>Best for:</strong> teams that want AI speed without weakening engineering judgment or review quality.</div>
-                        <ul class="service-proof">
-                            <li>AI practices established across architecture, code generation, and automated testing</li>
-                            <li>Best practices later adopted by multiple squads at Domain</li>
-                        </ul>
-                        <p class="service-outcome">Outcome: faster delivery loops with clearer guardrails for quality and maintainability.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-user-tie"></i>
-                        </div>
-                        <h3 class="service-title">Fractional Senior/Principal Engineer</h3>
-                        <p class="service-description">
-                            Add senior .NET/AWS judgment to a critical project without waiting for a full-time hire.
-                        </p>
-                        <div class="service-fit"><strong>Best for:</strong> 3-6 month modernization, architecture, delivery, or mentoring gaps.</div>
-                        <ul class="service-proof">
-                            <li>Remote delivery across APAC, Australia, UK, and US time zones</li>
-                            <li>Architecture leadership, mentoring, implementation, and delivery support</li>
-                        </ul>
-                        <p class="service-outcome">Outcome: a critical project gets senior ownership while your team keeps moving.</p>
-                    </div>
+                    {{/each}}
                 </div>
             </div>
             <div class="next-section">
-                <a href="#skills" class="btn">View Skills <i class="fas fa-chevron-down"></i></a>
+                <a href="#{{services.next.target}}" class="btn">{{services.next.label}} <i class="fas fa-chevron-down"></i></a>
             </div>
         </section>
 
         <section id="skills" class="skills" aria-labelledby="skills-title">
             <div class="container">
-                <h2 class="section-title" id="skills-title">Skills</h2>
-                <p class="skills-intro">System design, .NET modernization, and AI-augmented engineering, supported by cloud, backend, data, and frontend skills.</p>
+                <h2 class="section-title" id="skills-title">{{skills.title}}</h2>
+                <p class="skills-intro">{{skills.intro}}</p>
 
-                <div class="skills-category skills-core">
-                    <h3 class="skills-category-title">Signature capabilities</h3>
-                    <p class="skills-category-description">The areas where I bring the most senior-level ownership to modernization and delivery work.</p>
+                {{#each skills.categories}}
+                <div class="skills-category{{#if primary}} skills-core{{/if}}">
+                    <h3 class="skills-category-title">{{title}}</h3>
+                    <p class="skills-category-description">{{description}}</p>
                     <div class="skills-container">
-                        <span class="skill-tag skill-tag-primary">.NET 10</span>
-                        <span class="skill-tag skill-tag-primary">AWS</span>
-                        <span class="skill-tag skill-tag-primary">System Design</span>
-                        <span class="skill-tag skill-tag-primary">AI-Augmented Engineering</span>
-                        <span class="skill-tag skill-tag-primary">Claude Code</span>
+                        {{#each items}}
+                        <span class="skill-tag{{#if ../primary}} skill-tag-primary{{/if}}">{{this}}</span>
+                        {{/each}}
                     </div>
-                </div>
-
-                <div class="skills-category">
-                    <h3 class="skills-category-title">Backend</h3>
-                    <p class="skills-category-description">Build .NET services and APIs, from application architecture to data access.</p>
-                    <div class="skills-container">
-                        <span class="skill-tag">C#</span>
-                        <span class="skill-tag">.NET 10</span>
-                        <span class="skill-tag">ASP.NET Core</span>
-                        <span class="skill-tag">REST APIs</span>
-                        <span class="skill-tag">CQRS</span>
-                        <span class="skill-tag">Microservices</span>
-                    </div>
+                    {{#if more.length}}
                     <details class="skills-more">
-                        <summary>Also used</summary>
+                        <summary>{{@root.ui.alsoUsed}}</summary>
                         <div class="skills-container">
-                            <span class="skill-tag">Entity Framework</span>
-                            <span class="skill-tag">Dapper</span>
+                            {{#each more}}
+                            <span class="skill-tag">{{this}}</span>
+                            {{/each}}
                         </div>
                     </details>
+                    {{/if}}
                 </div>
-
-                <div class="skills-category">
-                    <h3 class="skills-category-title">Cloud & delivery</h3>
-                    <p class="skills-category-description">Deploy applications and connect services using AWS and Azure.</p>
-                    <div class="skills-container">
-                        <span class="skill-tag">ECS Fargate</span>
-                        <span class="skill-tag">EKS</span>
-                        <span class="skill-tag">Lambda</span>
-                        <span class="skill-tag">SQS/SNS</span>
-                        <span class="skill-tag">EventBridge</span>
-                        <span class="skill-tag">Azure App Service</span>
-                        <span class="skill-tag">Azure Functions</span>
-                        <span class="skill-tag">Azure Service Bus</span>
-                    </div>
-                    <details class="skills-more">
-                        <summary>Also used</summary>
-                        <div class="skills-container">
-                            <span class="skill-tag">API Gateway</span>
-                            <span class="skill-tag">S3</span>
-                            <span class="skill-tag">DynamoDB</span>
-                            <span class="skill-tag">CDK</span>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="skills-category">
-                    <h3 class="skills-category-title">Data & caching</h3>
-                    <p class="skills-category-description">Store, query, and cache application data.</p>
-                    <div class="skills-container">
-                        <span class="skill-tag">SQL Server</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">Redis</span>
-                        <span class="skill-tag">DynamoDB</span>
-                        <span class="skill-tag">Query Optimization</span>
-                    </div>
-                </div>
-
-                <div class="skills-category">
-                    <h3 class="skills-category-title">AI-augmented engineering</h3>
-                    <p class="skills-category-description">Integrate AI tools into architecture, coding, testing, and code review.</p>
-                    <div class="skills-container">
-                        <span class="skill-tag">Claude Code</span>
-                        <span class="skill-tag">GitHub Copilot</span>
-                    </div>
-                    <details class="skills-more">
-                        <summary>Also used</summary>
-                        <div class="skills-container">
-                            <span class="skill-tag">MCP Architecture</span>
-                            <span class="skill-tag">Prompt Engineering</span>
-                            <span class="skill-tag">LLM API Integration</span>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="skills-category">
-                    <h3 class="skills-category-title">DevOps, testing & observability</h3>
-                    <p class="skills-category-description">Automate deployments, test user journeys, and diagnose production issues.</p>
-                    <div class="skills-container">
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">GitHub Actions</span>
-                        <span class="skill-tag">ArgoCD</span>
-                        <span class="skill-tag">xUnit</span>
-                        <span class="skill-tag">Playwright</span>
-                    </div>
-                    <details class="skills-more">
-                        <summary>Also used</summary>
-                        <div class="skills-container">
-                            <span class="skill-tag">CloudWatch</span>
-                            <span class="skill-tag">Serilog</span>
-                            <span class="skill-tag">Elastic APM</span>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="skills-category">
-                    <h3 class="skills-category-title">Frontend</h3>
-                    <p class="skills-category-description">Build web and mobile interfaces backed by .NET services.</p>
-                    <div class="skills-container">
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">TypeScript</span>
-                        <span class="skill-tag">Angular</span>
-                        <span class="skill-tag">Server-Side Rendering</span>
-                        <span class="skill-tag">Server-Driven UI</span>
-                        <span class="skill-tag">Responsive Design</span>
-                    </div>
-                </div>
+                {{/each}}
             </div>
             <div class="next-section">
-                <a href="#experience" class="btn">See Experience <i class="fas fa-chevron-down"></i></a>
+                <a href="#{{skills.next.target}}" class="btn">{{skills.next.label}} <i class="fas fa-chevron-down"></i></a>
             </div>
         </section>
 
         <section id="experience">
             <div class="container">
-                <h2 class="section-title">Work Experience</h2>
+                <h2 class="section-title">{{experience.title}}</h2>
                 <div class="experience-timeline">
+                    {{#each experience.items}}
                     <div class="timeline-item">
-                        <div class="timeline-date">Mar 2023 - Present</div>
+                        <div class="timeline-date">{{date}}</div>
                         <div class="timeline-company">
-                            <a href="https://www.domain.com.au" target="_blank" class="external-link">
-                                Domain <i class="fas fa-external-link-alt"></i>
+                            <a href="{{url}}" target="_blank" class="external-link">
+                                {{company}} <i class="fas fa-external-link-alt"></i>
                             </a>
                         </div>
-                        <div class="timeline-position">Senior Software Engineer — Remote</div>
+                        <div class="timeline-position">{{position}}</div>
                         <div class="timeline-description">
                             <ul>
-                                <li>Led zero-downtime modernization of mission-critical services from .NET Framework on AWS EC2 (Windows) to containerized .NET on AWS EKS, eliminating 5+ years of technical debt with zero customer impact.</li>
-                                <li>Architected an event-driven Order Orchestration Engine using AWS EventBridge, SNS, and SQS to automate Salesforce order ingestion — eliminating manual steps from the sales pipeline and accelerating order processing.</li>
-                                <li>Built a reusable .NET HTTP resilience library with IHttpClientFactory, automated OAuth2 token lifecycle, and configurable circuit breakers/retries — adopted across multiple squads.</li>
-                                <li>Integrated Claude Code & GitHub Copilot into the full SDLC (architecture, coding, test generation, code review), measurably increasing team throughput sprint-over-sprint. Established AI tooling best practices later adopted across the organization.</li>
-                                <li>Migrated legacy React/.NET Framework internal tools to Retool (no-code), freeing engineering capacity from internal CRUD maintenance to focus on core revenue-generating products.</li>
-                                <li>Introduced end-to-end automated testing with Playwright in the build pipeline, validating critical frontend and backend user journeys on every deployment.</li>
+                                {{#each highlights}}
+                                <li>{{this}}</li>
+                                {{/each}}
                             </ul>
                         </div>
                     </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">Nov 2021 - Mar 2023</div>
-                        <div class="timeline-company">
-                            <a href="https://www.carsales.com.au" target="_blank" class="external-link">
-                                Carsales <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                        <div class="timeline-position">Senior Software Engineer — Remote</div>
-                        <div class="timeline-description">
-                            <ul>
-                                <li>Engineered a standardized Server-Driven UI (SDUI) framework for Editorial and Reviews pages, establishing a unified contract across Web, iOS, and Android — decoupling cross-team dependencies and reducing time-to-market.</li>
-                                <li>Decomposed a monolithic Editorial API into separate read/write paths with Redis distributed caching (CQRS), improving scalability for consuming teams.</li>
-                                <li>Led the Redbook.com.au frontend rewrite in React/TypeScript, driving a 20% traffic increase to inquiry pages.</li>
-                                <li>Shipped "Can't Find Your Car" feature end-to-end, generating 200+ new ad listings within 90 days of launch.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">Aug 2020 - Nov 2021</div>
-                        <div class="timeline-company">
-                            <a href="https://www.moneyme.com.au" target="_blank" class="external-link">
-                                Moneyme <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                        <div class="timeline-position">Senior Software Engineer — Pasig, PH</div>
-                        <div class="timeline-description">
-                            <ul>
-                                <li>Designed SOC2-compliant public APIs with ASP.NET Core and OAuth2/JWT for third-party loan submissions in a regulated fintech environment.</li>
-                                <li>Built .NET Framework ASP.NET MVC applications for loan product landing pages with responsive Razor views and form submission pipelines.</li>
-                                <li>Led the MoneyMe+ WooCommerce plugin team; integration brought in 1,000+ e-commerce leads within its first 60 days.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-date">Dec 2019 - Jul 2020</div>
-                        <div class="timeline-company">
-                            <a href="https://www.nowcom.com" target="_blank" class="external-link">
-                                Nowcom Global Services <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                        <div class="timeline-position">Lead Software Engineer — Pasig, PH</div>
-                        <div class="timeline-description">
-                            <ul>
-                                <li>Led a cross-functional squad of 10 with full ownership of sprint grooming, technical specs, weekly releases, and on-call rotation.</li>
-                                <li>Optimized lender API integration layer, reducing response times from 8s to 2s on a platform processing 150,000 transactions per day.</li>
-                            </ul>
-                        </div>
-                    </div>
+                    {{/each}}
 
                     <div class="timeline-item timeline-earlier">
                         <div class="timeline-description">
                             <p class="timeline-earlier-copy">
-                                Earlier: BlastAsia (Software Engineer I → Dev Lead, 2016-2019) · Accenture (Associate SE, 2015-2016)
+                                {{experience.earlier}}
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="next-section">
-                <a href="#projects" class="btn">See Projects <i class="fas fa-chevron-down"></i></a>
+                <a href="#{{experience.next.target}}" class="btn">{{experience.next.label}} <i class="fas fa-chevron-down"></i></a>
             </div>
         </section>
 
         <section id="projects">
             <div class="container">
-                <h2 class="section-title">Featured Projects</h2>
+                <h2 class="section-title">{{projects.title}}</h2>
                 <div class="project-grid">
+                    {{#each projects.items}}
                     <div class="project-card">
                         <div class="project-content">
                             <h3 class="project-title">
-                                <a href="https://ccwatcher.shaunalonzo.com/" target="_blank"
-                                    class="external-link">
-                                    Card Guide PH <i class="fas fa-external-link-alt"></i>
+                                <a href="{{url}}" target="_blank" class="external-link">
+                                    {{title}} <i class="fas fa-external-link-alt"></i>
                                 </a>
                             </h3>
                             <p class="project-description">
-                                A comprehensive guide for credit card information and tracking in the Philippines.
-                                AI agents (LLM + Playwright) for automated data extraction, React/Node.js on Vercel, PostgreSQL.
+                                {{description}}
                             </p>
                             <div class="project-tech">
-                                <span>Node.js</span>
-                                <span>TypeScript</span>
-                                <span>React</span>
-                                <span>Vercel</span>
-                                <span>PostgreSQL</span>
-                                <span>AI Agents</span>
+                                {{#each technologies}}
+                                <span>{{this}}</span>
+                                {{/each}}
                             </div>
                         </div>
                     </div>
-
-                    <div class="project-card">
-                        <div class="project-content">
-                            <h3 class="project-title">
-                                <a href="https://www.redbook.com.au" target="_blank" class="external-link">
-                                    Redbook Website Redesign <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </h3>
-                            <p class="project-description">
-                                Led the transition of Redbook.com.au from a 2000s aesthetic to a modern design,
-                                revitalizing website appearance while maintaining existing customers and boosting
-                                website views.
-                            </p>
-                            <div class="project-tech">
-                                <span>C#</span>
-                                <span>React</span>
-                                <span>AWS</span>
-                                <span>.NET</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-content">
-                            <h3 class="project-title">
-                                <a href="https://wphive.com/plugins/moneyme-payments-for-woocommerce/" target="_blank"
-                                    class="external-link">
-                                    MoneyMe+ WooCommerce Plugin <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </h3>
-                            <p class="project-description">
-                                Developed an e-commerce plugin that generated over 1000 leads within first 2 months of
-                                launch, connecting sellers with financing options.
-                            </p>
-                            <div class="project-tech">
-                                <span>C#</span>
-                                <span>JavaScript</span>
-                                <span>Azure</span>
-                                <span>.NET Core</span>
-                                <span>WordPress</span>
-                            </div>
-                        </div>
-                    </div>
+                    {{/each}}
                 </div>
             </div>
             <div class="next-section">
-                <a href="#contact" class="btn">Get In Touch <i class="fas fa-chevron-down"></i></a>
+                <a href="#{{projects.next.target}}" class="btn">{{projects.next.label}} <i class="fas fa-chevron-down"></i></a>
             </div>
         </section>
 
         <section id="contact" class="contact">
             <div class="container">
                 <div class="contact-content">
-                    <h2 class="contact-title">Get In Touch</h2>
+                    <h2 class="contact-title">{{contact.title}}</h2>
                     <p class="contact-subtitle">
-                        I work with engineering teams — whether that's a 3-month .NET modernization
-                        sprint, AWS architecture consulting, embedding as a fractional senior engineer,
-                        or a full-time role on a mission-driven team.
+                        {{contact.description}}
                     </p>
                     <p class="contact-subtitle contact-location-note">
-                        Based in the Philippines (UTC+8), working remotely with teams in Australia,
-                        the UK, and the US.
+                        {{text contact.locationNote}}
                     </p>
                     <div class="location">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>Manila, Philippines</span>
+                        <span>{{location}}</span>
                     </div>
                     <div class="contact-actions">
                         <div class="email-display">
-                            <span class="email-address">contact@shaunalonzo.com</span>
+                            <span class="email-address">{{identity.email}}</span>
                         </div>
                         <div class="email-buttons">
-                            <a href="mailto:contact@shaunalonzo.com" class="btn">
-                                <i class="far fa-envelope"></i> Email Me
+                            <a href="mailto:{{identity.email}}" class="btn">
+                                <i class="far fa-envelope"></i> {{ui.email}}
                             </a>
-                            <button id="copyEmailBtn" class="btn btn-secondary" aria-label="Copy email address">
-                                <i class="far fa-copy"></i> Copy Email
-                                <span class="tooltip" id="copyTooltip">Copied!</span>
+                            <button id="copyEmailBtn" class="btn btn-secondary" aria-label="{{ui.copyEmailLabel}}">
+                                <i class="far fa-copy"></i> {{ui.copyEmail}}
+                                <span class="tooltip" id="copyTooltip" role="status" data-success="{{ui.copySuccess}}" data-error="{{ui.copyError}}">{{ui.copySuccess}}</span>
                             </button>
                         </div>
                     </div>
                     <div class="social-links">
-                        <a href="https://www.linkedin.com/in/shaunalonzo/" class="social-link"
-                            aria-label="LinkedIn Profile">
-                            <i class="fab fa-linkedin"></i>
-                            <span class="social-label">LinkedIn</span>
+                        {{#each social}}
+                        <a href="{{url}}" class="social-link" aria-label="{{ariaLabel}}">
+                            <i class="{{icon}}"></i>
+                            <span class="social-label">{{label}}</span>
                         </a>
-                        <a href="https://github.com/Shonos" class="social-link" aria-label="GitHub Profile">
-                            <i class="fab fa-github"></i>
-                            <span class="social-label">GitHub</span>
-                        </a>
+                        {{/each}}
                     </div>
                 </div>
             </div>
             <div class="next-section">
-                <a href="#about" class="btn">Back to Top <i class="fas fa-chevron-up"></i></a>
+                <a href="#{{contact.next.target}}" class="btn">{{contact.next.label}} <i class="fas fa-chevron-up"></i></a>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p class="footer-text">© 2026 Shaun Alonzo — Available for contract, consulting & full-time roles.</p>
+            <p class="footer-text">{{text footer}}</p>
         </div>
     </footer>
 
     <div class="chat-widget dev-feature">
-        <button class="chat-button" id="chatButton" aria-label="Open chat">
+        <button class="chat-button" id="chatButton" aria-label="{{ui.openChat}}">
             <i class="fas fa-comment"></i>
         </button>
         <div class="chat-container" id="chatContainer">
             <div class="chat-header">
-                <div>Chat with Shaun's Assistant</div>
-                <button class="chat-close" id="chatClose" aria-label="Close chat">
+                <div>{{text ui.chatTitle}}</div>
+                <button class="chat-close" id="chatClose" aria-label="{{ui.closeChat}}">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="chat-messages" id="chatMessages">
-                <!-- Messages will be added here dynamically -->
             </div>
             <div class="chat-input-container">
-                <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..."
-                    aria-label="Type a message">
-                <button class="chat-submit" id="chatSubmit" disabled aria-label="Send message">
+                <input type="text" class="chat-input" id="chatInput" placeholder="{{ui.chatPlaceholder}}"
+                    aria-label="{{ui.chatInputLabel}}">
+                <button class="chat-submit" id="chatSubmit" disabled aria-label="{{ui.sendMessage}}">
                     <i class="fas fa-paper-plane"></i>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Structured Data for Person -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Shaun Alonzo",
-      "jobTitle": "Senior .NET & AWS Engineer",
-      "url": "https://shaunalonzo.com",
-      "sameAs": [
-        "https://www.linkedin.com/in/shaunalonzo/",
-        "https://github.com/Shonos"
-      ],
-      "knowsAbout": [".NET", "C#", "AWS", "React", "TypeScript", "Microservices", "Event-Driven Architecture", "AI-Augmented Development"],
-      "description": "Senior .NET & AWS engineer available for contract, consulting, and full-time roles. .NET modernization, AWS architecture, and AI-augmented engineering. Remote, Philippines-based."
-    }
-    </script>
-
-    <script>
-        // Mobile menu toggle
-        const menuBtn = document.getElementById('menuBtn');
-        const navLinks = document.getElementById('navLinks');
-
-        menuBtn.addEventListener('click', () => {
-            const isOpen = navLinks.classList.toggle('active');
-
-            // Change icon and accessible state based on menu state
-            const icon = menuBtn.querySelector('i');
-            menuBtn.setAttribute('aria-expanded', String(isOpen));
-            menuBtn.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
-            icon.classList.toggle('fa-bars', !isOpen);
-            icon.classList.toggle('fa-times', isOpen);
-        });
-
-        // Close menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                menuBtn.setAttribute('aria-expanded', 'false');
-                menuBtn.setAttribute('aria-label', 'Open navigation menu');
-                const icon = menuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-
-                if (targetElement) {
-                    const headerOffset = 100;
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Add active class to nav links on scroll
-        // Add a debounce function to prevent excessive URL updates
-        function debounce(func, wait) {
-            let timeout;
-            return function (...args) {
-                const context = this;
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(context, args), wait);
-            };
-        }
-
-        // Track the last section we updated the URL for to prevent unnecessary updates
-        let lastUpdatedSection = '';
-
-        // Debounced function to update URL and analytics
-        const updateUrlAndAnalytics = debounce((sectionId, route) => {
-            // Only update if it's different from the last update
-            if (sectionId !== lastUpdatedSection) {
-                lastUpdatedSection = sectionId;
-
-                // Update URL without creating history entry
-                history.replaceState({}, '', route);
-
-                // Track page view in analytics (with debounce to prevent flooding)
-                if (typeof gtag === 'function') {
-                    const pageTitle = route === '/' ? 'About - Shaun Alonzo' :
-                        route.substring(1).charAt(0).toUpperCase() +
-                        route.substring(1).slice(1) + ' - Shaun Alonzo';
-
-                    gtag('event', 'page_view', {
-                        page_title: pageTitle,
-                        page_path: route,
-                        send_to: 'G-EG4TMY27NZ'
-                    });
-                }
-            }
-        }, 300); // 300ms debounce time
-
-        // Modified scroll event listener
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-links a');
-
-            // Find which section is in view
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                const scrollPosition = window.pageYOffset;
-
-                // Check if this section is in the viewport
-                if (scrollPosition >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            // If we have a current section, update navigation and URL
-            if (current) {
-                // Update navigation highlighting
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-
-                        // Get the route and update URL with debounce
-                        const route = link.getAttribute('data-route');
-                        if (route) {
-                            updateUrlAndAnalytics(current, route);
-                        }
-                    }
-                });
-            }
-        });
-
-        // Simple client-side router
-        const routes = {
-            '/': '#about',
-            '/about': '#about',
-            '/services': '#services',
-            '/experience': '#experience',
-            '/skills': '#skills',
-            '/projects': '#projects',
-            '/contact': '#contact'
-        };
-
-        function handleRouting() {
-            // Get full path including any query parameters
-            let fullPath = window.location.pathname + window.location.search;
-
-            // Check if we're handling a redirect from 404.html (format: /?/path)
-            if (window.location.search.startsWith('?/')) {
-                // Extract the actual path from the query parameter
-                const actualPath = window.location.search.substring(1); // removes the leading '?'
-
-                // Replace the URL with the clean path (remove the '?')
-                history.replaceState({}, '', actualPath);
-
-                // Update the path for routing
-                fullPath = actualPath;
-            } else {
-                // Regular path handling
-                fullPath = window.location.pathname;
-            }
-
-            // Clean up the path
-            let path = fullPath === '' || fullPath === '/' ? '/' : fullPath.replace(/\/$/, '');
-
-            // Continue with existing routing logic
-            const targetId = routes[path] || routes['/'];
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                const headerOffset = 100;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                // Delay scroll slightly to ensure layout is ready
-                setTimeout(() => {
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }, 50); // tweak this value if needed
-            }
-
-            // After updating the route, send a page view to Google Analytics
-            if (typeof gtag === 'function') {
-                const pagePath = path === '/' ? '/about' : path;
-                const pageTitle = path === '/' ? 'About - Shaun Alonzo' :
-                    path.substring(1).charAt(0).toUpperCase() +
-                    path.substring(1).slice(1) + ' - Shaun Alonzo';
-
-                gtag('event', 'page_view', {
-                    page_title: pageTitle,
-                    page_path: pagePath,
-                    send_to: 'G-EG4TMY27NZ'
-                });
-            }
-        }
-
-        // Handle navigation using History API
-        function handleNavigation() {
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-
-                    const href = this.getAttribute('href');
-                    const route = Object.keys(routes).find(key => routes[key] === href);
-
-                    if (route) {
-                        history.pushState({}, '', route);
-                        handleRouting();
-                    }
-                });
-            });
-        }
-
-        let lastScrollY = window.scrollY;
-        let ticking = false;
-
-        // Threshold in pixels - how far user needs to scroll before header hides
-        const scrollThreshold = 20;
-
-        function updateHeader() {
-            const header = document.querySelector('header');
-            const currentScrollY = window.scrollY;
-
-            // Hide header when scrolling down, show when scrolling up
-            if (currentScrollY > lastScrollY + scrollThreshold) {
-                // Scrolling down
-                header.classList.add('hide');
-                lastScrollY = currentScrollY;
-            } else if (currentScrollY < lastScrollY - (scrollThreshold / 2)) {
-                // Scrolling up - use lower threshold for quicker reveal
-                header.classList.remove('hide');
-                lastScrollY = currentScrollY;
-            }
-
-            // Always show header at the top of the page
-            if (currentScrollY <= 0) {
-                header.classList.remove('hide');
-            }
-
-            ticking = false;
-        }
-
-        // Throttle scroll event for better performance
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(updateHeader);
-                ticking = true;
-            }
-        });
-
-        // Run on page load
-        window.addEventListener('load', () => {
-            handleRouting();
-            handleNavigation();
-        });
-
-        // Handle browser navigation (back/forward)
-        window.addEventListener('popstate', handleRouting);
-
-        // Add this after your existing scripts
-        document.addEventListener('DOMContentLoaded', function () {
-            // Track "Say Hello" button clicks
-            const contactButton = document.querySelector('.contact .btn');
-            if (contactButton) {
-                contactButton.addEventListener('click', function () {
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'contact_click', {
-                            'event_category': 'engagement',
-                            'event_label': 'Email Contact',
-                            'value': 1
-                        });
-                    }
-                });
-            }
-
-            // Email copy functionality
-            const copyEmailBtn = document.getElementById('copyEmailBtn');
-            const copyTooltip = document.getElementById('copyTooltip');
-
-            if (copyEmailBtn) {
-                copyEmailBtn.addEventListener('click', () => {
-                    // The email to copy
-                    const email = 'contact@shaunalonzo.com';
-
-                    // Try the modern clipboard API first
-                    if (navigator.clipboard) {
-                        navigator.clipboard.writeText(email)
-                            .then(() => {
-                                showCopySuccess();
-                            })
-                            .catch(err => {
-                                console.error('Clipboard API failed:', err);
-                                fallbackCopy(email);
-                            });
-                    } else {
-                        fallbackCopy(email);
-                    }
-                });
-            }
-
-            // Track other social link clicks
-            document.querySelectorAll('.social-links .social-link').forEach(link => {
-                link.addEventListener('click', function () {
-                    if (typeof gtag === 'function') {
-                        const platform = this.querySelector('i').classList.contains('fa-linkedin') ? 'LinkedIn' : 'GitHub';
-                        gtag('event', 'social_click', {
-                            'event_category': 'engagement',
-                            'event_label': platform,
-                            'value': 1
-                        });
-                    }
-                });
-            });
-        });
-
-        // Fallback copy method using textarea
-        function fallbackCopy(text) {
-            // Create a temporary textarea
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-
-            // Make it non-editable to avoid focus and style issues
-            textarea.setAttribute('readonly', '');
-            textarea.style.position = 'absolute';
-            textarea.style.left = '-9999px';
-
-            document.body.appendChild(textarea);
-
-            // Check if there's any selection already
-            const selected = document.getSelection().rangeCount > 0 ?
-                document.getSelection().getRangeAt(0) : false;
-
-            // Select the text
-            textarea.select();
-            textarea.setSelectionRange(0, textarea.value.length);
-
-            // Copy to clipboard
-            let success = false;
-            try {
-                success = document.execCommand('copy');
-            } catch (err) {
-                console.error('Fallback copy failed:', err);
-            }
-
-            // Clean up
-            document.body.removeChild(textarea);
-
-            // Restore previous selection if any
-            if (selected) {
-                document.getSelection().removeAllRanges();
-                document.getSelection().addRange(selected);
-            }
-
-            if (success) {
-                showCopySuccess();
-            }
-        }
-
-        // Function to show success tooltip
-        function showCopySuccess() {
-            copyTooltip.classList.add('show');
-
-            // Hide tooltip after 2 seconds
-            setTimeout(() => {
-                copyTooltip.classList.remove('show');
-            }, 2000);
-
-            // Track event in analytics
-            if (typeof gtag === 'function') {
-                gtag('event', 'copy_email', {
-                    'event_category': 'engagement',
-                    'event_label': 'email_copied',
-                    'value': 1
-                });
-            }
-        }
-    </script>
-
-    <script>
-        // Theme switcher functionality
-        const themeToggleBtn = document.getElementById('themeToggle');
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-        // Function to set theme
-        const setTheme = (theme) => {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            updateThemeIcon(theme);
-        };
-
-        // Function to update the theme toggle icon
-        const updateThemeIcon = (theme) => {
-            const icon = themeToggleBtn.querySelector('i');
-            if (theme === 'light') {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-                themeToggleBtn.setAttribute('aria-label', 'Switch to dark mode');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-                themeToggleBtn.setAttribute('aria-label', 'Switch to light mode');
-            }
-        };
-
-        // Initialize theme based on user preference or system preference
-        const initializeTheme = () => {
-            const savedTheme = localStorage.getItem('theme');
-
-            if (savedTheme) {
-                // Use saved theme
-                setTheme(savedTheme);
-            } else {
-                // Use system preference
-                setTheme(prefersDarkScheme.matches ? 'dark' : 'light');
-            }
-        };
-
-        // Toggle theme when button is clicked
-        themeToggleBtn.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-            setTheme(newTheme);
-
-            // Track theme change in analytics
-            if (typeof gtag === 'function') {
-                gtag('event', 'theme_change', {
-                    'event_category': 'preferences',
-                    'event_label': newTheme,
-                    'value': 1
-                });
-            }
-        });
-
-        // Listen for system preference changes
-        prefersDarkScheme.addEventListener('change', (e) => {
-            // Only change theme if user hasn't manually set a preference
-            if (!localStorage.getItem('theme')) {
-                setTheme(e.matches ? 'dark' : 'light');
-            }
-        });
-
-        // Initialize theme on page load
-        initializeTheme();
-
-        // Chat component functionality
-        document.addEventListener('DOMContentLoaded', function () {
-            const chatButton = document.getElementById('chatButton');
-            const chatContainer = document.getElementById('chatContainer');
-            const chatClose = document.getElementById('chatClose');
-            const chatInput = document.getElementById('chatInput');
-            const chatSubmit = document.getElementById('chatSubmit');
-            const chatMessages = document.getElementById('chatMessages');
-
-            // Static messages to be displayed when the chat opens
-            const staticMessages = [
-                { text: "Hi there! I'm Shaun's assistant. How can I help you learn more about his .NET & AWS contract and consulting services?", type: "received", delay: 500 },
-                { text: "I can tell you about his experience modernizing .NET systems, AWS architecture expertise, or AI-augmented engineering. What are you interested in?", type: "received", delay: 2000 }
-            ];
-
-            // Toggle chat window
-            chatButton.addEventListener('click', function () {
-                chatContainer.classList.add('active');
-
-                // Only show welcome messages if chat is empty
-                if (chatMessages.childElementCount === 0) {
-                    displayStaticMessages();
-                }
-
-                // Focus on input
-                setTimeout(() => chatInput.focus(), 300);
-            });
-
-            // Close chat window
-            chatClose.addEventListener('click', function () {
-                chatContainer.classList.remove('active');
-            });
-
-            // Listen for Enter key in input
-            chatInput.addEventListener('keypress', function (e) {
-                if (e.key === 'Enter' && chatInput.value.trim() !== '') {
-                    sendMessage();
-                }
-            });
-
-            // Send button click
-            chatSubmit.addEventListener('click', function () {
-                if (chatInput.value.trim() !== '') {
-                    sendMessage();
-                }
-            });
-
-            // Input validation
-            chatInput.addEventListener('input', function () {
-                chatSubmit.disabled = chatInput.value.trim() === '';
-            });
-
-            // Function to display static welcome messages
-            function displayStaticMessages() {
-                // Use setTimeout to show messages sequentially
-                staticMessages.forEach((msg, index) => {
-                    setTimeout(() => {
-                        // Show typing indicator before message
-                        if (index > 0) {
-                            showTypingIndicator();
-                        }
-
-                        // Display the message after typing indicator
-                        setTimeout(() => {
-                            hideTypingIndicator();
-                            addMessage(msg.text, msg.type);
-                        }, index > 0 ? 1500 : 0);
-                    }, msg.delay);
-                });
-            }
-
-            // Function to send a message
-            function sendMessage() {
-                const text = chatInput.value.trim();
-                addMessage(text, 'sent');
-                chatInput.value = '';
-                chatSubmit.disabled = true;
-
-                // Show typing indicator
-                setTimeout(showTypingIndicator, 1000);
-
-                // Simulate a response after a delay
-                setTimeout(() => {
-                    hideTypingIndicator();
-                    respondToMessage(text);
-                }, 3000);
-            }
-
-            // Function to add a message to the chat
-            function addMessage(text, type) {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('message', type);
-                messageElement.textContent = text;
-                chatMessages.appendChild(messageElement);
-
-                // Scroll to bottom
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-
-            // Function to show typing indicator
-            function showTypingIndicator() {
-                if (!document.querySelector('.typing-indicator')) {
-                    const indicator = document.createElement('div');
-                    indicator.classList.add('typing-indicator');
-                    indicator.innerHTML = '<span></span><span></span><span></span>';
-                    chatMessages.appendChild(indicator);
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                }
-            }
-
-            // Function to hide typing indicator
-            function hideTypingIndicator() {
-                const indicator = document.querySelector('.typing-indicator');
-                if (indicator) {
-                    indicator.remove();
-                }
-            }
-
-            // Function to respond with static responses
-            function respondToMessage(message) {
-                // Convert message to lowercase for easier matching
-                const lowerMessage = message.toLowerCase();
-
-                let response;
-
-                // Very simple response logic based on keywords
-                if (lowerMessage.includes('experience') || lowerMessage.includes('work')) {
-                    response = "Shaun has 10+ years of experience across Domain, Carsales, Moneyme, and Nowcom. He specializes in .NET modernization on AWS, event-driven architectures, and AI-augmented engineering. Want details on a specific role?";
-                }
-                else if (lowerMessage.includes('skill') || lowerMessage.includes('tech')) {
-                    response = "Shaun's core stack spans C#/.NET, AWS (ECS, EKS, Lambda, SQS/SNS), React/TypeScript, and AI-augmented development with Claude Code and GitHub Copilot. He also brings strong DevOps and observability expertise.";
-                }
-                else if (lowerMessage.includes('contact') || lowerMessage.includes('hire') || lowerMessage.includes('email') || lowerMessage.includes('contract') || lowerMessage.includes('consulting')) {
-                    response = "Shaun is open to contract, consulting, and full-time roles. You can reach him at contact@shaunalonzo.com or connect on LinkedIn. He works remotely from the Philippines (UTC+8) with teams across Australia, the UK, and the US.";
-                }
-                else if (lowerMessage.includes('project') || lowerMessage.includes('portfolio')) {
-                    response = "Shaun's featured work includes Card Guide PH (an AI-powered credit card guide), the Redbook.com.au frontend redesign, and the MoneyMe+ WooCommerce plugin. Check the Projects section for more details.";
-                }
-                else if (lowerMessage.includes('location') || lowerMessage.includes('where')) {
-                    response = "Shaun is based in Manila, Philippines (UTC+8) and works remotely with teams in Australia, the UK, and the US.";
-                }
-                else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
-                    response = "Hello! I can tell you about Shaun's .NET & AWS consulting services, experience, or projects. What are you interested in?";
-                }
-                else {
-                    response = "That's a great question! For specific inquiries about contract engagements or consulting, it's best to reach Shaun directly at contact@shaunalonzo.com. Is there anything else I can help with?";
-                }
-
-                addMessage(response, 'received');
-            }
-        });
-    </script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EG4TMY27NZ"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-EG4TMY27NZ', {
-            send_page_view: false
-        });
-    </script>
+    <script type="application/ld+json">{{structuredData}}</script>
+    <script type="application/json" id="site-config">{{runtimeConfig}}</script>
+    <script type="module" src="./src/main.js"></script>
 </body>
 
 </html>

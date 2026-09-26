@@ -1,0 +1,312 @@
+{
+  "identity": {
+    "name": "Shaun Alonzo",
+    "initials": "SA",
+    "role": "Senior .NET & AWS Engineer",
+    "email": "contact@shaunalonzo.com",
+    "url": "https://shaunalonzo.com",
+    "location": {
+      "city": "Manila",
+      "country": "Philippines",
+      "timezone": "UTC+8"
+    },
+    "image": {
+      "src": "assets/shaunalonzo.jpg",
+      "alt": "{name}"
+    },
+    "favicon": "favicon.ico"
+  },
+  "metadata": {
+    "language": "en",
+    "title": "{name} — {role}",
+    "description": "Senior .NET & AWS engineer available for contract, consulting, and full-time roles. .NET modernization, AWS architecture, and AI-augmented engineering. Remote, Philippines-based.",
+    "openGraphDescription": "Senior .NET & AWS engineer available for contract, consulting, and full-time roles. .NET modernization, AWS architecture, and AI-augmented engineering.",
+    "openGraphType": "website",
+    "twitterCard": "summary",
+    "twitterDescription": "Senior .NET & AWS engineer available for contract, consulting, and full-time roles.",
+    "knowsAbout": [".NET", "C#", "AWS", "React", "TypeScript", "Microservices", "Event-Driven Architecture", "AI-Augmented Development"]
+  },
+  "navigation": [
+    { "id": "about", "route": "/about", "label": "About" },
+    { "id": "services", "route": "/services", "label": "Services" },
+    { "id": "skills", "route": "/skills", "label": "Skills" },
+    { "id": "experience", "route": "/experience", "label": "Experience" },
+    { "id": "projects", "route": "/projects", "label": "Projects" },
+    { "id": "contact", "route": "/contact", "label": "Contact" }
+  ],
+  "ui": {
+    "themeToggle": "Toggle dark/light mode",
+    "switchToDark": "Switch to dark mode",
+    "switchToLight": "Switch to light mode",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "alsoUsed": "Also used",
+    "bestFor": "Best for:",
+    "email": "Email Me",
+    "copyEmail": "Copy Email",
+    "copyEmailLabel": "Copy email address",
+    "copySuccess": "Copied!",
+    "copyError": "Unable to copy. Please copy the email address manually.",
+    "openChat": "Open chat",
+    "closeChat": "Close chat",
+    "chatTitle": "Chat with {firstName}'s Assistant",
+    "chatPlaceholder": "Type a message...",
+    "chatInputLabel": "Type a message",
+    "sendMessage": "Send message"
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "description": "I help engineering teams modernize legacy .NET systems, design cloud-native architectures on AWS, and ship with AI-augmented workflows. 10+ years building for fintech, real estate, and marketplace platforms across APAC and Australia.",
+    "cta": { "target": "contact", "label": "Get In Touch" },
+    "next": { "target": "services", "label": "How I Can Help" }
+  },
+  "services": {
+    "title": "How I Can Help Your Team",
+    "items": [
+      {
+        "icon": "fas fa-sync-alt",
+        "title": ".NET Modernization",
+        "description": "Move legacy .NET Framework workloads from Windows EC2 to containerized .NET on AWS without disrupting customers.",
+        "fit": "teams carrying risky legacy services, slow release cycles, or unsupported framework versions.",
+        "proof": [
+          "Phased traffic routing and .NET Standard compatibility bridges",
+          "5+ years of technical debt eliminated with zero customer impact"
+        ],
+        "outcome": "Outcome: safer releases, clearer ownership, and a platform ready for modern AWS operations."
+      },
+      {
+        "icon": "fas fa-cloud",
+        "title": "AWS Architecture & Cloud-Native Design",
+        "description": "Design event-driven, serverless, and containerized AWS systems that match the team’s operating model.",
+        "fit": "product teams moving beyond lift-and-shift cloud hosting.",
+        "proof": [
+          "SQS/SNS, EventBridge, Lambda, API Gateway, ECS Fargate, EKS, and AWS CDK",
+          "AWS Solutions Architect Associate certified"
+        ],
+        "outcome": "Outcome: cloud architecture that is observable, resilient, and easier to change."
+      },
+      {
+        "icon": "fas fa-robot",
+        "title": "AI-Augmented Engineering",
+        "description": "Help teams use Claude Code and GitHub Copilot responsibly across architecture, coding, tests, and reviews.",
+        "fit": "teams that want AI speed without weakening engineering judgment or review quality.",
+        "proof": [
+          "AI practices established across architecture, code generation, and automated testing",
+          "Best practices later adopted by multiple squads at Domain"
+        ],
+        "outcome": "Outcome: faster delivery loops with clearer guardrails for quality and maintainability."
+      },
+      {
+        "icon": "fas fa-user-tie",
+        "title": "Fractional Senior/Principal Engineer",
+        "description": "Add senior .NET/AWS judgment to a critical project without waiting for a full-time hire.",
+        "fit": "3-6 month modernization, architecture, delivery, or mentoring gaps.",
+        "proof": [
+          "Remote delivery across APAC, Australia, UK, and US time zones",
+          "Architecture leadership, mentoring, implementation, and delivery support"
+        ],
+        "outcome": "Outcome: a critical project gets senior ownership while your team keeps moving."
+      }
+    ],
+    "next": { "target": "skills", "label": "View Skills" }
+  },
+  "skills": {
+    "title": "Skills",
+    "intro": "System design, .NET modernization, and AI-augmented engineering, supported by cloud, backend, data, and frontend skills.",
+    "categories": [
+      {
+        "title": "Signature capabilities",
+        "description": "The areas where I bring the most senior-level ownership to modernization and delivery work.",
+        "primary": true,
+        "items": [".NET 10", "AWS", "System Design", "AI-Augmented Engineering", "Claude Code"],
+        "more": []
+      },
+      {
+        "title": "Backend",
+        "description": "Build .NET services and APIs, from application architecture to data access.",
+        "primary": false,
+        "items": ["C#", ".NET 10", "ASP.NET Core", "REST APIs", "CQRS", "Microservices"],
+        "more": ["Entity Framework", "Dapper"]
+      },
+      {
+        "title": "Cloud & delivery",
+        "description": "Deploy applications and connect services using AWS and Azure.",
+        "primary": false,
+        "items": ["ECS Fargate", "EKS", "Lambda", "SQS/SNS", "EventBridge", "Azure App Service", "Azure Functions", "Azure Service Bus"],
+        "more": ["API Gateway", "S3", "DynamoDB", "CDK"]
+      },
+      {
+        "title": "Data & caching",
+        "description": "Store, query, and cache application data.",
+        "primary": false,
+        "items": ["SQL Server", "PostgreSQL", "Redis", "DynamoDB", "Query Optimization"],
+        "more": []
+      },
+      {
+        "title": "AI-augmented engineering",
+        "description": "Integrate AI tools into architecture, coding, testing, and code review.",
+        "primary": false,
+        "items": ["Claude Code", "GitHub Copilot"],
+        "more": ["MCP Architecture", "Prompt Engineering", "LLM API Integration"]
+      },
+      {
+        "title": "DevOps, testing & observability",
+        "description": "Automate deployments, test user journeys, and diagnose production issues.",
+        "primary": false,
+        "items": ["Docker", "GitHub Actions", "ArgoCD", "xUnit", "Playwright"],
+        "more": ["CloudWatch", "Serilog", "Elastic APM"]
+      },
+      {
+        "title": "Frontend",
+        "description": "Build web and mobile interfaces backed by .NET services.",
+        "primary": false,
+        "items": ["React", "TypeScript", "Angular", "Server-Side Rendering", "Server-Driven UI", "Responsive Design"],
+        "more": []
+      }
+    ],
+    "next": { "target": "experience", "label": "See Experience" }
+  },
+  "experience": {
+    "title": "Work Experience",
+    "items": [
+      {
+        "date": "Mar 2023 - Present",
+        "company": "Domain",
+        "url": "https://www.domain.com.au",
+        "position": "Senior Software Engineer — Remote",
+        "highlights": [
+          "Led zero-downtime modernization of mission-critical services from .NET Framework on AWS EC2 (Windows) to containerized .NET on AWS EKS, eliminating 5+ years of technical debt with zero customer impact.",
+          "Architected an event-driven Order Orchestration Engine using AWS EventBridge, SNS, and SQS to automate Salesforce order ingestion — eliminating manual steps from the sales pipeline and accelerating order processing.",
+          "Built a reusable .NET HTTP resilience library with IHttpClientFactory, automated OAuth2 token lifecycle, and configurable circuit breakers/retries — adopted across multiple squads.",
+          "Integrated Claude Code & GitHub Copilot into the full SDLC (architecture, coding, test generation, code review), measurably increasing team throughput sprint-over-sprint. Established AI tooling best practices later adopted across the organization.",
+          "Migrated legacy React/.NET Framework internal tools to Retool (no-code), freeing engineering capacity from internal CRUD maintenance to focus on core revenue-generating products.",
+          "Introduced end-to-end automated testing with Playwright in the build pipeline, validating critical frontend and backend user journeys on every deployment."
+        ]
+      },
+      {
+        "date": "Nov 2021 - Mar 2023",
+        "company": "Carsales",
+        "url": "https://www.carsales.com.au",
+        "position": "Senior Software Engineer — Remote",
+        "highlights": [
+          "Engineered a standardized Server-Driven UI (SDUI) framework for Editorial and Reviews pages, establishing a unified contract across Web, iOS, and Android — decoupling cross-team dependencies and reducing time-to-market.",
+          "Decomposed a monolithic Editorial API into separate read/write paths with Redis distributed caching (CQRS), improving scalability for consuming teams.",
+          "Led the Redbook.com.au frontend rewrite in React/TypeScript, driving a 20% traffic increase to inquiry pages.",
+          "Shipped \"Can't Find Your Car\" feature end-to-end, generating 200+ new ad listings within 90 days of launch."
+        ]
+      },
+      {
+        "date": "Aug 2020 - Nov 2021",
+        "company": "Moneyme",
+        "url": "https://www.moneyme.com.au",
+        "position": "Senior Software Engineer — Pasig, PH",
+        "highlights": [
+          "Designed SOC2-compliant public APIs with ASP.NET Core and OAuth2/JWT for third-party loan submissions in a regulated fintech environment.",
+          "Built .NET Framework ASP.NET MVC applications for loan product landing pages with responsive Razor views and form submission pipelines.",
+          "Led the MoneyMe+ WooCommerce plugin team; integration brought in 1,000+ e-commerce leads within its first 60 days."
+        ]
+      },
+      {
+        "date": "Dec 2019 - Jul 2020",
+        "company": "Nowcom Global Services",
+        "url": "https://www.nowcom.com",
+        "position": "Lead Software Engineer — Pasig, PH",
+        "highlights": [
+          "Led a cross-functional squad of 10 with full ownership of sprint grooming, technical specs, weekly releases, and on-call rotation.",
+          "Optimized lender API integration layer, reducing response times from 8s to 2s on a platform processing 150,000 transactions per day."
+        ]
+      }
+    ],
+    "earlier": "Earlier: BlastAsia (Software Engineer I → Dev Lead, 2016-2019) · Accenture (Associate SE, 2015-2016)",
+    "next": { "target": "projects", "label": "See Projects" }
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "items": [
+      {
+        "title": "Card Guide PH",
+        "url": "https://ccwatcher.shaunalonzo.com/",
+        "description": "A comprehensive guide for credit card information and tracking in the Philippines. AI agents (LLM + Playwright) for automated data extraction, React/Node.js on Vercel, PostgreSQL.",
+        "technologies": ["Node.js", "TypeScript", "React", "Vercel", "PostgreSQL", "AI Agents"]
+      },
+      {
+        "title": "Redbook Website Redesign",
+        "url": "https://www.redbook.com.au",
+        "description": "Led the transition of Redbook.com.au from a 2000s aesthetic to a modern design, revitalizing website appearance while maintaining existing customers and boosting website views.",
+        "technologies": ["C#", "React", "AWS", ".NET"]
+      },
+      {
+        "title": "MoneyMe+ WooCommerce Plugin",
+        "url": "https://wphive.com/plugins/moneyme-payments-for-woocommerce/",
+        "description": "Developed an e-commerce plugin that generated over 1000 leads within first 2 months of launch, connecting sellers with financing options.",
+        "technologies": ["C#", "JavaScript", "Azure", ".NET Core", "WordPress"]
+      }
+    ],
+    "next": { "target": "contact", "label": "Get In Touch" }
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "description": "I work with engineering teams — whether that's a 3-month .NET modernization sprint, AWS architecture consulting, embedding as a fractional senior engineer, or a full-time role on a mission-driven team.",
+    "locationNote": "Based in the {country} ({timezone}), working remotely with teams in Australia, the UK, and the US.",
+    "next": { "target": "about", "label": "Back to Top" }
+  },
+  "social": [
+    {
+      "label": "LinkedIn",
+      "ariaLabel": "LinkedIn Profile",
+      "url": "https://www.linkedin.com/in/shaunalonzo/",
+      "icon": "fab fa-linkedin"
+    },
+    {
+      "label": "GitHub",
+      "ariaLabel": "GitHub Profile",
+      "url": "https://github.com/Shonos",
+      "icon": "fab fa-github"
+    }
+  ],
+  "footer": "© 2026 {name} — Available for contract, consulting & full-time roles.",
+  "analytics": {
+    "measurementId": "G-EG4TMY27NZ",
+    "allowedHosts": ["shaunalonzo.com", "www.shaunalonzo.com"]
+  },
+  "chat": {
+    "enabled": false,
+    "welcome": [
+      {
+        "text": "Hi there! I'm {firstName}'s assistant. How can I help you learn more about his .NET & AWS contract and consulting services?",
+        "delay": 500
+      },
+      {
+        "text": "I can tell you about his experience modernizing .NET systems, AWS architecture expertise, or AI-augmented engineering. What are you interested in?",
+        "delay": 2000
+      }
+    ],
+    "responses": [
+      {
+        "keywords": ["experience", "work"],
+        "text": "{firstName} has 10+ years of experience across Domain, Carsales, Moneyme, and Nowcom. He specializes in .NET modernization on AWS, event-driven architectures, and AI-augmented engineering. Want details on a specific role?"
+      },
+      {
+        "keywords": ["skill", "tech"],
+        "text": "{firstName}'s core stack spans C#/.NET, AWS (ECS, EKS, Lambda, SQS/SNS), React/TypeScript, and AI-augmented development with Claude Code and GitHub Copilot. He also brings strong DevOps and observability expertise."
+      },
+      {
+        "keywords": ["contact", "hire", "email", "contract", "consulting"],
+        "text": "{firstName} is open to contract, consulting, and full-time roles. You can reach him at {email} or connect on LinkedIn. He works remotely from the {country} ({timezone}) with teams across Australia, the UK, and the US."
+      },
+      {
+        "keywords": ["project", "portfolio"],
+        "text": "{firstName}'s featured work includes Card Guide PH (an AI-powered credit card guide), the Redbook.com.au frontend redesign, and the MoneyMe+ WooCommerce plugin. Check the Projects section for more details."
+      },
+      {
+        "keywords": ["location", "where"],
+        "text": "{firstName} is based in {location} ({timezone}) and works remotely with teams in Australia, the UK, and the US."
+      },
+      {
+        "keywords": ["hello", "hi", "hey"],
+        "text": "Hello! I can tell you about {firstName}'s .NET & AWS consulting services, experience, or projects. What are you interested in?"
+      }
+    ],
+    "fallback": "That's a great question! For specific inquiries about contract engagements or consulting, it's best to reach {firstName} directly at {email}. Is there anything else I can help with?"
+  }
+}

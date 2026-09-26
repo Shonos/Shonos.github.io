@@ -1,0 +1,305 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["identity", "metadata", "navigation", "ui", "hero", "services", "skills", "experience", "projects", "contact", "social", "footer", "analytics", "chat"],
+  "properties": {
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "initials", "role", "email", "url", "location", "image", "favicon"],
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "initials": { "$ref": "#/$defs/text" },
+        "role": { "$ref": "#/$defs/text" },
+        "email": { "type": "string", "maxLength": 254, "pattern": "^[A-Za-z0-9.!$'*+/=_`{|}~^-]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$" },
+        "url": { "$ref": "#/$defs/url" },
+        "location": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["city", "country", "timezone"],
+          "properties": {
+            "city": { "$ref": "#/$defs/text" },
+            "country": { "$ref": "#/$defs/text" },
+            "timezone": { "type": "string", "pattern": "^UTC[+-](?:[0-9]|1[0-4])(?::[0-5][0-9])?$" }
+          }
+        },
+        "image": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["src", "alt"],
+          "properties": {
+            "src": { "type": "string", "pattern": "^assets/(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+\\.(?:avif|gif|jpe?g|png|svg|webp)$" },
+            "alt": { "$ref": "#/$defs/text" }
+          }
+        },
+        "favicon": { "type": "string", "pattern": "^(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+\\.(?:ico|png|svg)$" }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["language", "title", "description", "openGraphDescription", "openGraphType", "twitterCard", "twitterDescription", "knowsAbout"],
+      "properties": {
+        "language": { "type": "string", "pattern": "^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$" },
+        "title": { "$ref": "#/$defs/text" },
+        "description": { "$ref": "#/$defs/text" },
+        "openGraphDescription": { "$ref": "#/$defs/text" },
+        "openGraphType": { "const": "website" },
+        "twitterCard": { "enum": ["summary", "summary_large_image"] },
+        "twitterDescription": { "$ref": "#/$defs/text" },
+        "knowsAbout": { "$ref": "#/$defs/textList" }
+      }
+    },
+    "navigation": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "route", "label"],
+        "properties": {
+          "id": { "$ref": "#/$defs/sectionId" },
+          "route": { "type": "string", "pattern": "^/[a-z][a-z0-9-]*$" },
+          "label": { "$ref": "#/$defs/text" }
+        }
+      }
+    },
+    "ui": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["themeToggle", "switchToDark", "switchToLight", "openMenu", "closeMenu", "alsoUsed", "bestFor", "email", "copyEmail", "copyEmailLabel", "copySuccess", "copyError", "openChat", "closeChat", "chatTitle", "chatPlaceholder", "chatInputLabel", "sendMessage"],
+      "properties": {
+        "themeToggle": { "$ref": "#/$defs/text" },
+        "switchToDark": { "$ref": "#/$defs/text" },
+        "switchToLight": { "$ref": "#/$defs/text" },
+        "openMenu": { "$ref": "#/$defs/text" },
+        "closeMenu": { "$ref": "#/$defs/text" },
+        "alsoUsed": { "$ref": "#/$defs/text" },
+        "bestFor": { "$ref": "#/$defs/text" },
+        "email": { "$ref": "#/$defs/text" },
+        "copyEmail": { "$ref": "#/$defs/text" },
+        "copyEmailLabel": { "$ref": "#/$defs/text" },
+        "copySuccess": { "$ref": "#/$defs/text" },
+        "copyError": { "$ref": "#/$defs/text" },
+        "openChat": { "$ref": "#/$defs/text" },
+        "closeChat": { "$ref": "#/$defs/text" },
+        "chatTitle": { "$ref": "#/$defs/text" },
+        "chatPlaceholder": { "$ref": "#/$defs/text" },
+        "chatInputLabel": { "$ref": "#/$defs/text" },
+        "sendMessage": { "$ref": "#/$defs/text" }
+      }
+    },
+    "hero": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["greeting", "description", "cta", "next"],
+      "properties": {
+        "greeting": { "$ref": "#/$defs/text" },
+        "description": { "$ref": "#/$defs/text" },
+        "cta": { "$ref": "#/$defs/sectionLink" },
+        "next": { "$ref": "#/$defs/sectionLink" }
+      }
+    },
+    "services": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "items", "next"],
+      "properties": {
+        "title": { "$ref": "#/$defs/text" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["icon", "title", "description", "fit", "proof", "outcome"],
+            "properties": {
+              "icon": { "$ref": "#/$defs/icon" },
+              "title": { "$ref": "#/$defs/text" },
+              "description": { "$ref": "#/$defs/text" },
+              "fit": { "$ref": "#/$defs/text" },
+              "proof": { "$ref": "#/$defs/textList" },
+              "outcome": { "$ref": "#/$defs/text" }
+            }
+          }
+        },
+        "next": { "$ref": "#/$defs/sectionLink" }
+      }
+    },
+    "skills": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "intro", "categories", "next"],
+      "properties": {
+        "title": { "$ref": "#/$defs/text" },
+        "intro": { "$ref": "#/$defs/text" },
+        "categories": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title", "description", "primary", "items", "more"],
+            "properties": {
+              "title": { "$ref": "#/$defs/text" },
+              "description": { "$ref": "#/$defs/text" },
+              "primary": { "type": "boolean" },
+              "items": { "$ref": "#/$defs/textList" },
+              "more": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/text" } }
+            }
+          }
+        },
+        "next": { "$ref": "#/$defs/sectionLink" }
+      }
+    },
+    "experience": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "items", "earlier", "next"],
+      "properties": {
+        "title": { "$ref": "#/$defs/text" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["date", "company", "url", "position", "highlights"],
+            "properties": {
+              "date": { "$ref": "#/$defs/text" },
+              "company": { "$ref": "#/$defs/text" },
+              "url": { "$ref": "#/$defs/url" },
+              "position": { "$ref": "#/$defs/text" },
+              "highlights": { "$ref": "#/$defs/textList" }
+            }
+          }
+        },
+        "earlier": { "$ref": "#/$defs/text" },
+        "next": { "$ref": "#/$defs/sectionLink" }
+      }
+    },
+    "projects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "items", "next"],
+      "properties": {
+        "title": { "$ref": "#/$defs/text" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title", "url", "description", "technologies"],
+            "properties": {
+              "title": { "$ref": "#/$defs/text" },
+              "url": { "$ref": "#/$defs/url" },
+              "description": { "$ref": "#/$defs/text" },
+              "technologies": { "$ref": "#/$defs/textList" }
+            }
+          }
+        },
+        "next": { "$ref": "#/$defs/sectionLink" }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "description", "locationNote", "next"],
+      "properties": {
+        "title": { "$ref": "#/$defs/text" },
+        "description": { "$ref": "#/$defs/text" },
+        "locationNote": { "$ref": "#/$defs/text" },
+        "next": { "$ref": "#/$defs/sectionLink" }
+      }
+    },
+    "social": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "ariaLabel", "url", "icon"],
+        "properties": {
+          "label": { "$ref": "#/$defs/text" },
+          "ariaLabel": { "$ref": "#/$defs/text" },
+          "url": { "$ref": "#/$defs/url" },
+          "icon": { "$ref": "#/$defs/icon" }
+        }
+      }
+    },
+    "footer": { "$ref": "#/$defs/text" },
+    "analytics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["measurementId", "allowedHosts"],
+      "properties": {
+        "measurementId": { "type": "string", "pattern": "^G-[A-Z0-9]+$" },
+        "allowedHosts": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "maxLength": 253, "pattern": "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$" }
+        }
+      }
+    },
+    "chat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled", "welcome", "responses", "fallback"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "welcome": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["text", "delay"],
+            "properties": {
+              "text": { "$ref": "#/$defs/text" },
+              "delay": { "type": "integer", "minimum": 0, "maximum": 60000 }
+            }
+          }
+        },
+        "responses": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["keywords", "text"],
+            "properties": {
+              "keywords": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": { "type": "string", "pattern": "^[a-z0-9]+(?:[ -][a-z0-9]+)*$" }
+              },
+              "text": { "$ref": "#/$defs/text" }
+            }
+          }
+        },
+        "fallback": { "$ref": "#/$defs/text" }
+      }
+    }
+  },
+  "$defs": {
+    "text": { "type": "string", "minLength": 1, "maxLength": 6000, "pattern": "\\S" },
+    "textList": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/text" } },
+    "url": { "type": "string", "maxLength": 2048, "pattern": "^https?://[^\\s]+$" },
+    "icon": { "type": "string", "pattern": "^fa[srb] fa-[a-z0-9-]+$" },
+    "sectionId": { "enum": ["about", "services", "skills", "experience", "projects", "contact"] },
+    "sectionLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "label"],
+      "properties": {
+        "target": { "$ref": "#/$defs/sectionId" },
+        "label": { "$ref": "#/$defs/text" }
+      }
+    }
+  }
+}

@@ -967,10 +967,16 @@ footer {
         border-top: 1px solid var(--border);
         height: calc(100vh - 72px - env(safe-area-inset-top));
         overflow-y: auto;
+        visibility: hidden;
     }
 
     .nav-links.active {
         transform: translateX(0);
+        visibility: visible;
+    }
+
+    header.hide:focus-within {
+        transform: translateY(0);
     }
 
     .mobile-menu-btn {
