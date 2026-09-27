@@ -137,6 +137,7 @@ test('rejects duplicate navigation ids and routes and broken section references'
     const content = structuredClone(source);
     content.navigation[1].id = content.navigation[0].id;
     content.navigation[1].route = content.navigation[0].route;
+    content.hero.next.target = 'services';
     await assert.rejects(validateContent(content, root), error => {
         assert.match(error.message, /\/navigation\/1\/id: duplicate navigation id/);
         assert.match(error.message, /\/navigation\/1\/route: duplicate route/);
@@ -190,9 +191,11 @@ test('preserves the complete visible content, collection order, and hidden chat 
         ...source.projects.items.flatMap(item => [item.title, item.description, ...item.technologies]),
         ...source.social.map(profile => profile.label),
         "Chat with Shaun's Assistant", 'Manila, Philippines',
-        '© 2026 Shaun Alonzo — Available for contract, consulting & full-time roles.'
+        '© 2026 Shaun Alonzo — Pursuing full-time senior engineering opportunities; contract and consulting work also considered.'
     ];
     for (const phrase of phrases) assert.ok(text.includes(phrase), `Missing wording: ${phrase}`);
+    assert.match(text, /pursuing a full-time senior engineering role/i);
+    assert.match(text, /primary focus is joining a team in a full-time senior engineering role/i);
     assert.equal((html.match(/class="service-card"/g) || []).length, 4);
     assert.equal((html.match(/class="skills-category(?: skills-core)?"/g) || []).length, 7);
     assert.equal((html.match(/class="timeline-item"/g) || []).length, 4);
@@ -224,7 +227,7 @@ test('emits exactly the runtime contract rather than shipping build content', ()
     assert.deepEqual(Object.keys(runtime.chat), ['enabled', 'welcome', 'responses', 'fallback']);
     assert.equal(runtime.chat.enabled, false);
     assert.deepEqual(runtime.chat.welcome, [
-        { text: "Hi there! I'm Shaun's assistant. How can I help you learn more about his .NET & AWS contract and consulting services?", delay: 500 },
+        { text: "Hi there! I'm Shaun's assistant. How can I help you learn more about his full-time senior engineering experience and capabilities?", delay: 500 },
         { text: 'I can tell you about his experience modernizing .NET systems, AWS architecture expertise, or AI-augmented engineering. What are you interested in?', delay: 2000 }
     ]);
     assert.equal(runtime.chat.responses.length, 6);
@@ -233,7 +236,7 @@ test('emits exactly the runtime contract rather than shipping build content', ()
         assert.ok(response.keywords.length > 0);
         assert.doesNotMatch(response.text, /\{(?:firstName|email|location|country|timezone)\}/);
     }
-    assert.equal(runtime.chat.fallback, "That's a great question! For specific inquiries about contract engagements or consulting, it's best to reach Shaun directly at contact@shaunalonzo.com. Is there anything else I can help with?");
+    assert.equal(runtime.chat.fallback, "That's a great question! For full-time opportunities or focused contract and consulting inquiries, it's best to reach Shaun directly at contact@shaunalonzo.com. Is there anything else I can help with?");
     assert.deepEqual(structured, {
         '@context': 'https://schema.org', '@type': 'Person',
         name: source.identity.name, jobTitle: source.identity.role, url: source.identity.url,
