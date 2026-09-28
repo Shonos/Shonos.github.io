@@ -19,11 +19,11 @@
   "metadata": {
     "language": "en",
     "title": "{name} — {role}",
-    "description": "Senior .NET & AWS engineer pursuing full-time opportunities, with contract and consulting work also available. .NET modernization, AWS architecture, and AI-augmented engineering. Remote, Philippines-based.",
-    "openGraphDescription": "Senior .NET & AWS engineer pursuing full-time opportunities, with contract and consulting work also available. .NET modernization, AWS architecture, and AI-augmented engineering.",
+    "description": "Senior .NET & AWS engineer available for contract, consulting, and full-time roles. .NET modernization, AWS architecture, and AI-augmented engineering. Remote, Philippines-based.",
+    "openGraphDescription": "Senior .NET & AWS engineer available for contract, consulting, and full-time roles. .NET modernization, AWS architecture, and AI-augmented engineering.",
     "openGraphType": "website",
     "twitterCard": "summary",
-    "twitterDescription": "Senior .NET & AWS engineer pursuing full-time opportunities, with contract and consulting work also available.",
+    "twitterDescription": "Senior .NET & AWS engineer available for contract, consulting, and full-time roles.",
     "knowsAbout": [".NET", "C#", "AWS", "React", "TypeScript", "Microservices", "Event-Driven Architecture", "AI-Augmented Development"]
   },
   "navigation": [
@@ -56,18 +56,18 @@
   },
   "hero": {
     "greeting": "Hello, I'm",
-    "description": "I'm pursuing a full-time senior engineering role where I can modernize .NET systems, design cloud-native architectures on AWS, and help teams ship with AI-augmented workflows. 10+ years building for fintech, real estate, and marketplace platforms across APAC and Australia.",
-    "cta": { "target": "contact", "label": "Discuss a Full-Time Role" },
-    "next": { "target": "experience", "label": "See My Experience" }
+    "description": "I help engineering teams modernize legacy .NET systems, design cloud-native architectures on AWS, and ship with AI-augmented workflows. 10+ years building for fintech, real estate, and marketplace platforms across APAC and Australia.",
+    "cta": { "target": "contact", "label": "Get In Touch" },
+    "next": { "target": "services", "label": "How I Can Help" }
   },
   "services": {
-    "title": "What I Bring to a Team",
+    "title": "How I Can Help Your Team",
     "items": [
       {
         "icon": "fas fa-sync-alt",
         "title": ".NET Modernization",
-        "description": "Lead the modernization of legacy .NET Framework workloads into containerized .NET on AWS without disrupting customers.",
-        "fit": "product teams carrying risky legacy services, slow release cycles, or unsupported framework versions.",
+        "description": "Move legacy .NET Framework workloads from Windows EC2 to containerized .NET on AWS without disrupting customers.",
+        "fit": "teams carrying risky legacy services, slow release cycles, or unsupported framework versions.",
         "proof": [
           "Phased traffic routing and .NET Standard compatibility bridges",
           "5+ years of technical debt eliminated with zero customer impact"
@@ -77,8 +77,8 @@
       {
         "icon": "fas fa-cloud",
         "title": "AWS Architecture & Cloud-Native Design",
-        "description": "Design and deliver event-driven, serverless, and containerized AWS systems that match the team’s operating model.",
-        "fit": "engineering teams moving beyond lift-and-shift cloud hosting.",
+        "description": "Design event-driven, serverless, and containerized AWS systems that match the team’s operating model.",
+        "fit": "product teams moving beyond lift-and-shift cloud hosting.",
         "proof": [
           "SQS/SNS, EventBridge, Lambda, API Gateway, ECS Fargate, EKS, and AWS CDK",
           "AWS Solutions Architect Associate certified"
@@ -88,7 +88,7 @@
       {
         "icon": "fas fa-robot",
         "title": "AI-Augmented Engineering",
-        "description": "Establish responsible use of Claude Code and GitHub Copilot across architecture, coding, tests, and reviews.",
+        "description": "Help teams use Claude Code and GitHub Copilot responsibly across architecture, coding, tests, and reviews.",
         "fit": "teams that want AI speed without weakening engineering judgment or review quality.",
         "proof": [
           "AI practices established across architecture, code generation, and automated testing",
@@ -98,9 +98,9 @@
       },
       {
         "icon": "fas fa-user-tie",
-        "title": "Contract & Fractional Engineering",
-        "description": "For teams that need senior .NET/AWS judgment on a defined modernization, architecture, delivery, or mentoring engagement.",
-        "fit": "secondary contract, consulting, and fractional engineering needs.",
+        "title": "Fractional Senior/Principal Engineer",
+        "description": "Add senior .NET/AWS judgment to a critical project without waiting for a full-time hire.",
+        "fit": "3-6 month modernization, architecture, delivery, or mentoring gaps.",
         "proof": [
           "Remote delivery across APAC, Australia, UK, and US time zones",
           "Architecture leadership, mentoring, implementation, and delivery support"
@@ -245,8 +245,8 @@
     "next": { "target": "contact", "label": "Get In Touch" }
   },
   "contact": {
-    "title": "Discuss a Full-Time Opportunity",
-    "description": "My primary focus is joining a team in a full-time senior engineering role. I'm also open to focused contract, consulting, or fractional engagements involving .NET modernization, AWS architecture, and delivery leadership.",
+    "title": "Get In Touch",
+    "description": "I work with engineering teams — whether that's a 3-month .NET modernization sprint, AWS architecture consulting, embedding as a fractional senior engineer, or a full-time role on a mission-driven team.",
     "locationNote": "Based in the {country} ({timezone}), working remotely with teams in Australia, the UK, and the US.",
     "next": { "target": "about", "label": "Back to Top" }
   },
@@ -264,7 +264,7 @@
       "icon": "fab fa-github"
     }
   ],
-  "footer": "© 2026 {name} — Pursuing full-time senior engineering opportunities; contract and consulting work also considered.",
+  "footer": "© 2026 {name} — Available for contract, consulting & full-time roles.",
   "analytics": {
     "measurementId": "G-EG4TMY27NZ",
     "allowedHosts": ["shaunalonzo.com", "www.shaunalonzo.com"]
@@ -273,7 +273,7 @@
     "enabled": false,
     "welcome": [
       {
-        "text": "Hi there! I'm {firstName}'s assistant. How can I help you learn more about his full-time senior engineering experience and capabilities?",
+        "text": "Hi there! I'm {firstName}'s assistant. How can I help you learn more about his .NET & AWS contract and consulting services?",
         "delay": 500
       },
       {
@@ -292,7 +292,7 @@
       },
       {
         "keywords": ["contact", "hire", "email", "contract", "consulting"],
-        "text": "{firstName} is primarily pursuing full-time senior engineering roles and also considers contract, consulting, and fractional work. You can reach him at {email} or connect on LinkedIn. He works remotely from the {country} ({timezone}) with teams across Australia, the UK, and the US."
+        "text": "{firstName} is open to contract, consulting, and full-time roles. You can reach him at {email} or connect on LinkedIn. He works remotely from the {country} ({timezone}) with teams across Australia, the UK, and the US."
       },
       {
         "keywords": ["project", "portfolio"],
@@ -304,9 +304,9 @@
       },
       {
         "keywords": ["hello", "hi", "hey"],
-        "text": "Hello! I can tell you about {firstName}'s full-time engineering experience, .NET and AWS capabilities, or projects. What are you interested in?"
+        "text": "Hello! I can tell you about {firstName}'s .NET & AWS consulting services, experience, or projects. What are you interested in?"
       }
     ],
-    "fallback": "That's a great question! For full-time opportunities or focused contract and consulting inquiries, it's best to reach {firstName} directly at {email}. Is there anything else I can help with?"
+    "fallback": "That's a great question! For specific inquiries about contract engagements or consulting, it's best to reach {firstName} directly at {email}. Is there anything else I can help with?"
   }
 }
