@@ -1,28 +1,44 @@
 import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { resolve, relative, join } from 'node:path';
 import { renderContent } from './render-content.js';
 
 const watchedFiles = ['index.html', 'content/site.json', 'content/site.schema.json'];
 
 export function contentPlugins() {
+    let review = false;
+    let outputRoot = resolve('dist');
     return [{
         name: 'site-content',
         enforce: 'pre',
-        async transformIndexHtml(html) {
-            const rendered = await renderContent(html, process.cwd(), '/');
-            return rendered.replace('__THEME_SCRIPT__', '/theme-init.js');
+        configResolved(config) {
+            review = config.mode === 'review';
+            outputRoot = resolve(config.root, config.build.outDir);
+        },
+        transformIndexHtml: {
+            order: 'pre',
+            async handler(html, context) {
+                if (context.filename?.endsWith('404.html')) return html;
+                const entry = context.filename ? relative(process.cwd(), context.filename) : '/';
+                const rendered = await renderContent(html, process.cwd(), '/', entry, { review });
+                return rendered.replace('__THEME_SCRIPT__', '/theme-init.js');
+            }
         },
         async closeBundle() {
             if (this.meta.watchMode) return;
             const { minify } = await import('terser');
             const { minify: minifyHtml } = await import('html-minifier-terser');
-            const { mkdir, readFile, rm, writeFile } = await import('node:fs/promises');
+            const { mkdir, readFile, readdir, rm, writeFile } = await import('node:fs/promises');
             const source = await readFile(resolve(process.cwd(), 'src/theme-init.js'), 'utf8');
             const result = await minify(source);
-            await mkdir(resolve(process.cwd(), 'dist/assets'), { recursive: true });
-            await writeFile(resolve(process.cwd(), 'dist/assets/theme-init.js'), result.code, 'utf8');
-            await rm(resolve(process.cwd(), 'dist/theme-init.js'), { force: true });
-            for (const file of ['dist/index.html', 'dist/404.html']) {
+            await mkdir(resolve(outputRoot, 'assets'), { recursive: true });
+            await writeFile(resolve(outputRoot, 'assets/theme-init.js'), result.code, 'utf8');
+            await rm(resolve(outputRoot, 'theme-init.js'), { force: true });
+            async function htmlFiles(directory) {
+                const entries = await readdir(directory, { withFileTypes: true });
+                return (await Promise.all(entries.map(entry => entry.isDirectory() ?
+                    htmlFiles(join(directory, entry.name)) : entry.name.endsWith('.html') ? [join(directory, entry.name)] : []))).flat();
+            }
+            for (const file of await htmlFiles(outputRoot)) {
                 const path = resolve(process.cwd(), file);
                 const output = await readFile(path, 'utf8');
                 const rewritten = output.replaceAll('/theme-init.js', '/assets/theme-init.js');
@@ -41,7 +57,7 @@ export function contentPlugins() {
         configureServer(server) {
             const reload = file => {
                 const relative = file.replace(`${process.cwd()}/`, '');
-                if (watchedFiles.includes(relative)) {
+                if (watchedFiles.includes(relative) || relative.startsWith('templates/')) {
                     server.ws.send({ type: 'full-reload' });
                 }
             };

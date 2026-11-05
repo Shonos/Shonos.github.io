@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{{metadata.language}}">
+{{> head}}
+<body data-page="{{page.kind}}" data-study="{{study.slug}}">
+    {{> header}}
+    {{> reviewBanner}}
+    <main id="main-content">
+        <article class="case-study">
+            <div class="container case-opening"><a href="{{rootPath}}#work" class="back-link">{{icon "arrow"}} {{ui.allWork}}</a><h1>{{study.title}}</h1><p class="case-category">{{study.category}} · {{study.client}}</p><p class="case-summary">{{study.summary}}</p><ul class="inline-tags">{{#each study.technologies}}<li>{{this}}</li>{{/each}}</ul></div>
+            <div class="container case-media">{{> media item=(lookup media study.media) slot=study.media}}</div>
+            <div class="container case-body">
+                {{> reviewNote check=reviewChecks.case-studies}}
+                <section class="case-section"><h2>{{ui.problemHeading}}</h2><p>{{study.problem}}</p></section>
+                <section class="case-section"><h2>{{ui.decisionHeading}}</h2><p>{{study.decision}}</p></section>
+                <section class="case-section"><h2>{{ui.contextHeading}}</h2><p>{{study.context}}</p></section>
+                <section class="case-section"><h2>{{ui.scopeHeading}}</h2><p>{{study.ownership}}</p></section>
+                <section class="case-section"><h2>{{ui.outcomeHeading}}</h2><ul class="outcome-list">{{#each study.outcomes}}<li>{{icon "check"}}<span>{{this}}</span></li>{{/each}}</ul></section>
+                <section class="case-section technical-section"><h2>{{ui.technicalDetails}}</h2><div>{{#each study.technical}}<h3>{{title}}</h3><p>{{description}}</p>{{/each}}</div></section>
+                <aside class="case-takeaway"><h2>{{ui.similarProblem}}</h2><p>{{study.takeaway}}</p><a href="{{mail ui.projectSubject}}" class="btn" data-intent="project">{{ui.similarCta}} {{icon "arrow"}}</a></aside>
+                <a href="{{rootPath}}#work" class="back-link">{{icon "arrow"}} {{ui.allWork}}</a>
+            </div>
+        </article>
+    </main>
+    {{> footer}}
+    {{> scripts}}
+</body>
+</html>

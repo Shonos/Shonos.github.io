@@ -1,8 +1,12 @@
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-const root = resolve(process.cwd(), 'dist');
+const dirIndex = process.argv.indexOf('--dir');
+const root = resolve(process.cwd(), dirIndex >= 0 ? process.argv[dirIndex + 1] : 'dist');
+const review = process.argv.includes('--review');
 const required = ['index.html', '404.html', 'CNAME', 'favicon.ico'];
+const content = JSON.parse(await readFile(resolve('content/site.json'), 'utf8'));
+required.push('profile/index.html', 'assets/fonts/manrope-latin.woff2', ...content.work.cases.map(study => `work/${study.slug}/index.html`));
 
 for (const file of required) {
     await access(resolve(root, file));
@@ -13,14 +17,17 @@ if (cname !== 'shaunalonzo.com') {
     throw new Error(`Unexpected CNAME: ${cname}`);
 }
 
-const html = await readFile(resolve(root, 'index.html'), 'utf8');
-for (const marker of ['{{', '__THEME_SCRIPT__', '/src/main.js', '/src/theme-init.js']) {
-    if (html.includes(marker)) {
-        throw new Error(`Build contains unresolved marker or source entry: ${marker}`);
+for (const file of required.filter(file => file.endsWith('.html') && file !== '404.html')) {
+    const html = await readFile(resolve(root, file), 'utf8');
+    if (!review && (/data-review-[a-z-]+/.test(html) || [content.ui.reviewAction, content.ui.reviewBanner, content.ui.reviewLocalOnly].some(note => html.includes(note)))) throw new Error(`${file}: review notes must not ship in a production build`);
+    for (const marker of ['{{', '__THEME_SCRIPT__', '/src/main.js', '/src/theme-init.js', 'user-confirmations/', 'knowledge_id']) {
+        if (html.includes(marker)) {
+            throw new Error(`${file}: unresolved marker, source entry, or private evidence: ${marker}`);
+        }
     }
-}
-if (!html.includes('type="application/ld+json"') || !html.includes('id="site-config"')) {
-    throw new Error('Generated index.html is missing embedded data');
+    if (!html.includes('type="application/ld+json"') || !html.includes('id="site-config"') || !html.includes('rel="canonical"')) {
+        throw new Error(`${file} is missing embedded data or canonical URL`);
+    }
 }
 
 const sourceMaps = [];
@@ -34,4 +41,4 @@ async function scan(directory) {
 }
 await scan(root);
 if (sourceMaps.length) throw new Error(`Source maps found in dist: ${sourceMaps.join(', ')}`);
-console.log('Production artifact verified.');
+console.log(`${review ? 'Local review' : 'Production'} artifact verified.`);

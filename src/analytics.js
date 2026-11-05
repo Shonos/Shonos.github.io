@@ -43,8 +43,8 @@ export function trackEvent(name = '', parameters = {}) {
     }
 }
 
-export function trackPageView(route = '/about', title = '') {
-    const path = route === '/' ? '/about' : route;
+export function trackPageView(route = '/', title = '') {
+    const path = route;
     if (!measurementId || lastPage === path) {
         return;
     }
@@ -54,6 +54,6 @@ export function trackPageView(route = '/about', title = '') {
     trackEvent('page_view', {
         page_title: siteName ? `${label} - ${siteName}` : label,
         page_path: path,
-        page_location: `${window.location.origin}${path}${window.location.search}`
+        page_location: `${window.location.origin}${path}`
     });
 }

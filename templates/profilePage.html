@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="{{metadata.language}}">
+{{> head}}
+<body data-page="{{page.kind}}">
+    {{> header}}
+    {{> reviewBanner}}
+    <main id="main-content" class="profile-page container">
+        <a href="{{rootPath}}#experience" class="back-link">{{icon "arrow"}} {{ui.backHome}}</a>
+        <div class="profile-heading"><div><h1>{{identity.name}}</h1><p>{{identity.role}}</p></div><button class="btn btn-secondary" id="printProfile">{{ui.profilePrint}}</button></div>
+        <p class="profile-summary">{{ui.profileDescription}}</p>
+        <div class="profile-contact"><a href="mailto:{{identity.email}}" data-intent="full-time">{{identity.email}}</a><span>{{identity.location.city}}, {{identity.location.country}} · {{identity.location.timezone}}</span></div>
+        <h2>{{ui.profileWork}}</h2>
+        {{> reviewNote check=reviewChecks.career}}
+        {{#each experience.items}}<section class="profile-role"><div><h3>{{company}}</h3><p>{{position}}</p><time>{{date}}</time></div><p>{{summary}}</p></section>{{/each}}
+        <p class="muted">{{experience.earlier}}</p>
+        <h2>{{work.title}}</h2><ul class="profile-work">{{#each work.cases}}<li><a href="{{@root.rootPath}}work/{{slug}}/">{{shortTitle}} {{icon "arrow"}}</a><p>{{summary}}</p></li>{{/each}}</ul>
+        <div class="toolkit-heading"><h2>{{ui.profileStack}}</h2>{{> brand name=".NET" mark=(lookup brands '.NET')}}</div><div class="skills-grid">{{#each experience.skills}}<div><h3>{{title}}</h3><ul class="inline-tags">{{#each items}}<li>{{this}}</li>{{/each}}</ul></div>{{/each}}</div>
+        <div class="profile-final"><a href="{{mail ui.roleSubject}}" class="btn" data-intent="full-time">{{ui.roleCta}} {{icon "arrow"}}</a></div>
+        {{> reviewNote check=reviewChecks.availability}}
+    </main>
+    {{> footer}}
+    {{> scripts}}
+</body>
+</html>

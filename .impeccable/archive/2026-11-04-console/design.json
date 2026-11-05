@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-02-14T00:00:00.000Z",
+  "title": "Design System: Shaun Alonzo Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "midnight-infrastructure": {"role":"neutral","displayName":"Midnight Infrastructure","canonical":"rgb(3, 7, 18)","tonalRamp":["rgb(3, 7, 18)","rgb(5, 10, 25)","rgb(7, 12, 25)","rgb(10, 15, 30)","rgb(15, 20, 35)","#4a5568","#a0a0a0","#f0f0f0"]},
+      "signal-mint": {"role":"primary","displayName":"Signal Mint","canonical":"#64ffda","tonalRamp":["#064e46","#0f766e","#138f83","#2aa89a","#4db6ac","#64ffda","#a7fff0","#e1fffa"]},
+      "console-surface": {"role":"neutral","displayName":"Console Surface","canonical":"rgb(15, 20, 35)","tonalRamp":["rgb(3, 7, 18)","rgb(7, 12, 25)","rgb(10, 15, 30)","rgb(15, 20, 35)","#2d3748","#4a5568","#a0a0a0","#f0f0f0"]},
+      "telemetry-line": {"role":"neutral","displayName":"Telemetry Line","canonical":"rgb(30, 40, 60)","tonalRamp":["rgb(3, 7, 18)","rgb(10, 15, 30)","rgb(15, 20, 35)","rgb(30, 40, 60)","#4a5568","#718096","#cbd5e0","#f5f7fa"]}
+    },
+    "typographyMeta": {
+      "display": {"displayName":"Display","purpose":"Hero identity and primary first-viewport statement."},
+      "body": {"displayName":"Body","purpose":"Technical descriptions and evidence blocks."}
+    },
+    "shadows": [
+      {"name":"portrait-shadow","value":"0 10px 30px rgba(0, 0, 0, 0.3)","purpose":"Grounds the circular profile image."},
+      {"name":"chat-overlay","value":"0 5px 25px rgba(0, 0, 0, 0.2)","purpose":"Separates the utility chat overlay from the page."}
+    ],
+    "motion": [{"name":"ease-standard","value":"0.3s ease","purpose":"Subtle hover, color, and visibility transitions."}],
+    "breakpoints": [{"name":"mobile","value":"576px"},{"name":"tablet","value":"768px"},{"name":"wide-tablet","value":"992px"}]
+  },
+  "components": [
+    {"name":"Primary Button","kind":"button","refersTo":"button-primary","description":"Outlined mint action for contact and section progression.","html":"<button class=\"ds-btn-primary\">Get In Touch</button>","css":".ds-btn-primary { background: transparent; color: #64ffda; border: 1px solid #64ffda; padding: 0.75rem 1.5rem; border-radius: 4px; font: 500 1rem Inter, sans-serif; transition: all 0.3s ease; } .ds-btn-primary:hover { background: rgba(100,255,218,0.1); transform: translateY(-2px); } .ds-btn-primary:focus-visible { outline: 2px solid #64ffda; outline-offset: 3px; }"},
+    {"name":"Console Card","kind":"card","refersTo":"card","description":"Bordered surface for services and project evidence.","html":"<article class=\"ds-card\"><h3>Cloud architecture</h3><p>Event-driven systems on AWS.</p></article>","css":".ds-card { background: rgb(15,20,35); color: #f0f0f0; border: 1px solid rgb(30,40,60); border-radius: 8px; padding: 2rem; transition: transform 0.3s ease, border-color 0.3s ease; } .ds-card:hover { transform: translateY(-3px); border-color: #64ffda; }"},
+    {"name":"Skill Chip","kind":"chip","refersTo":"chip","description":"Compact technology proof tag.","html":"<span class=\"ds-chip\">AWS CDK</span>","css":".ds-chip { display: inline-block; background: rgb(15,20,35); color: #f0f0f0; border: 1px solid rgb(30,40,60); border-radius: 20px; padding: 0.5rem 1rem; font: 500 0.9rem Inter, sans-serif; } .ds-chip:hover { border-color: #64ffda; transform: translateY(-2px); }"},
+    {"name":"Primary Navigation","kind":"nav","refersTo":"navigation","description":"Fixed, quiet section navigation with mint hover signal.","html":"<nav class=\"ds-nav\"><a href=\"#about\">About</a><a href=\"#contact\">Contact</a></nav>","css":".ds-nav { display: flex; gap: 2rem; background: rgb(3,7,18); padding: 1rem; } .ds-nav a { color: #f0f0f0; text-decoration: none; font: 500 1rem Inter, sans-serif; transition: color 0.3s ease; } .ds-nav a:hover, .ds-nav a:focus-visible { color: #64ffda; }"}
+  ],
+  "narrative": {
+    "northStar":"The Cloud Engineer's Console",
+    "overview":"The visual system reads like a precise operational console for senior engineering judgment: dark, stable, low-noise, and lit by rare mint signal. It should feel technically fluent without slipping into sci-fi decoration. The interface gives evidence room to breathe, using calm structure, bordered surfaces, and measured motion to make Shaun's experience feel trustworthy and current.\n\nThe system is restrained by default. Cards, timelines, chips, and contact surfaces sit on tonal navy layers rather than heavy ornament. Signal Mint marks identity, wayfinding, interactive affordance, and proof points; it should feel like live telemetry on an otherwise quiet infrastructure plane.",
+    "keyCharacteristics":["Dark technical canvas with layered navy surfaces.","Mint accent used as signal, not decoration.","Inter/system typography with direct hierarchy and practical rhythm.","Flat cards, thin borders, rounded corners, and subtle hover lift.","Professional, outcome-oriented copy presentation with minimal flourish."],
+    "rules":[{"name":"The Signal Rarity Rule","body":"Mint is a status signal and wayfinding device; do not flood large backgrounds with it or turn every element into an accent block.","section":"colors"},{"name":"The Flat-at-Rest Rule","body":"Static cards and sections should not gain heavy shadows. Reserve shadows for media, overlays, and purposeful hover states.","section":"elevation"}],
+    "dos":["Do treat Signal Mint as a rare operational signal for identity, navigation, action, and proof.","Do preserve the dark navy layered hierarchy when adding sections or components.","Do use thin borders, small radii, and subtle hover lift for interactive confidence."],
+    "donts":["Don't introduce unrelated bright accent hues unless a redesign explicitly replaces the visual world.","Don't add heavy shadows, glassmorphism, neon glows, or decorative gradients to ordinary cards.","Don't swap in playful, serif, handwritten, or novelty typography for the core interface."]
+  }
+}

@@ -1,0 +1,5 @@
+{{#if page.review}}<section class="review-checklist" id="review-checklist" aria-labelledby="review-checklist-title" data-review-checklist><div class="container">
+    <h2 id="review-checklist-title">{{ui.reviewChecklistTitle}}</h2><p>{{ui.reviewChecklistIntro}}</p>
+    <div class="review-checklist-grid"><div><h3>{{ui.reviewMediaHeading}}</h3><p>{{ui.reviewMediaDecision}}</p><ul>{{#each pendingMedia}}<li><a href="#review-media-{{key}}">{{placeholder}}</a></li>{{else}}<li>{{ui.reviewNoMedia}}</li>{{/each}}</ul></div>
+    <div><h3>{{ui.reviewContentHeading}}</h3><ul>{{#each reviewItems}}<li><a href="{{href}}">{{title}}</a><p>{{description}}</p></li>{{else}}<li>{{ui.reviewNoContent}}</li>{{/each}}</ul></div></div>
+</div></section>{{/if}}

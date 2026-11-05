@@ -7,7 +7,7 @@ export default defineConfig({
     fullyParallel: true,
     forbidOnly: Boolean(process.env.CI),
     retries: process.env.CI ? 1 : 0,
-    workers: process.env.CI ? 2 : undefined,
+    workers: process.env.CI ? 2 : 4,
     timeout: 30000,
     expect: { timeout: 8000 },
     outputDir: 'test-results',
@@ -32,6 +32,12 @@ export default defineConfig({
         {
             command: 'node scripts/preview-pages.js --port 4174',
             url: 'http://127.0.0.1:4174',
+            reuseExistingServer: !process.env.CI,
+            timeout: 30000
+        },
+        {
+            command: 'node scripts/preview-pages.js --dir dist-review --port 4175',
+            url: 'http://127.0.0.1:4175',
             reuseExistingServer: !process.env.CI,
             timeout: 30000
         },

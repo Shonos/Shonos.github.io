@@ -37,6 +37,8 @@ jobs:
         run: npm test
       - name: Build
         run: npm run build
+      - name: Build review fixture for browser tests
+        run: npm run build:review
       - name: Browser tests
         run: npm run test:e2e
       - name: Upload verified artifact

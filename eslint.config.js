@@ -3,7 +3,7 @@ import globals from 'globals';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
-    globalIgnores(['dist/**', 'public/theme-init.js', 'node_modules/**', 'playwright-report/**', 'test-results/**', '.impeccable/**']),
+    globalIgnores(['dist/**', 'dist-review/**', 'public/theme-init.js', 'node_modules/**', 'playwright-report/**', 'test-results/**', '.impeccable/**']),
     js.configs.recommended,
     {
         files: ['**/*.js'],

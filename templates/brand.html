@@ -1,0 +1,7 @@
+<span class="brand" data-brand="{{name}}">
+    {{#if mark}}
+    <img class="brand-logo{{#if mark.darkSrc}} brand-logo--light{{/if}}" src="{{base mark.src}}" alt="{{name}}" width="{{mark.width}}" height="{{mark.height}}" decoding="async">
+    {{#if mark.darkSrc}}<img class="brand-logo brand-logo--dark" src="{{base mark.darkSrc}}" alt="{{name}}" width="{{mark.width}}" height="{{mark.height}}" decoding="async">{{/if}}
+    <span class="brand-print-name" aria-hidden="true">{{name}}</span>
+    {{else}}{{name}}{{/if}}
+</span>

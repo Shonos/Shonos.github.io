@@ -1,8 +1,9 @@
-import { initAnalytics } from './analytics.js';
-import { initChat } from './chat.js';
+import { initAnalytics, trackEvent, trackPageView } from './analytics.js';
 import { initContact } from './contact.js';
 import { initNavigation } from './navigation.js';
 import { initTheme } from './theme.js';
+import { initMedia, initMotion } from './motion.js';
+import { initMigrations } from './migration.js';
 
 export function readSiteConfig() {
     let value = {};
@@ -15,7 +16,6 @@ export function readSiteConfig() {
         }
     }
     const analytics = value.analytics || {};
-    const chat = value.chat || {};
     return {
         name: typeof value.name === 'string' ? value.name : '',
         email: typeof value.email === 'string' ? value.email : '',
@@ -24,14 +24,7 @@ export function readSiteConfig() {
             allowedHosts: Array.isArray(analytics.allowedHosts) ?
                 analytics.allowedHosts.filter(host => typeof host === 'string') : []
         },
-        chat: {
-            enabled: chat.enabled === true,
-            welcome: Array.isArray(chat.welcome) ? chat.welcome.filter(message =>
-                message && typeof message.text === 'string' && Number.isFinite(message.delay)) : [],
-            responses: Array.isArray(chat.responses) ? chat.responses.filter(response =>
-                response && typeof response.text === 'string' && Array.isArray(response.keywords)) : [],
-            fallback: typeof chat.fallback === 'string' ? chat.fallback : ''
-        }
+        legacyRoutes: value.legacyRoutes && typeof value.legacyRoutes === 'object' ? value.legacyRoutes : {}
     };
 }
 
@@ -45,9 +38,26 @@ export function initialize() {
     const config = readSiteConfig();
     initAnalytics(config.analytics, config.name);
     initTheme();
-    initNavigation();
+    initNavigation(config.legacyRoutes);
     initContact(config.email);
-    initChat(config.chat);
+    initMedia();
+    initMotion();
+    initMigrations();
+    trackPageView(window.location.pathname, document.title);
+    const allowedEvents = new Set(['case_study_open', 'hiring_path', 'profile_open']);
+    document.querySelectorAll('a[data-track]').forEach(link => {
+        if (!(link instanceof HTMLAnchorElement) || !allowedEvents.has(link.dataset.track)) return;
+        link.addEventListener('click', () => trackEvent(link.dataset.track, {
+            ...(link.dataset.study ? { study: link.dataset.study } : {})
+        }));
+    });
+    if (document.body.dataset.page === 'case-study') {
+        trackEvent('case_study_view', { study: document.body.dataset.study });
+    }
+    document.getElementById('printProfile')?.addEventListener('click', () => {
+        trackEvent('profile_print');
+        window.print();
+    });
 }
 
 if (document.readyState === 'loading') {

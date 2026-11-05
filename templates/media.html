@@ -1,0 +1,23 @@
+<figure class="media-figure" data-media-slot="{{slot}}" data-media-error="{{@root.ui.mediaError}}">
+    <div class="media-surface media-surface--{{item.layout}}" style="--media-ratio: {{item.width}} / {{item.height}}">
+        {{#if item.image}}
+        <a class="media-image-link" href="{{base item.src}}" target="_blank" rel="noopener" aria-label="{{item.alt}}"><img class="project-image" src="{{base item.src}}" alt="{{item.alt}}" width="{{item.width}}" height="{{item.height}}" loading="{{#if eager}}eager{{else}}lazy{{/if}}" decoding="async"></a>
+        {{else if item.video}}
+        <video class="project-video" controls playsinline preload="none" poster="{{base item.poster}}" width="{{item.width}}" height="{{item.height}}" aria-label="{{item.alt}}">
+            <source src="{{base item.src}}" type="{{item.mime}}">
+            {{#if item.captions}}<track kind="captions" src="{{base item.captions}}" srclang="en" label="English" default>{{/if}}
+            <a href="{{base item.src}}">{{item.alt}}</a>
+        </video>
+        {{else if item.migration}}
+        {{> migration}}
+        {{else}}
+        <div class="concept-visual concept-visual--{{item.layout}}">
+            <p class="concept-title">{{item.title}}</p>
+            <div class="concept-nodes">{{#each item.nodes}}<div class="concept-node" data-flow-node="{{@index}}"><span class="node-marker" aria-hidden="true"></span><strong>{{title}}</strong><span>{{detail}}</span></div>{{/each}}</div>
+        </div>
+        {{/if}}
+    </div>
+    <figcaption class="media-caption">{{item.caption}}</figcaption>
+    {{#if item.reviewPlaceholder}}<aside class="media-review" id="review-media-{{slot}}" data-review-slot="{{slot}}"><p class="review-title"><strong>{{@root.ui.reviewAction}}: {{item.placeholder}}</strong></p><p>{{item.brief}}</p><p class="review-helper">{{@root.ui.reviewLocalOnly}}</p></aside>{{/if}}
+    {{#if item.video}}<p class="media-transcript">{{item.transcript}}</p>{{/if}}
+</figure>

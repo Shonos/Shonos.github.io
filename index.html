@@ -1,279 +1,73 @@
 <!DOCTYPE html>
 <html lang="{{metadata.language}}">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-    <script src="__THEME_SCRIPT__"></script>
-    <link rel="icon" type="image/x-icon" href="{{base identity.favicon}}">
-    <title>{{text metadata.title}}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./assets/styles.css">
-    <meta name="description" content="{{metadata.description}}">
-    <meta property="og:title" content="{{text metadata.title}}">
-    <meta property="og:description" content="{{metadata.openGraphDescription}}">
-    <meta property="og:type" content="{{metadata.openGraphType}}">
-    <meta property="og:url" content="{{identity.url}}">
-    <meta property="og:image" content="{{openGraphImage}}">
-    <meta name="twitter:card" content="{{metadata.twitterCard}}">
-    <meta name="twitter:title" content="{{text metadata.title}}">
-    <meta name="twitter:description" content="{{metadata.twitterDescription}}">
-</head>
-
-<body>
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">{{identity.initials}}</div>
-                <ul class="nav-links" id="navLinks">
-                    {{#each navigation}}
-                    <li><a href="#{{id}}" data-route="{{route}}">{{label}}</a></li>
-                    {{/each}}
-                </ul>
-                <div class="nav-buttons">
-                    <button id="themeToggle" class="theme-toggle" aria-label="{{ui.themeToggle}}" data-dark-label="{{ui.switchToDark}}" data-light-label="{{ui.switchToLight}}">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <button class="mobile-menu-btn" id="menuBtn" aria-label="{{ui.openMenu}}" data-open-label="{{ui.openMenu}}" data-close-label="{{ui.closeMenu}}" aria-expanded="false" aria-controls="navLinks">
-                        <i class="fas fa-bars"></i>
-                    </button>
+{{> head}}
+<body data-page="{{page.kind}}">
+    {{> header}}
+    {{> reviewBanner}}
+    <main id="main-content">
+        <section class="hero" id="home" aria-labelledby="hero-title">
+            <span id="about" class="anchor-alias" aria-hidden="true"></span>
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <h1 id="hero-title">{{hero.title}} <span class="accent">{{hero.focus}}</span><span class="hero-close">{{hero.close}}</span></h1>
+                    <p class="hero-description">{{hero.description}}</p>
+                    <div class="hero-actions"><a href="{{mail ui.projectSubject}}" class="btn" data-intent="project">{{ui.projectCta}} {{icon "arrow"}}</a><a href="#work" class="text-link">{{hero.workCta}} {{icon "arrow"}}</a></div>
+                    <ul class="stack-line" aria-label="Core technologies">{{#each hero.stack}}<li>{{this}}</li>{{/each}}</ul>
+                    <p class="hiring-link">{{hero.hiringPrefix}} <a href="#experience" data-track="hiring_path">{{hero.hiringCta}}</a></p>
                 </div>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section class="hero" id="about">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-text">
-                        <p class="hero-subtitle">{{hero.greeting}}</p>
-                        <h1 class="hero-title">
-                            <span class="hero-name">{{identity.name}}</span>
-                        </h1>
-                        <div class="hero-role">
-                            {{identity.role}}
-                        </div>
-                        <p class="hero-description">
-                            {{hero.description}}
-                        </p>
-                        <a href="#{{hero.cta.target}}" class="btn">{{hero.cta.label}}</a>
-
-                    </div>
-                    <div class="hero-image-container">
-                        <img src="{{base identity.image.src}}" alt="{{text identity.image.alt}}" class="profile-image">
-                    </div>
-                </div>
+                <aside class="hero-proof" aria-label="A decision from a real project">
+                    {{> media item=media.featured slot="featured" eager=true}}
+                    <a class="proof-link" href="{{rootPath}}work/dotnet-modernization/" data-track="case_study_open" data-study="dotnet-modernization">{{hero.proofLink}} {{icon "arrow"}}</a>
+                </aside>
             </div>
-            <div class="next-section">
-                <a href="#{{hero.next.target}}" class="btn">{{hero.next.label}} <i class="fas fa-chevron-down"></i></a>
+            <div class="container credibility"><p>{{hero.credibility}}</p><div class="employer-proof"><span class="employer-label">{{hero.employerLabel}}</span><ul class="employers">{{#each hero.employers}}<li>{{> brand name=this mark=(lookup @root.brands this)}}</li>{{/each}}</ul><p class="employer-note">{{hero.employerNote}}</p></div></div>
+        </section>
+
+        <section class="section work-section" id="work" aria-labelledby="work-title">
+            <span id="projects" class="anchor-alias" aria-hidden="true"></span>
+            <div class="container">
+                <div class="section-heading"><h2 id="work-title">{{work.title}}</h2><p>{{work.intro}}</p></div>
+                {{> reviewNote check=reviewChecks.case-studies}}
+                <div class="work-list">{{#each work.cases}}
+                    <article class="work-item">
+                        {{> media item=(lookup @root.media media) slot=media}}
+                        <div class="work-main"><h3><a href="{{@root.rootPath}}work/{{slug}}/" data-track="case_study_open" data-study="{{slug}}">{{shortTitle}}</a></h3><p class="work-category">{{category}}</p><p>{{preview}}</p><p class="work-outcome">{{result}}</p><a href="{{@root.rootPath}}work/{{slug}}/" class="text-link" data-track="case_study_open" data-study="{{slug}}">{{@root.ui.readStory}} {{icon "arrow"}}</a></div>
+                    </article>
+                {{/each}}</div>
             </div>
         </section>
 
-        <section id="services" class="services">
-            <div class="container">
-                <h2 class="section-title">{{services.title}}</h2>
-                <div class="services-grid">
-                    {{#each services.items}}
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="{{icon}}"></i>
-                        </div>
-                        <h3 class="service-title">{{title}}</h3>
-                        <p class="service-description">
-                            {{description}}
-                        </p>
-                        <div class="service-fit"><strong>{{@root.ui.bestFor}}</strong> {{fit}}</div>
-                        <ul class="service-proof">
-                            {{#each proof}}
-                            <li>{{this}}</li>
-                            {{/each}}
-                        </ul>
-                        <p class="service-outcome">{{outcome}}</p>
-                    </div>
-                    {{/each}}
-                </div>
-            </div>
-            <div class="next-section">
-                <a href="#{{services.next.target}}" class="btn">{{services.next.label}} <i class="fas fa-chevron-down"></i></a>
+        <section class="section services" id="services" aria-labelledby="services-title">
+            <div class="container"><div class="section-heading"><h2 id="services-title">{{services.title}}</h2><p>{{services.intro}}</p></div>
+                <div class="service-list">{{#each services.items}}<article class="service-row"><div class="service-title">{{icon icon}}<h3>{{title}}</h3></div><p>{{description}}</p><a href="#{{target}}" class="text-link">{{link}} {{icon "arrow"}}</a></article>{{/each}}</div>
             </div>
         </section>
 
-        <section id="skills" class="skills" aria-labelledby="skills-title">
-            <div class="container">
-                <h2 class="section-title" id="skills-title">{{skills.title}}</h2>
-                <p class="skills-intro">{{skills.intro}}</p>
-
-                {{#each skills.categories}}
-                <div class="skills-category{{#if primary}} skills-core{{/if}}">
-                    <h3 class="skills-category-title">{{title}}</h3>
-                    <p class="skills-category-description">{{description}}</p>
-                    <div class="skills-container">
-                        {{#each items}}
-                        <span class="skill-tag{{#if ../primary}} skill-tag-primary{{/if}}">{{this}}</span>
-                        {{/each}}
-                    </div>
-                    {{#if more.length}}
-                    <details class="skills-more">
-                        <summary>{{@root.ui.alsoUsed}}</summary>
-                        <div class="skills-container">
-                            {{#each more}}
-                            <span class="skill-tag">{{this}}</span>
-                            {{/each}}
-                        </div>
-                    </details>
-                    {{/if}}
+        <section class="section ai-section" id="ai" aria-labelledby="ai-title">
+            <div class="container"><div class="section-heading"><h2 id="ai-title">{{ai.title}}</h2><p>{{ai.intro}}</p></div>
+                <div class="workflow-showcase" data-workflow>
+                    <div class="workflow-stage">{{> media item=media.agents slot="agents"}}<button class="motion-replay" type="button" data-motion-replay hidden>{{icon "workflow"}} {{ui.motionReplay}}</button></div>
+                    <div class="workflow-copy"><h3>{{ai.workflowTitle}}</h3><ol class="workflow-controls" aria-label="{{ui.workflowControls}}">{{#each ai.workflow}}<li data-workflow-step="{{@index}}"><h4>{{title}}</h4><p>{{description}}</p></li>{{/each}}</ol></div>
                 </div>
-                {{/each}}
-            </div>
-            <div class="next-section">
-                <a href="#{{skills.next.target}}" class="btn">{{skills.next.label}} <i class="fas fa-chevron-down"></i></a>
+                <div class="ai-stories">{{#each ai.stories}}<article class="ai-story"><h3>{{title}}</h3><p class="evidence-type">{{kind}}</p><p>{{description}}</p>{{#if url}}<a href="{{url}}" class="text-link" target="_blank" rel="noopener noreferrer">{{link}} {{icon "external"}}</a>{{/if}}</article>{{/each}}</div>
+                {{#if media.personal-project.reviewPlaceholder}}<div class="personal-media-slot">{{> media item=media.personal-project slot="personal-project"}}</div>{{else if media.personal-project.hasAsset}}<div class="personal-media-slot">{{> media item=media.personal-project slot="personal-project"}}</div>{{/if}}
             </div>
         </section>
 
-        <section id="experience">
-            <div class="container">
-                <h2 class="section-title">{{experience.title}}</h2>
-                <div class="experience-timeline">
-                    {{#each experience.items}}
-                    <div class="timeline-item">
-                        <div class="timeline-date">{{date}}</div>
-                        <div class="timeline-company">
-                            <a href="{{url}}" target="_blank" class="external-link">
-                                {{company}} <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                        <div class="timeline-position">{{position}}</div>
-                        <div class="timeline-description">
-                            <ul>
-                                {{#each highlights}}
-                                <li>{{this}}</li>
-                                {{/each}}
-                            </ul>
-                        </div>
-                    </div>
-                    {{/each}}
-
-                    <div class="timeline-item timeline-earlier">
-                        <div class="timeline-description">
-                            <p class="timeline-earlier-copy">
-                                {{experience.earlier}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="next-section">
-                <a href="#{{experience.next.target}}" class="btn">{{experience.next.label}} <i class="fas fa-chevron-down"></i></a>
-            </div>
+        <section class="section approach-section" id="approach" aria-labelledby="approach-title">
+            <div class="container"><div class="section-heading"><h2 id="approach-title">{{approach.title}}</h2><p>{{approach.intro}}</p></div><ol class="approach-steps">{{#each approach.steps}}<li><h3>{{title}}</h3><p>{{description}}</p></li>{{/each}}</ol></div>
         </section>
 
-        <section id="projects">
-            <div class="container">
-                <h2 class="section-title">{{projects.title}}</h2>
-                <div class="project-grid">
-                    {{#each projects.items}}
-                    <div class="project-card">
-                        <div class="project-content">
-                            <h3 class="project-title">
-                                <a href="{{url}}" target="_blank" class="external-link">
-                                    {{title}} <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </h3>
-                            <p class="project-description">
-                                {{description}}
-                            </p>
-                            <div class="project-tech">
-                                {{#each technologies}}
-                                <span>{{this}}</span>
-                                {{/each}}
-                            </div>
-                        </div>
-                    </div>
-                    {{/each}}
-                </div>
-            </div>
-            <div class="next-section">
-                <a href="#{{projects.next.target}}" class="btn">{{projects.next.label}} <i class="fas fa-chevron-down"></i></a>
+        <section class="section about-section" id="experience" aria-labelledby="experience-title">
+            <div class="container"><div class="about-grid"><div class="about-copy"><h2 id="experience-title">{{experience.title}}</h2><p>{{experience.description}}</p><div class="hiring-actions"><a href="{{mail ui.roleSubject}}" class="text-link" data-intent="full-time">{{ui.roleCta}} {{icon "arrow"}}</a><a href="{{rootPath}}profile/" class="text-link" data-track="profile_open">{{ui.profileLink}} {{icon "arrow"}}</a></div></div><figure class="portrait"><img src="{{base identity.image.src}}" alt="{{text identity.image.alt}}" width="300" height="300" loading="lazy"><figcaption><strong>{{identity.name}}</strong><span>{{identity.location.city}}, {{identity.location.country}}</span></figcaption></figure></div>
+                {{> reviewNote check=reviewChecks.availability}}
+                <div id="skills" class="skills-block"><div class="toolkit-heading"><h3 id="skills-title">{{experience.skillsTitle}}</h3>{{> brand name=".NET" mark=(lookup brands '.NET')}}</div><ul class="inline-tags">{{#each hero.stack}}<li>{{this}}</li>{{/each}}</ul></div>
             </div>
         </section>
-
-        <section id="contact" class="contact">
-            <div class="container">
-                <div class="contact-content">
-                    <h2 class="contact-title">{{contact.title}}</h2>
-                    <p class="contact-subtitle">
-                        {{contact.description}}
-                    </p>
-                    <p class="contact-subtitle contact-location-note">
-                        {{text contact.locationNote}}
-                    </p>
-                    <div class="location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>{{location}}</span>
-                    </div>
-                    <div class="contact-actions">
-                        <div class="email-display">
-                            <span class="email-address">{{identity.email}}</span>
-                        </div>
-                        <div class="email-buttons">
-                            <a href="mailto:{{identity.email}}" class="btn">
-                                <i class="far fa-envelope"></i> {{ui.email}}
-                            </a>
-                            <button id="copyEmailBtn" class="btn btn-secondary" aria-label="{{ui.copyEmailLabel}}">
-                                <i class="far fa-copy"></i> {{ui.copyEmail}}
-                                <span class="tooltip" id="copyTooltip" role="status" data-success="{{ui.copySuccess}}" data-error="{{ui.copyError}}">{{ui.copySuccess}}</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        {{#each social}}
-                        <a href="{{url}}" class="social-link" aria-label="{{ariaLabel}}">
-                            <i class="{{icon}}"></i>
-                            <span class="social-label">{{label}}</span>
-                        </a>
-                        {{/each}}
-                    </div>
-                </div>
-            </div>
-            <div class="next-section">
-                <a href="#{{contact.next.target}}" class="btn">{{contact.next.label}} <i class="fas fa-chevron-up"></i></a>
-            </div>
-        </section>
+        {{> contact}}
+        {{> reviewChecklist}}
     </main>
-
-    <footer>
-        <div class="container">
-            <p class="footer-text">{{text footer}}</p>
-        </div>
-    </footer>
-
-    <div class="chat-widget dev-feature">
-        <button class="chat-button" id="chatButton" aria-label="{{ui.openChat}}">
-            <i class="fas fa-comment"></i>
-        </button>
-        <div class="chat-container" id="chatContainer">
-            <div class="chat-header">
-                <div>{{text ui.chatTitle}}</div>
-                <button class="chat-close" id="chatClose" aria-label="{{ui.closeChat}}">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-            </div>
-            <div class="chat-input-container">
-                <input type="text" class="chat-input" id="chatInput" placeholder="{{ui.chatPlaceholder}}"
-                    aria-label="{{ui.chatInputLabel}}">
-                <button class="chat-submit" id="chatSubmit" disabled aria-label="{{ui.sendMessage}}">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script type="application/ld+json">{{structuredData}}</script>
-    <script type="application/json" id="site-config">{{runtimeConfig}}</script>
-    <script type="module" src="./src/main.js"></script>
+    {{> footer}}
+    {{> scripts}}
 </body>
-
 </html>

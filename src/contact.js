@@ -83,7 +83,8 @@ export function initContact(email = '') {
         link.addEventListener('click', () => {
             trackEvent('contact_click', {
                 event_category: 'engagement',
-                event_label: 'Email Contact',
+                event_label: link.dataset.intent === 'full-time' ? 'Full-time role' : 'Project inquiry',
+                intent: link.dataset.intent === 'full-time' ? 'full-time' : 'project',
                 value: 1
             });
         });

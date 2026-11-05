@@ -2,304 +2,74 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "additionalProperties": false,
-  "required": ["identity", "metadata", "navigation", "ui", "hero", "services", "skills", "experience", "projects", "contact", "social", "footer", "analytics", "chat"],
+  "required": ["identity", "metadata", "media", "migration", "review", "navigation", "legacyRoutes", "ui", "hero", "services", "ai", "work", "approach", "experience", "contact", "social", "analytics"],
   "properties": {
     "identity": {
-      "type": "object",
-      "additionalProperties": false,
+      "type": "object", "additionalProperties": false,
       "required": ["name", "initials", "role", "email", "url", "location", "image", "favicon"],
       "properties": {
-        "name": { "$ref": "#/$defs/text" },
-        "initials": { "$ref": "#/$defs/text" },
-        "role": { "$ref": "#/$defs/text" },
+        "name": { "$ref": "#/$defs/text" }, "initials": { "$ref": "#/$defs/text" }, "role": { "$ref": "#/$defs/text" },
         "email": { "type": "string", "maxLength": 254, "pattern": "^[A-Za-z0-9.!$'*+/=_`{|}~^-]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$" },
         "url": { "$ref": "#/$defs/url" },
-        "location": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["city", "country", "timezone"],
-          "properties": {
-            "city": { "$ref": "#/$defs/text" },
-            "country": { "$ref": "#/$defs/text" },
-            "timezone": { "type": "string", "pattern": "^UTC[+-](?:[0-9]|1[0-4])(?::[0-5][0-9])?$" }
-          }
-        },
-        "image": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["src", "alt"],
-          "properties": {
-            "src": { "type": "string", "pattern": "^assets/(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+\\.(?:avif|gif|jpe?g|png|svg|webp)$" },
-            "alt": { "$ref": "#/$defs/text" }
-          }
-        },
-        "favicon": { "type": "string", "pattern": "^(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+\\.(?:ico|png|svg)$" }
+        "location": { "type": "object", "additionalProperties": false, "required": ["city", "country", "timezone"], "properties": { "city": { "$ref": "#/$defs/text" }, "country": { "$ref": "#/$defs/text" }, "timezone": { "type": "string", "pattern": "^UTC[+-](?:[0-9]|1[0-4])(?::[0-5][0-9])?$" } } },
+        "image": { "type": "object", "additionalProperties": false, "required": ["src", "alt"], "properties": { "src": { "$ref": "#/$defs/asset" }, "alt": { "$ref": "#/$defs/text" } } },
+        "favicon": { "$ref": "#/$defs/asset" }
       }
     },
-    "metadata": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["language", "title", "description", "openGraphDescription", "openGraphType", "twitterCard", "twitterDescription", "knowsAbout"],
+    "metadata": { "type": "object", "additionalProperties": false, "required": ["language", "title", "description", "knowsAbout"], "properties": { "language": { "type": "string", "pattern": "^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$" }, "title": { "$ref": "#/$defs/text" }, "description": { "$ref": "#/$defs/text" }, "knowsAbout": { "$ref": "#/$defs/textList" } } },
+    "brands": { "type": "object", "propertyNames": { "enum": ["Domain", "carsales", ".NET"] }, "additionalProperties": { "type": "object", "additionalProperties": false, "required": ["src", "width", "height"], "properties": { "src": { "$ref": "#/$defs/asset" }, "darkSrc": { "$ref": "#/$defs/asset" }, "width": { "type": "integer", "minimum": 1, "maximum": 4096 }, "height": { "type": "integer", "minimum": 1, "maximum": 4096 } } } },
+    "media": { "type": "object", "required": ["featured", "agents", "personal-project"], "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" }, "additionalProperties": { "$ref": "#/$defs/media" } },
+    "review": { "type": "object", "additionalProperties": false, "required": ["career", "availability", "case-studies"], "properties": { "career": { "$ref": "#/$defs/reviewCheck" }, "availability": { "$ref": "#/$defs/reviewCheck" }, "case-studies": { "$ref": "#/$defs/reviewCheck" } } },
+    "migration": {
+      "type": "object", "additionalProperties": false,
+      "required": ["customers", "router", "existing", "replacement", "statuses", "stages"],
       "properties": {
-        "language": { "type": "string", "pattern": "^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$" },
-        "title": { "$ref": "#/$defs/text" },
-        "description": { "$ref": "#/$defs/text" },
-        "openGraphDescription": { "$ref": "#/$defs/text" },
-        "openGraphType": { "const": "website" },
-        "twitterCard": { "enum": ["summary", "summary_large_image"] },
-        "twitterDescription": { "$ref": "#/$defs/text" },
-        "knowsAbout": { "$ref": "#/$defs/textList" }
+        "customers": { "$ref": "#/$defs/text" }, "router": { "$ref": "#/$defs/text" }, "existing": { "$ref": "#/$defs/text" }, "replacement": { "$ref": "#/$defs/text" },
+        "statuses": { "type": "object", "additionalProperties": false, "required": ["serving", "building", "ready", "retired"], "properties": { "serving": { "$ref": "#/$defs/text" }, "building": { "$ref": "#/$defs/text" }, "ready": { "$ref": "#/$defs/text" }, "retired": { "$ref": "#/$defs/text" } } },
+        "stages": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "object", "additionalProperties": false, "required": ["id", "title", "description"], "properties": { "id": { "enum": ["build", "check", "share", "retire"] }, "title": { "$ref": "#/$defs/text" }, "description": { "$ref": "#/$defs/text" } } } }
       }
     },
-    "navigation": {
-      "type": "array",
-      "minItems": 6,
-      "maxItems": 6,
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["id", "route", "label"],
-        "properties": {
-          "id": { "$ref": "#/$defs/sectionId" },
-          "route": { "type": "string", "pattern": "^/[a-z][a-z0-9-]*$" },
-          "label": { "$ref": "#/$defs/text" }
-        }
-      }
-    },
-    "ui": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["themeToggle", "switchToDark", "switchToLight", "openMenu", "closeMenu", "alsoUsed", "bestFor", "email", "copyEmail", "copyEmailLabel", "copySuccess", "copyError", "openChat", "closeChat", "chatTitle", "chatPlaceholder", "chatInputLabel", "sendMessage"],
-      "properties": {
-        "themeToggle": { "$ref": "#/$defs/text" },
-        "switchToDark": { "$ref": "#/$defs/text" },
-        "switchToLight": { "$ref": "#/$defs/text" },
-        "openMenu": { "$ref": "#/$defs/text" },
-        "closeMenu": { "$ref": "#/$defs/text" },
-        "alsoUsed": { "$ref": "#/$defs/text" },
-        "bestFor": { "$ref": "#/$defs/text" },
-        "email": { "$ref": "#/$defs/text" },
-        "copyEmail": { "$ref": "#/$defs/text" },
-        "copyEmailLabel": { "$ref": "#/$defs/text" },
-        "copySuccess": { "$ref": "#/$defs/text" },
-        "copyError": { "$ref": "#/$defs/text" },
-        "openChat": { "$ref": "#/$defs/text" },
-        "closeChat": { "$ref": "#/$defs/text" },
-        "chatTitle": { "$ref": "#/$defs/text" },
-        "chatPlaceholder": { "$ref": "#/$defs/text" },
-        "chatInputLabel": { "$ref": "#/$defs/text" },
-        "sendMessage": { "$ref": "#/$defs/text" }
-      }
-    },
-    "hero": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["greeting", "description", "cta", "next"],
-      "properties": {
-        "greeting": { "$ref": "#/$defs/text" },
-        "description": { "$ref": "#/$defs/text" },
-        "cta": { "$ref": "#/$defs/sectionLink" },
-        "next": { "$ref": "#/$defs/sectionLink" }
-      }
-    },
-    "services": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["title", "items", "next"],
-      "properties": {
-        "title": { "$ref": "#/$defs/text" },
-        "items": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["icon", "title", "description", "fit", "proof", "outcome"],
-            "properties": {
-              "icon": { "$ref": "#/$defs/icon" },
-              "title": { "$ref": "#/$defs/text" },
-              "description": { "$ref": "#/$defs/text" },
-              "fit": { "$ref": "#/$defs/text" },
-              "proof": { "$ref": "#/$defs/textList" },
-              "outcome": { "$ref": "#/$defs/text" }
-            }
-          }
-        },
-        "next": { "$ref": "#/$defs/sectionLink" }
-      }
-    },
-    "skills": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["title", "intro", "categories", "next"],
-      "properties": {
-        "title": { "$ref": "#/$defs/text" },
-        "intro": { "$ref": "#/$defs/text" },
-        "categories": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["title", "description", "primary", "items", "more"],
-            "properties": {
-              "title": { "$ref": "#/$defs/text" },
-              "description": { "$ref": "#/$defs/text" },
-              "primary": { "type": "boolean" },
-              "items": { "$ref": "#/$defs/textList" },
-              "more": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/text" } }
-            }
-          }
-        },
-        "next": { "$ref": "#/$defs/sectionLink" }
-      }
-    },
-    "experience": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["title", "items", "earlier", "next"],
-      "properties": {
-        "title": { "$ref": "#/$defs/text" },
-        "items": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["date", "company", "url", "position", "highlights"],
-            "properties": {
-              "date": { "$ref": "#/$defs/text" },
-              "company": { "$ref": "#/$defs/text" },
-              "url": { "$ref": "#/$defs/url" },
-              "position": { "$ref": "#/$defs/text" },
-              "highlights": { "$ref": "#/$defs/textList" }
-            }
-          }
-        },
-        "earlier": { "$ref": "#/$defs/text" },
-        "next": { "$ref": "#/$defs/sectionLink" }
-      }
-    },
-    "projects": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["title", "items", "next"],
-      "properties": {
-        "title": { "$ref": "#/$defs/text" },
-        "items": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["title", "url", "description", "technologies"],
-            "properties": {
-              "title": { "$ref": "#/$defs/text" },
-              "url": { "$ref": "#/$defs/url" },
-              "description": { "$ref": "#/$defs/text" },
-              "technologies": { "$ref": "#/$defs/textList" }
-            }
-          }
-        },
-        "next": { "$ref": "#/$defs/sectionLink" }
-      }
-    },
-    "contact": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["title", "description", "locationNote", "next"],
-      "properties": {
-        "title": { "$ref": "#/$defs/text" },
-        "description": { "$ref": "#/$defs/text" },
-        "locationNote": { "$ref": "#/$defs/text" },
-        "next": { "$ref": "#/$defs/sectionLink" }
-      }
-    },
-    "social": {
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["label", "ariaLabel", "url", "icon"],
-        "properties": {
-          "label": { "$ref": "#/$defs/text" },
-          "ariaLabel": { "$ref": "#/$defs/text" },
-          "url": { "$ref": "#/$defs/url" },
-          "icon": { "$ref": "#/$defs/icon" }
-        }
-      }
-    },
-    "footer": { "$ref": "#/$defs/text" },
-    "analytics": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["measurementId", "allowedHosts"],
-      "properties": {
-        "measurementId": { "type": "string", "pattern": "^G-[A-Z0-9]+$" },
-        "allowedHosts": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": { "type": "string", "maxLength": 253, "pattern": "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$" }
-        }
-      }
-    },
-    "chat": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["enabled", "welcome", "responses", "fallback"],
-      "properties": {
-        "enabled": { "type": "boolean" },
-        "welcome": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["text", "delay"],
-            "properties": {
-              "text": { "$ref": "#/$defs/text" },
-              "delay": { "type": "integer", "minimum": 0, "maximum": 60000 }
-            }
-          }
-        },
-        "responses": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["keywords", "text"],
-            "properties": {
-              "keywords": {
-                "type": "array",
-                "minItems": 1,
-                "uniqueItems": true,
-                "items": { "type": "string", "pattern": "^[a-z0-9]+(?:[ -][a-z0-9]+)*$" }
-              },
-              "text": { "$ref": "#/$defs/text" }
-            }
-          }
-        },
-        "fallback": { "$ref": "#/$defs/text" }
-      }
-    }
+    "navigation": { "type": "array", "minItems": 1, "maxItems": 6, "items": { "type": "object", "additionalProperties": false, "required": ["id", "label"], "properties": { "id": { "$ref": "#/$defs/sectionId" }, "label": { "$ref": "#/$defs/text" } } } },
+    "legacyRoutes": { "type": "object", "minProperties": 1, "propertyNames": { "pattern": "^/[a-z][a-z0-9-]*$" }, "additionalProperties": { "$ref": "#/$defs/sectionId" } },
+    "ui": { "type": "object", "minProperties": 1, "additionalProperties": { "$ref": "#/$defs/text" } },
+    "hero": { "type": "object", "required": ["title", "focus", "close", "description", "stack", "employers"], "properties": { "stack": { "$ref": "#/$defs/textList" }, "employers": { "$ref": "#/$defs/textList" } }, "additionalProperties": { "$ref": "#/$defs/text" } },
+    "services": { "type": "object", "additionalProperties": false, "required": ["title", "intro", "items"], "properties": { "title": { "$ref": "#/$defs/text" }, "intro": { "$ref": "#/$defs/text" }, "items": { "type": "array", "minItems": 1, "items": { "type": "object", "additionalProperties": false, "required": ["icon", "title", "description", "offer", "deliverable", "link", "target"], "properties": { "icon": { "enum": ["workflow", "layers", "spark"] }, "title": { "$ref": "#/$defs/text" }, "description": { "$ref": "#/$defs/text" }, "offer": { "$ref": "#/$defs/text" }, "deliverable": { "$ref": "#/$defs/text" }, "link": { "$ref": "#/$defs/text" }, "target": { "$ref": "#/$defs/sectionId" } } } } } },
+    "ai": { "type": "object", "required": ["title", "intro", "stories", "workflowTitle", "workflowLabel", "workflow", "boundary"], "properties": { "stories": { "type": "array", "minItems": 1, "items": { "type": "object", "additionalProperties": false, "required": ["kind", "title", "description", "detail", "tags"], "properties": { "kind": { "$ref": "#/$defs/text" }, "title": { "$ref": "#/$defs/text" }, "description": { "$ref": "#/$defs/text" }, "detail": { "$ref": "#/$defs/text" }, "tags": { "$ref": "#/$defs/textList" }, "url": { "$ref": "#/$defs/url" }, "link": { "$ref": "#/$defs/text" } } } }, "workflow": { "$ref": "#/$defs/blocks" } }, "additionalProperties": { "$ref": "#/$defs/text" } },
+    "work": { "type": "object", "additionalProperties": false, "required": ["title", "intro", "cases"], "properties": { "title": { "$ref": "#/$defs/text" }, "intro": { "$ref": "#/$defs/text" }, "cases": { "type": "array", "minItems": 1, "items": { "type": "object", "required": ["slug", "client", "category", "title", "shortTitle", "summary", "problem", "decision", "context", "ownership", "outcomes", "result", "technical", "diagram", "takeaway", "technologies"], "properties": { "slug": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" }, "outcomes": { "$ref": "#/$defs/textList" }, "technical": { "$ref": "#/$defs/blocks" }, "diagram": { "type": "array", "minItems": 1, "items": { "type": "object", "additionalProperties": false, "required": ["label", "detail"], "properties": { "label": { "$ref": "#/$defs/text" }, "detail": { "$ref": "#/$defs/text" } } } }, "technologies": { "$ref": "#/$defs/textList" } }, "additionalProperties": { "$ref": "#/$defs/text" } } } } },
+    "approach": { "type": "object", "required": ["title", "intro", "steps", "exampleTitle", "example", "exampleLink"], "properties": { "steps": { "$ref": "#/$defs/blocks" } }, "additionalProperties": { "$ref": "#/$defs/text" } },
+    "experience": { "type": "object", "required": ["title", "description", "workingStyle", "hiringTitle", "hiringDescription", "items", "earlier", "skillsTitle", "skills"], "properties": { "items": { "type": "array", "minItems": 1, "items": { "type": "object", "additionalProperties": false, "required": ["company", "date", "position", "summary"], "properties": { "company": { "$ref": "#/$defs/text" }, "date": { "$ref": "#/$defs/text" }, "position": { "$ref": "#/$defs/text" }, "summary": { "$ref": "#/$defs/text" } } } }, "skills": { "type": "array", "minItems": 1, "items": { "type": "object", "additionalProperties": false, "required": ["title", "items"], "properties": { "title": { "$ref": "#/$defs/text" }, "items": { "$ref": "#/$defs/textList" } } } } }, "additionalProperties": { "$ref": "#/$defs/text" } },
+    "contact": { "type": "object", "required": ["title", "description", "expectation", "promptsTitle", "prompts", "locationNote"], "properties": { "prompts": { "$ref": "#/$defs/textList" } }, "additionalProperties": { "$ref": "#/$defs/text" } },
+    "social": { "type": "array", "minItems": 1, "items": { "type": "object", "additionalProperties": false, "required": ["label", "url"], "properties": { "label": { "$ref": "#/$defs/text" }, "url": { "$ref": "#/$defs/url" } } } },
+    "analytics": { "type": "object", "additionalProperties": false, "required": ["measurementId", "allowedHosts"], "properties": { "measurementId": { "type": "string", "pattern": "^G-[A-Z0-9]+$" }, "allowedHosts": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "maxLength": 253, "pattern": "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$" } } } }
   },
   "$defs": {
+    "reviewCheck": { "type": "object", "additionalProperties": false, "required": ["title", "description", "resolved"], "properties": { "title": { "$ref": "#/$defs/text" }, "description": { "$ref": "#/$defs/text" }, "resolved": { "type": "boolean" } } },
+    "media": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "publish", "layout", "width", "height", "title", "caption", "placeholder", "brief", "nodes"],
+      "properties": {
+        "kind": { "enum": ["pending", "image", "video"] }, "publish": { "type": "boolean" }, "reviewed": { "type": "boolean" },
+        "layout": { "enum": ["migration", "integration", "product", "workflow"] },
+        "width": { "type": "integer", "minimum": 1, "maximum": 8192 }, "height": { "type": "integer", "minimum": 1, "maximum": 8192 },
+        "title": { "$ref": "#/$defs/text" }, "caption": { "$ref": "#/$defs/text" }, "placeholder": { "$ref": "#/$defs/text" }, "brief": { "$ref": "#/$defs/text" },
+        "nodes": { "type": "array", "minItems": 3, "maxItems": 4, "items": { "type": "object", "additionalProperties": false, "required": ["title", "detail"], "properties": { "title": { "$ref": "#/$defs/text" }, "detail": { "$ref": "#/$defs/text" } } } },
+        "src": { "type": "string", "pattern": "^(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+\\.(?:avif|jpe?g|png|webp|mp4|webm)$" },
+        "alt": { "$ref": "#/$defs/text" }, "poster": { "$ref": "#/$defs/asset" },
+        "mime": { "enum": ["video/mp4", "video/webm"] }, "hasAudio": { "type": "boolean" },
+        "transcript": { "$ref": "#/$defs/text" }, "captions": { "type": "string", "pattern": "^(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+\\.vtt$" }
+      },
+      "allOf": [
+        { "if": { "properties": { "kind": { "const": "pending" } } }, "then": { "properties": { "publish": { "const": false } } } },
+        { "if": { "properties": { "kind": { "const": "image" } } }, "then": { "required": ["src", "alt"] } },
+        { "if": { "properties": { "kind": { "const": "video" } } }, "then": { "required": ["src", "alt", "poster", "mime", "hasAudio", "transcript"] } },
+        { "if": { "required": ["hasAudio"], "properties": { "hasAudio": { "const": true } } }, "then": { "required": ["captions"] } }
+      ]
+    },
     "text": { "type": "string", "minLength": 1, "maxLength": 6000, "pattern": "\\S" },
     "textList": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/text" } },
     "url": { "type": "string", "maxLength": 2048, "pattern": "^https?://[^\\s]+$" },
-    "icon": { "type": "string", "pattern": "^fa[srb] fa-[a-z0-9-]+$" },
-    "sectionId": { "enum": ["about", "services", "skills", "experience", "projects", "contact"] },
-    "sectionLink": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["target", "label"],
-      "properties": {
-        "target": { "$ref": "#/$defs/sectionId" },
-        "label": { "$ref": "#/$defs/text" }
-      }
-    }
+    "asset": { "type": "string", "pattern": "^(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+\\.(?:avif|gif|jpe?g|png|svg|webp|ico)$" },
+    "sectionId": { "enum": ["home", "services", "ai", "work", "approach", "experience", "skills", "contact"] },
+    "blocks": { "type": "array", "minItems": 1, "items": { "type": "object", "additionalProperties": false, "required": ["title", "description"], "properties": { "title": { "$ref": "#/$defs/text" }, "description": { "$ref": "#/$defs/text" } } } }
   }
 }

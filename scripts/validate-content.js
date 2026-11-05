@@ -2,6 +2,7 @@ import { readFile, realpath, stat } from 'node:fs/promises';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import Ajv from 'ajv';
+import { MIGRATION_STAGES } from '../src/migration-state.js';
 
 export function interpolateText(text, identity) {
     const tokens = {
@@ -32,7 +33,9 @@ export async function validateContent(content, root = process.cwd()) {
     } catch (error) {
         throw new Error(`content/site.schema.json: ${error.message}`, { cause: error });
     }
-    const validate = new Ajv({ allErrors: true, strict: true }).compile(schema);
+    // Copy dictionaries use typed additionalProperties for their text fields.
+    // Required keys are still enforced, including those not listed in properties.
+    const validate = new Ajv({ allErrors: true, strict: true, strictRequired: false }).compile(schema);
     if (!validate(content)) {
         const errors = validate.errors.map(error => {
             const field = error.params.missingProperty || error.params.additionalProperty;
@@ -43,32 +46,35 @@ export async function validateContent(content, root = process.cwd()) {
     }
 
     const errors = [];
+    content.migration.stages.forEach((stage, index) => {
+        if (stage.id !== MIGRATION_STAGES[index].id) errors.push(`/migration/stages/${index}/id: migration stages must follow build, check, share, retire`);
+    });
     const ids = new Set();
-    const routes = new Set();
     content.navigation.forEach((item, index) => {
         if (ids.has(item.id)) errors.push(`/navigation/${index}/id: duplicate navigation id "${item.id}"`);
-        if (routes.has(item.route)) errors.push(`/navigation/${index}/route: duplicate route "${item.route}"`);
         ids.add(item.id);
-        routes.add(item.route);
     });
-    for (const id of ['about', 'services', 'skills', 'experience', 'projects', 'contact']) {
-        if (!ids.has(id)) errors.push(`/navigation: missing section reference "${id}"`);
+    const slugs = new Set();
+    content.work.cases.forEach((item, index) => {
+        if (slugs.has(item.slug)) errors.push(`/work/cases/${index}/slug: duplicate case-study slug`);
+        slugs.add(item.slug);
+        if (!item.media || !Object.hasOwn(content.media, item.media)) errors.push(`/work/cases/${index}/media: unknown media slot`);
+    });
+    for (const [key, item] of Object.entries(content.media)) {
+        if (item.kind === 'image' && !/\.(?:avif|jpe?g|png|webp)$/.test(item.src || '')) errors.push(`/media/${key}/src: image must use a web image format`);
+        if (item.kind === 'video' && (!item.src?.endsWith(item.mime === 'video/mp4' ? '.mp4' : '.webm'))) errors.push(`/media/${key}/src: video extension must match its MIME type`);
     }
-    const links = [
-        ['/hero/cta/target', content.hero.cta.target],
-        ...['hero', 'services', 'skills', 'experience', 'projects', 'contact'].map(section => [
-            `/${section}/next/target`, content[section].next.target
-        ])
-    ];
-    for (const [path, target] of links) {
-        if (!ids.has(target)) errors.push(`${path}: unknown navigation target "${target}"`);
+    if (content.media.agents.layout !== 'workflow' || content.media.agents.nodes.length !== content.ai.workflow.length) {
+        errors.push('/media/agents: workflow nodes must match the explanatory steps');
+    }
+    for (const route of ['/about', '/services', '/skills', '/experience', '/projects', '/contact']) {
+        if (!Object.hasOwn(content.legacyRoutes, route)) errors.push(`/legacyRoutes: missing legacy route "${route}"`);
     }
 
     const urls = [
         ['/identity/url', content.identity.url],
         ...content.social.map((item, index) => [`/social/${index}/url`, item.url]),
-        ...content.experience.items.map((item, index) => [`/experience/items/${index}/url`, item.url]),
-        ...content.projects.items.map((item, index) => [`/projects/items/${index}/url`, item.url])
+        ...content.ai.stories.flatMap((item, index) => item.url ? [[`/ai/stories/${index}/url`, item.url]] : [])
     ];
     for (const [path, value] of urls) {
         try {
@@ -88,12 +94,7 @@ export async function validateContent(content, root = process.cwd()) {
     const interpolated = [
         ['/metadata/title', content.metadata.title],
         ['/identity/image/alt', content.identity.image.alt],
-        ['/ui/chatTitle', content.ui.chatTitle],
-        ['/contact/locationNote', content.contact.locationNote],
-        ['/footer', content.footer],
-        ...content.chat.welcome.map((message, index) => [`/chat/welcome/${index}/text`, message.text]),
-        ...content.chat.responses.map((response, index) => [`/chat/responses/${index}/text`, response.text]),
-        ['/chat/fallback', content.chat.fallback]
+        ['/ui/copyright', content.ui.copyright]
     ];
     for (const [path, text] of interpolated) {
         try {
@@ -105,7 +106,13 @@ export async function validateContent(content, root = process.cwd()) {
 
     const assets = [
         ['/identity/image/src', content.identity.image.src],
-        ['/identity/favicon', content.identity.favicon]
+        ['/identity/favicon', content.identity.favicon],
+        ...Object.entries(content.brands || {}).flatMap(([name, mark]) => [
+            [`/brands/${name}/src`, mark.src],
+            ...(mark.darkSrc ? [[`/brands/${name}/darkSrc`, mark.darkSrc]] : [])
+        ]),
+        ...Object.entries(content.media).flatMap(([key, item]) => ['src', 'poster', 'captions']
+            .filter(field => item[field]).map(field => [`/media/${key}/${field}`, item[field]]))
     ];
     for (const [path, asset] of assets) {
         try {

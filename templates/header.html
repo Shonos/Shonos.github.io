@@ -1,0 +1,12 @@
+<a class="skip-link" href="#main-content">{{ui.skip}}</a>
+<header class="site-header">
+    <nav class="container nav" aria-label="Main navigation">
+        <a class="wordmark" href="{{rootPath}}" aria-label="{{identity.name}} home"><span class="wordmark-symbol" aria-hidden="true">{{identity.initials}}<span></span></span><span>{{identity.name}}</span></a>
+        <ul class="nav-links" id="navLinks">{{#each navigation}}<li><a href="{{@root.page.home}}#{{id}}">{{label}}</a></li>{{/each}}</ul>
+        <div class="nav-actions">
+            <a class="nav-contact" href="{{mail ui.projectSubject}}" data-intent="project">{{ui.headerCta}} {{icon "arrow"}}</a>
+            <button id="themeToggle" class="icon-button" aria-label="{{ui.themeToggle}}" data-dark-label="{{ui.switchToDark}}" data-light-label="{{ui.switchToLight}}">{{icon "sun"}}</button>
+            <button id="menuBtn" class="icon-button menu-button" aria-label="{{ui.openMenu}}" data-open-label="{{ui.openMenu}}" data-close-label="{{ui.closeMenu}}" aria-expanded="false" aria-controls="navLinks" hidden>{{icon "menu"}}</button>
+        </div>
+    </nav>
+</header>

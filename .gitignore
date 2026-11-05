@@ -1,7 +1,11 @@
 node_modules/
 dist/
+dist-review/
 playwright-report/
 test-results/
+.playwright-mcp/
+.impeccable/review/
+.impeccable/critique/
 .env
 .env.*
 !.env.example

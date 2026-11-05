@@ -1,0 +1,10 @@
+<section class="section contact-section" id="contact" aria-labelledby="contact-title">
+    <div class="container contact-grid">
+        <div><h2 id="contact-title">{{contact.title}}</h2><p class="contact-description">{{contact.description}}</p><p>{{contact.expectation}}</p>
+            <div class="contact-actions"><a href="{{mail ui.projectSubject}}" class="btn" data-intent="project">{{ui.projectCta}} {{icon "arrow"}}</a><button id="copyEmailBtn" class="copy-button" aria-label="{{ui.copyEmailLabel}}">{{icon "copy"}} {{ui.copyEmail}}</button></div>
+            <a class="email-address" href="mailto:{{identity.email}}">{{identity.email}}</a>
+            <span class="copy-status" id="copyTooltip" role="status" aria-live="polite" data-success="{{ui.copySuccess}}" data-error="{{ui.copyError}}"></span>
+        </div>
+        <aside class="contact-prompts"><h3>{{contact.promptsTitle}}</h3><ul>{{#each contact.prompts}}<li>{{this}}</li>{{/each}}</ul><p>{{contact.locationNote}}</p><a href="{{mail ui.roleSubject}}" class="text-link" data-intent="full-time">{{ui.roleCta}} {{icon "arrow"}}</a></aside>
+    </div>
+</section>

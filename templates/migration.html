@@ -1,0 +1,23 @@
+<div class="migration" data-migration data-migration-state="build" data-playing="false"
+    data-play-label="{{@root.ui.migrationPlay}}" data-pause-label="{{@root.ui.migrationPause}}" data-replay-label="{{@root.ui.migrationReplay}}"
+    data-status-serving="{{@root.migration.statuses.serving}}" data-status-building="{{@root.migration.statuses.building}}" data-status-ready="{{@root.migration.statuses.ready}}" data-status-retired="{{@root.migration.statuses.retired}}">
+    <p class="concept-title">{{item.title}}</p>
+    <div class="migration-map">
+        <svg class="migration-connections" viewBox="0 0 100 262" preserveAspectRatio="none" fill="none" aria-hidden="true">
+            <path class="migration-wire" d="M50 40V76" vector-effect="non-scaling-stroke"/>
+            <path class="migration-wire" d="M50 120V140Q50 148 42 148H31Q23 148 23 156V172" vector-effect="non-scaling-stroke"/>
+            <path class="migration-wire" d="M50 120V140Q50 148 58 148H69Q77 148 77 156V172" vector-effect="non-scaling-stroke"/>
+            <path class="migration-traffic" data-traffic-route="customers" data-route-active="true" d="M50 40V76" vector-effect="non-scaling-stroke" pathLength="100"/>
+            <path class="migration-traffic" data-traffic-route="existing" data-route-active="true" d="M50 120V140Q50 148 42 148H31Q23 148 23 156V172" vector-effect="non-scaling-stroke" pathLength="100"/>
+            <path class="migration-traffic" data-traffic-route="replacement" data-route-active="false" d="M50 120V140Q50 148 58 148H69Q77 148 77 156V172" vector-effect="non-scaling-stroke" pathLength="100"/>
+        </svg>
+        <div class="migration-customers">{{@root.migration.customers}}</div>
+        <div class="migration-router">{{@root.migration.router}}</div>
+        <div class="migration-system migration-existing" data-system="existing" data-status="serving"><strong>{{@root.migration.existing}}</strong><span data-system-status>{{@root.migration.statuses.serving}}</span></div>
+        <div class="migration-system migration-replacement" data-system="replacement" data-status="building"><strong>{{@root.migration.replacement}}</strong><span data-system-status>{{@root.migration.statuses.building}}</span><span class="migration-build" aria-hidden="true"></span></div>
+    </div>
+    <ol class="migration-steps" aria-label="{{@root.ui.migrationStages}}">{{#each @root.migration.stages}}<li data-migration-stage="{{@index}}"><strong>{{title}}</strong><p>{{description}}</p></li>{{/each}}</ol>
+    <p class="migration-description" data-migration-description hidden aria-live="polite" aria-atomic="true"></p>
+    <div class="migration-playback" data-migration-playback hidden></div>
+    <p class="migration-reduced" data-migration-reduced hidden>{{@root.ui.migrationReduced}}</p>
+</div>
