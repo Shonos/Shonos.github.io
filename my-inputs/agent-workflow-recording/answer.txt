@@ -1,0 +1,15 @@
+for this one please ask a sub agent to create the html based animation like the migration you have already created in this project
+
+I want the animation about
+
+dev - talking to orchestrator agent (sonnet)
+orchestrator agent passing initial task to planner agent (claude opus)
+once plan done
+goes back to orchestrator agent
+depending on the plan, it either calls builder agents to implement
+tester agents to test
+or need more info, goes to researcher agent (sonnet/opus), then back to orchestaor then back to plan
+
+create an animation that make sense of this.
+
+Then plug in to the web site
