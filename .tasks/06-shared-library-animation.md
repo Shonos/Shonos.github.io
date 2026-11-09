@@ -15,10 +15,10 @@ Status: captured; not planned.
 
 ## Open decisions
 
-- Confirm the specific services, external dependencies, and labels that may be shown publicly.
-- Decide whether to show a before/after standardization story, an individual outbound-call journey, or another bounded sequence.
-- Confirm which capabilities describe the actual professional library and which, if any, are conceptual extensions. The current case copy emphasizes OAuth and HTTP resilience; do not silently expand historical implementation claims.
-- Confirm any additional capability intended by “etc.” rather than inventing one.
+- Confirm the specific services, external dependencies, and labels that may be shown publicly. (make it generic, microservices (apis), offline jobs (console/backgroudn jobs), apis to apis, offline to apis)
+- Decide whether to show a before/after standardization story, an individual outbound-call journey, or another bounded sequence. (yeah a before and after would look good)
+- Confirm which capabilities describe the actual professional library and which, if any, are conceptual extensions. The current case copy emphasizes OAuth and HTTP resilience; do not silently expand historical implementation claims. (don't base on actual exp, make it a bit genertic)
+- Confirm any additional capability intended by “etc.” rather than inventing one. (don't invent one for now but the main goal is standardazing non functional features across multiple microservices)
 
 ## Completion criteria for the eventual change
 

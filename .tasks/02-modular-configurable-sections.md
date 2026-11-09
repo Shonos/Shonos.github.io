@@ -15,9 +15,9 @@ Status: captured; not planned.
 
 ## Open decisions
 
-- Which sections should initially be disabled? No list has been chosen yet.
-- Which opening/contact elements, if any, must always remain enabled?
-- Does configuration also need ordering, or only visibility? Ordering was not explicitly requested.
+- Which sections should initially be disabled? No list has been chosen yet. (shaun here - keep it all for now)
+- Which opening/contact elements, if any, must always remain enabled? (shaun here - keep it all for now)
+- Does configuration also need ordering, or only visibility? Ordering was not explicitly requested. (for now no ordering)
 
 ## Completion criteria for the eventual change
 

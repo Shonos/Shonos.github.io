@@ -16,6 +16,9 @@ Status: captured; not planned.
 
 The repeated “about me” wording does not identify what should be combined. Combining the current hero/introduction with About is a possible interpretation, **not a confirmed decision**. Clarify during planning; do not assume the full engineering profile should move onto the homepage.
 
+
+(shaun here - I was talking about the A senior engineer. Still hands-on.)
+
 ## Completion criteria for the eventual change
 
 - The opening clearly introduces Shaun and retains a clear next action.
