@@ -3,6 +3,7 @@ import { isAbsolute, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import Ajv from 'ajv';
 import { MIGRATION_STAGES } from '../src/migration-state.js';
+import { AGENT_WORKFLOW_NODES, AGENT_WORKFLOW_ROUTES } from '../src/agent-workflow-state.js';
 
 export function interpolateText(text, identity) {
     const tokens = {
@@ -49,6 +50,18 @@ export async function validateContent(content, root = process.cwd()) {
     content.migration.stages.forEach((stage, index) => {
         if (stage.id !== MIGRATION_STAGES[index].id) errors.push(`/migration/stages/${index}/id: migration stages must follow build, check, share, retire`);
     });
+    if (new Set(content.orchestration.nodes.map(node => node.id)).size !== AGENT_WORKFLOW_NODES.length) {
+        errors.push('/orchestration/nodes: each workflow role must appear exactly once');
+    }
+    if (new Set(content.orchestration.routes.map(route => route.id)).size !== Object.keys(AGENT_WORKFLOW_ROUTES).length) {
+        errors.push('/orchestration/routes: each workflow route must appear exactly once');
+    }
+    content.orchestration.routes.forEach((route, index) => {
+        const expected = AGENT_WORKFLOW_ROUTES[route.id].stages;
+        if (route.stages.length !== expected.length || route.stages.some((stage, step) => stage.id !== expected[step].id)) {
+            errors.push(`/orchestration/routes/${index}/stages: handoffs must follow the workflow model`);
+        }
+    });
     const ids = new Set();
     content.navigation.forEach((item, index) => {
         if (ids.has(item.id)) errors.push(`/navigation/${index}/id: duplicate navigation id "${item.id}"`);
@@ -60,11 +73,13 @@ export async function validateContent(content, root = process.cwd()) {
         slugs.add(item.slug);
         if (!item.media || !Object.hasOwn(content.media, item.media)) errors.push(`/work/cases/${index}/media: unknown media slot`);
     });
+    if (!slugs.has(content.hero.proofSlug)) errors.push('/hero/proofSlug: featured visual must link to a known case study');
     for (const [key, item] of Object.entries(content.media)) {
         if (item.kind === 'image' && !/\.(?:avif|jpe?g|png|webp)$/.test(item.src || '')) errors.push(`/media/${key}/src: image must use a web image format`);
         if (item.kind === 'video' && (!item.src?.endsWith(item.mime === 'video/mp4' ? '.mp4' : '.webm'))) errors.push(`/media/${key}/src: video extension must match its MIME type`);
     }
-    if (content.media.agents.layout !== 'workflow' || content.media.agents.nodes.length !== content.ai.workflow.length) {
+    if (!['workflow', 'orchestration'].includes(content.media.agents.layout) ||
+        (content.media.agents.layout === 'workflow' && content.media.agents.nodes.length !== content.ai.workflow.length)) {
         errors.push('/media/agents: workflow nodes must match the explanatory steps');
     }
     for (const route of ['/about', '/services', '/skills', '/experience', '/projects', '/contact']) {
@@ -112,7 +127,8 @@ export async function validateContent(content, root = process.cwd()) {
             ...(mark.darkSrc ? [[`/brands/${name}/darkSrc`, mark.darkSrc]] : [])
         ]),
         ...Object.entries(content.media).flatMap(([key, item]) => ['src', 'poster', 'captions']
-            .filter(field => item[field]).map(field => [`/media/${key}/${field}`, item[field]]))
+            .filter(field => item[field]).map(field => [`/media/${key}/${field}`, item[field]])),
+        ...Object.entries(content.media).flatMap(([key, item]) => (item.images || []).map((image, index) => [`/media/${key}/images/${index}/src`, image.src]))
     ];
     for (const [path, asset] of assets) {
         try {

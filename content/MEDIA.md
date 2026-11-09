@@ -1,6 +1,8 @@
 # Screenshot and recording handoff
 
-The current diagrams are conceptual explanations, not product screenshots or live agent results. All six slots are pending. The LAN review labels where real media can go; a normal production build removes those review notes.
+Supplied Redbook and Cards Guide PH screenshots now fill the `featured`, `product`, and `personal-project` spaces. The requested coded orchestration illustration replaces the `agents` recording request; it is not a live run. Only `modernization` and `integrations` remain pending media decisions. The LAN review labels those decisions; a normal production build removes all review notes.
+
+Originals in `my-inputs/` are untouched. Delivery files and sourced-image provenance are in `public/assets/work/`; `SOURCES.md` records original hashes, dimensions, and limitations. Capture dates and correspondence to the original Redbook work period were not supplied. Screenshot delivery does not resolve career, availability, or public-safe case-disclosure confirmations, and is not authorization to deploy.
 
 In the review site, open **Your update checklist** from the top banner. **Your input needed** boxes are working notes for Shaun, not final visitor copy. Media upgrades are optional: supply approved media, confirm keeping an illustration where shown, or omit that space. After agreeing on a decision, a media record can use `reviewed: true` to clear its note/count without changing `kind` or `publish`. Published media also clears its pending note. Separate `review` confirmations track career dates, inquiry options, and public-safe case-study wording. There is no upload form or automatic publishing action.
 
@@ -16,16 +18,18 @@ For employer material, confirm publication permission and the relevant work peri
 
 | Key in `media` | Placement | Useful material |
 | --- | --- | --- |
-| `featured` | Hero | A project overview or concise walkthrough. Its case link currently points to .NET modernization; update that link/context if another project is featured. |
+| `featured` | Hero | Supplied Redbook desktop search and mobile features gallery. `hero.proofSlug` links to the matching Redbook case. |
 | `modernization` | First work preview and .NET case study | Approved architecture view, sanitized release walkthrough, or relevant product screen. |
 | `integrations` | Second preview and integrations case | Approved diagram or sandbox demonstration of authentication and failure handling. |
-| `product` | Third preview and Redbook case | Relevant desktop/mobile screenshots, attributed to the actual work period. |
-| `agents` | AI section | A real bounded task: context, approved tools, checks, and human review. |
-| `personal-project` | AI section after the evidence stories | Card Guide PH or another clearly identified personal project. Hidden from ordinary output while pending. |
+| `product` | Redbook case | Supplied Redbook desktop/mobile delivery files. The homepage work entry is text-only while this project is featured in the hero, avoiding a repeated gallery. Capture/work-period dates remain unspecified. |
+| `agents` | Full-width AI section | Reviewed HTML/SVG orchestration illustration: planning, optional research/re-plan, building, testing, and developer approval. |
+| `personal-project` | AI section after the evidence stories | Supplied Cards Guide PH reward-selection and card-results screens; explicitly a personal project. |
 
-The slots are flexible: each supports a single image or native video. A composed desktop/mobile image can use one slot. The work records select their frame by the `media` key. Avoid duplicating a screenshot in JSON or generated HTML.
+The slots support a single image, native video, or a native HTML screenshot gallery. Galleries preserve individual proportions and link to full-size images without generated composites or fake browser frames. `responsive` galleries pair desktop/mobile views and stack on phones; `mobile` galleries pair phone screens and allow native horizontal scrolling on narrow widths. Work records select their frame by the `media` key; repeated placements reuse the same delivery files, not separate image copies. Content belongs in JSON, never manually duplicated in generated HTML.
 
 Pending `migration` layouts share an HTML/SVG rollout illustration: the existing system serves while the replacement is built and checked, both serve during staged handover, then the existing system is turned off. Edit its shared labels and four written stages in `migration` in `content/site.json`; `templates/migration.html` renders it. It plays once with controls, never moves system boxes on hover, and is explicitly not live traffic. Reduced motion keeps selectable static stages; no JavaScript keeps the whole written sequence. Publishing a real image/video replaces this illustration normally; it does not create a running demo backend.
+
+The `orchestration` layout uses `templates/agentWorkflow.html`, `src/agent-workflow-state.js`, and `src/agent-workflow.js`; copy belongs to top-level `orchestration`. Developer → orchestrator (Sonnet) → planner (Claude Opus), with every result returning through the orchestrator. Research (Sonnet / Opus) is a conditional detour back to planning, not a required or endless loop. Routes finish at developer approval. Boxes stay fixed while handoffs move. Both routes have stage selection, finite playback, Pause/Play/Replay, reduced-motion and no-JavaScript explanations. Its `kind: "pending", publish: false, reviewed: true` deliberately selects a reviewed illustration without claiming an actual recording.
 
 ## Files and delivery targets
 
@@ -75,7 +79,11 @@ Change the same record, preserving its fallback fields:
 }
 ```
 
-For silent footage set `hasAudio: false`; the written description is still required. If the recording replaces the agents illustration, its workflow explanation remains readable but illustration selection/replay controls are not created. Update the AI story text if a different task requires a different explanation.
+For silent footage set `hasAudio: false`; the written description is still required. If a recording replaces the agents illustration, illustration selection/playback controls are not created. Update the AI story text if a different task requires a different explanation.
+
+## Connect a screenshot gallery
+
+Use `kind: "gallery"`, `publish: true`, and `galleryLayout: "responsive"` or `"mobile"`. Supply an `images` array of two to six objects, each with local `src`, meaningful `alt`, a visible `label`, and actual integer `width`/`height`. Keep the usual fallback fields and factual gallery caption. Do not combine unrelated screenshots into a fake product view. Each file is validated inside `public/`; publication is still a separate owner decision.
 
 ## Review before publication
 

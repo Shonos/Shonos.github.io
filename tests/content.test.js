@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
 import { copyFile, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
+import { parseFragment } from 'parse5';
 import { loadContent, renderContent, renderTemplate } from '../scripts/render-content.js';
 import { interpolateText, validateContent } from '../scripts/validate-content.js';
 
@@ -22,6 +23,10 @@ async function fixture(t, raw = JSON.stringify(source)) {
     await writeFile(join(root, 'content/site.json'), raw);
     await writeFile(join(root, 'public/assets/shaunalonzo.jpg'), 'image fixture');
     await writeFile(join(root, 'public/favicon.ico'), 'favicon fixture');
+    for (const asset of new Set(Object.values(source.media).flatMap(item => (item.images || []).map(image => image.src)))) {
+        await mkdir(dirname(join(root, 'public', asset)), { recursive: true });
+        await copyFile(join(repository, 'public', asset), join(root, 'public', asset));
+    }
     await mkdir(join(root, 'public/assets/brands'));
     for (const mark of Object.values(source.brands)) {
         for (const asset of [mark.src, mark.darkSrc].filter(Boolean)) {
@@ -204,27 +209,35 @@ test('review slots never appear in the default publication render', () => {
     assert.doesNotMatch(published, /data-review-|Your input needed|Featured project screenshot|Agent workflow recording/);
     assert.match(published, /conceptual illustration/);
     assert.match(review, /data-review-mode/);
-    for (const key of Object.keys(source.media)) assert.ok(review.includes(`data-review-slot="${key}"`));
+    for (const [key, item] of Object.entries(source.media)) {
+        assert.equal(review.includes(`data-review-slot="${key}"`), item.publish !== true && item.reviewed !== true);
+    }
     assert.ok(published.indexOf('id="work"') < published.indexOf('id="services"'));
-    const words = published.match(/<main[\s\S]*?<\/main>/)[0].replace(/<[^>]*>/g, ' ').trim().split(/\s+/).length;
-    assert.ok(words < 900, `Keep the homepage compact, including the migration's no-JS sequence (${words} words)`);
+    const visibleText = node => node.attrs?.some(attribute => attribute.name === 'hidden') ? '' :
+        node.nodeName === '#text' ? node.value : (node.childNodes || []).map(visibleText).join(' ');
+    const words = visibleText(parseFragment(published.match(/<main[\s\S]*?<\/main>/)[0])).trim().split(/\s+/).length;
+    assert.ok(words < 900, `Keep the readable no-JS homepage compact, excluding hidden enhancement-only stage copy (${words} words)`);
 });
 
 test('owner review flags are actionable, resolvable, and never change public copy', async t => {
     const root = await fixture(t);
     const content = structuredClone(source);
+    Object.assign(content.media.featured, { kind: 'pending', publish: false, reviewed: false });
+    const publicBaseline = renderTemplate(template, content);
     const review = renderTemplate(template, content, '/', '/', undefined, { review: true });
     assert.match(review, /data-review-checklist/);
     assert.match(review, /Your input needed: Featured project screenshot/);
     assert.match(review, /Note for Shaun/);
-    for (const key of Object.keys(content.media)) assert.ok(review.includes(`href="#review-media-${key}"`));
+    for (const [key, item] of Object.entries(content.media)) {
+        assert.equal(review.includes(`href="#review-media-${key}"`), item.publish !== true && item.reviewed !== true);
+    }
     assert.match(review, /href="\/profile\/#review-career"/);
     assert.match(review, /optional media upgrades/);
     content.media.featured.reviewed = true;
     content.review.career.resolved = true;
     const resolved = renderTemplate(template, content, '/', '/', undefined, { review: true });
     assert.doesNotMatch(resolved, /data-review-slot="featured"|href="#review-media-featured"|href="\/profile\/#review-career"/);
-    assert.equal(renderTemplate(template, content), renderTemplate(template, source));
+    assert.equal(renderTemplate(template, content), publicBaseline);
     const profile = await readFile(join(repository, 'templates/profilePage.html'), 'utf8');
     assert.match(renderTemplate(profile, source, '/', 'profile/', undefined, { review: true }), /data-review-note="career"/);
     assert.doesNotMatch(renderTemplate(profile, content, '/', 'profile/', undefined, { review: true }), /data-review-note="career"/);
@@ -252,13 +265,13 @@ test('image and video slots preserve native controls, names, captions, and publi
     item.publish = false;
     html = renderTemplate(template, content);
     assert.doesNotMatch(html, /class="project-image"/);
-    assert.match(html, /Illustrative rollout/);
+    assert.match(html, /class="concept-visual concept-visual--product"/);
     Object.assign(item, { kind: 'video', publish: true, src: 'assets/test.webm', poster: 'assets/shaunalonzo.jpg', mime: 'video/webm', hasAudio: false, transcript: 'A written description of the demonstrated task.' });
     await writeFile(join(root, 'public/assets/test.webm'), 'transport fixture, not a recording');
     await assert.doesNotReject(validateContent(content, root));
     html = renderTemplate(template, content);
     assert.match(html, /<video class="project-video" controls playsinline preload="none"/);
-    assert.doesNotMatch(html, /\bautoplay\b|\bloop\b/);
+    assert.doesNotMatch(html.match(/<video\b[^>]*>/)[0], /\bautoplay\b|\bloop\b/);
     assert.match(html, /A written description of the demonstrated task/);
     item.hasAudio = true;
     await assert.rejects(validateContent(content, root), /captions/);
@@ -276,12 +289,41 @@ test('media references and workflow node counts are validated', async t => {
     const root = await fixture(t);
     const content = structuredClone(source);
     content.work.cases[0].media = 'missing';
+    content.media.agents.layout = 'workflow';
     content.media.agents.nodes.pop();
     await assert.rejects(validateContent(content, root), error => {
         assert.match(error.message, /unknown media slot/);
         assert.match(error.message, /workflow nodes/);
         return true;
     });
+});
+
+test('supplied galleries use safe local assets, correct dimensions, and matching case context', async t => {
+    const root = await fixture(t);
+    await assert.doesNotReject(validateContent(source, root));
+    const html = renderTemplate(template, source);
+    assert.equal((html.match(/class="gallery-image"/g) || []).length, 4);
+    for (const image of source.media.featured.images) {
+        assert.equal(html.split(`src="/${image.src}"`).length - 1, 1, 'Featured screenshots must appear only once on the homepage');
+    }
+    assert.doesNotMatch(html, /data-media-slot="product"/);
+    const study = renderTemplate('{{> casePage}}', source, '/', '/work/redbook-product-modernization/');
+    assert.match(study, /data-media-slot="product"/);
+    assert.equal((study.match(/class="gallery-image"/g) || []).length, 2);
+    assert.match(html, /src="\/assets\/work\/redbook-desktop-search.png"[^>]*width="2553" height="1368" loading="eager"/);
+    assert.match(html, /data-study="redbook-product-modernization"/);
+    assert.doesNotMatch(html, /data-review-slot="(?:featured|product|personal-project|agents)"/);
+    assert.match(html, /Cards Guide PH/);
+    assert.doesNotMatch(JSON.stringify(scripts(html).runtime), /assets\/work|my-inputs|orchestration/);
+    const content = structuredClone(source);
+    content.media.featured.images[0].src = '../private.png';
+    await assert.rejects(validateContent(content, root), /\/media\/featured\/images\/0\/src/);
+    content.media.featured.images[0].src = source.media.featured.images[0].src;
+    content.media.featured.images[0].alt = '';
+    await assert.rejects(validateContent(content, root), /\/media\/featured\/images\/0\/alt/);
+    content.media.featured.images[0].alt = source.media.featured.images[0].alt;
+    content.hero.proofSlug = 'missing-case';
+    await assert.rejects(validateContent(content, root), /featured visual must link/);
 });
 
 test('migration stage order and complete written fallback are validated', async t => {
@@ -295,6 +337,18 @@ test('migration stage order and complete written fallback are validated', async 
     await assert.rejects(validateContent(content, root), /migration stages must follow/);
     content.migration.stages.pop();
     await assert.rejects(validateContent(content, root), /\/migration\/stages/);
+});
+
+test('orchestration copy follows the finite routes and cannot silently disable enhancement', async t => {
+    const root = await fixture(t);
+    const content = structuredClone(source);
+    content.orchestration.nodes[1].id = content.orchestration.nodes[0].id;
+    await assert.rejects(validateContent(content, root), /each workflow role/);
+    content.orchestration.nodes = source.orchestration.nodes;
+    content.orchestration.routes[0].stages.reverse();
+    await assert.rejects(validateContent(content, root), /handoffs must follow/);
+    content.orchestration.routes = [source.orchestration.routes[0], source.orchestration.routes[0]];
+    await assert.rejects(validateContent(content, root), /each workflow route/);
 });
 
 test('identity, metadata, links, and email subjects stay consistent', () => {
@@ -311,6 +365,22 @@ test('identity, metadata, links, and email subjects stay consistent', () => {
     assert.match(html, /Cebu, Philippines/);
     assert.match(html, /rel="canonical" href="https:\/\/example.com\/"/);
     assert.equal(scripts(html).structured.name, 'Alex Rivera');
+});
+
+test('Domain testing evidence distinguishes backend feature coverage and the production gate from EKS rollout health', () => {
+    const study = renderTemplate('{{> casePage}}', source, '/', '/work/dotnet-modernization/');
+    const profile = renderTemplate('{{> profilePage}}', source, '/', '/profile/');
+    for (const html of [study, profile]) {
+        assert.match(html, /more than 400 Playwright|Playwright[^<]*more than 400/i);
+        assert.match(html, /reserving, booking/);
+        assert.match(html, /agency and agent/);
+        assert.match(html, /Failed (?:feature )?tests blocked production deployment/i);
+        assert.doesNotMatch(html, /canary/i);
+    }
+    assert.match(study, /created test agencies and agents, updated their data, and deleted them/);
+    assert.match(study, /previous-version pods were gradually switched off as new-version pods became healthy/);
+    assert.match(study, /separate gate before production deployment/);
+    assert.match(renderTemplate(template, source), /More than 400 Playwright backend feature tests/);
 });
 
 test('escapes HTML and keeps embedded JSON safe against script closure', async t => {

@@ -7,6 +7,19 @@ const preview = 'http://127.0.0.1:4174';
 const development = 'http://127.0.0.1:5174';
 const review = 'http://127.0.0.1:4175';
 const production = 'https://shaunalonzo.com';
+const pendingMedia = Object.entries(content.media).filter(([, item]) => item.publish !== true && item.reviewed !== true);
+const pendingConfirmations = Object.values(content.review).filter(item => !item.resolved);
+
+function replaceFirstMediaFigure(html, replacement) {
+    const start = html.indexOf('<figure class="media-figure"');
+    if (start < 0) throw new Error('Missing media fixture target');
+    let depth = 0;
+    for (const match of html.slice(start).matchAll(/<\/?figure\b[^>]*>/g)) {
+        depth += match[0].startsWith('</') ? -1 : 1;
+        if (depth === 0) return html.slice(0, start) + replacement + html.slice(start + match.index + match[0].length);
+    }
+    throw new Error('Unbalanced media fixture target');
+}
 const test = base.extend({
     network: [async ({ context }, use) => {
         const network = { external: [], errors: [], failures: [], documents: [] };
@@ -68,7 +81,7 @@ test('review labels are explicit and confined to the separate local-review artif
     await expect(page.locator('[data-review-slot], [data-review-mode]')).toHaveCount(0);
     await page.goto(review);
     await expect(page.locator('[data-review-mode]')).toContainText('Local visual review');
-    await expect(page.locator('[data-review-slot]')).toHaveCount(6);
+    await expect(page.locator('[data-review-slot]')).toHaveCount(pendingMedia.length);
     await expect(page.locator('.media-surface video')).toHaveCount(0);
     for (const width of [320, 390, 767, 1440]) {
         await page.setViewportSize({ width, height: 844 });
@@ -80,15 +93,16 @@ test('review labels are explicit and confined to the separate local-review artif
 test('owner checklist links to flagged media and career confirmations without implying required uploads', async ({ page }) => {
     await page.goto(review);
     const banner = page.locator('[data-review-mode]');
-    await expect(banner).toContainText('6 Media decisions');
-    await expect(banner).toContainText('3 Content confirmations');
+    await expect(banner).toContainText(`${pendingMedia.length} Media decisions`);
+    await expect(banner).toContainText(`${pendingConfirmations.length} Content confirmations`);
     await banner.getByRole('link', { name: content.ui.reviewChecklistCta }).click();
     const checklist = page.locator('[data-review-checklist]');
     await expect(page).toHaveURL(`${review}/#review-checklist`);
     await expect(checklist.getByRole('heading', { name: content.ui.reviewChecklistTitle })).toBeInViewport();
     await expect(checklist).toContainText('optional media upgrades');
-    await checklist.getByRole('link', { name: content.media.featured.placeholder }).click();
-    const note = page.locator('[data-review-slot="featured"]');
+    const [pendingKey, pendingItem] = pendingMedia[0];
+    await checklist.getByRole('link', { name: pendingItem.placeholder }).click();
+    const note = page.locator(`[data-review-slot="${pendingKey}"]`);
     await expect(note).toContainText(`${content.ui.reviewAction}:`);
     await expect(note).toContainText(content.ui.reviewLocalOnly);
     await expect(note).toBeInViewport();
@@ -110,41 +124,9 @@ test('owner-only instructions are absent from every normal public page', async (
     }
 });
 
-test('illustrative workflow responds to touch and keyboard without implying a live agent', async ({ page }) => {
-    await page.goto('/#ai');
-    const showcase = page.locator('[data-workflow]');
-    const buttons = showcase.locator('.workflow-controls button');
-    await expect(showcase).toContainText('not a live agent run');
-    await expect(buttons).toHaveCount(4);
-    await buttons.nth(2).click();
-    await expect(buttons.nth(2)).toHaveAttribute('aria-pressed', 'true');
-    await expect(showcase.locator('[data-flow-node="2"]')).toHaveClass(/is-current/);
-    await page.keyboard.press('End');
-    await expect(buttons.last()).toBeFocused();
-    await expect(showcase).toHaveAttribute('data-active-step', '3');
-    await page.keyboard.press('Home');
-    await expect(buttons.first()).toBeFocused();
-    await expect(showcase.locator('[data-motion-replay]')).toBeHidden();
-});
-
-test('manual illustration replay is finite and settles when reduced motion is requested', async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'no-preference' });
-    await page.goto('/');
-    await expect.poll(() => page.evaluate(() => document.getAnimations().length)).toBe(0);
-    await page.locator('#ai').scrollIntoViewIfNeeded();
-    const replay = page.locator('[data-motion-replay]');
-    await expect(replay).toBeVisible();
-    await replay.click();
-    expect(await page.evaluate(() => document.getAnimations().length)).toBeGreaterThan(0);
-    await page.emulateMedia({ reducedMotion: 'reduce' });
-    await expect(replay).toBeHidden();
-    await expect.poll(() => page.evaluate(() => document.getAnimations().length)).toBe(0);
-    await expect(page.locator('.concept-node.is-current')).toBeVisible();
-});
-
 test('migration stages route traffic only to serving systems and remain keyboard selectable', async ({ page }) => {
     await page.goto('/');
-    const diagram = page.locator('.hero-proof [data-migration]');
+    const diagram = page.locator('[data-media-slot="modernization"] [data-migration]');
     const stages = diagram.locator('.migration-steps button');
     await expect(stages).toHaveCount(4);
     await expect(diagram.locator('[data-migration-playback]')).toBeHidden();
@@ -170,7 +152,7 @@ test('migration stages route traffic only to serving systems and remain keyboard
     await page.keyboard.press('ArrowLeft');
     await expect(stages.last()).toBeFocused();
     await expect(diagram).toHaveAttribute('data-migration-state', 'retire');
-    await expect(page.locator('.hero-proof')).toContainText('not live traffic');
+    await expect(page.locator('[data-media-slot="modernization"]')).toContainText('not live traffic');
 });
 
 test('migration plays once, pauses precisely, resumes, hands over gradually, and replays', async ({ page }) => {
@@ -178,7 +160,8 @@ test('migration plays once, pauses precisely, resumes, hands over gradually, and
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto('/');
-    const diagram = page.locator('.hero-proof [data-migration]');
+    const diagram = page.locator('[data-media-slot="modernization"] [data-migration]');
+    await diagram.scrollIntoViewIfNeeded();
     await expect(diagram).toHaveAttribute('data-playing', 'true');
     await page.clock.runFor(3400);
     await expect(diagram).toHaveAttribute('data-migration-state', 'check');
@@ -218,7 +201,8 @@ test('migration pauses offscreen and in a background document without auto-resum
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto('/');
-    const diagram = page.locator('.hero-proof [data-migration]');
+    const diagram = page.locator('[data-media-slot="modernization"] [data-migration]');
+    await diagram.scrollIntoViewIfNeeded();
     await expect(diagram).toHaveAttribute('data-playing', 'true');
     await page.locator('#contact').scrollIntoViewIfNeeded();
     await expect(diagram).toHaveAttribute('data-playing', 'false');
@@ -241,7 +225,7 @@ test('migration preserves the complete written sequence without JavaScript', asy
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
     await page.goto(`${preview}/`);
-    const diagram = page.locator('.hero-proof [data-migration]');
+    const diagram = page.locator('[data-media-slot="modernization"] [data-migration]');
     await expect(diagram.locator('button')).toHaveCount(0);
     for (const stage of content.migration.stages) await expect(diagram.getByText(stage.description, { exact: true })).toBeVisible();
     await expect(diagram.locator('[data-system="existing"]')).toContainText(content.migration.statuses.serving);
@@ -288,7 +272,7 @@ test('supplied media uses native playback and reports failure without blocking t
     const figure = renderTemplate('{{> media item=media.featured slot="featured" eager=true}}', example);
     await page.route(`${development}/`, async route => {
         const response = await route.fetch();
-        const html = (await response.text()).replace(/<figure class="media-figure"[\s\S]*?<\/figure>/, figure);
+        const html = replaceFirstMediaFigure(await response.text(), figure);
         await route.fulfill({ response, body: html });
     });
     await page.route('**/assets/test.webm', route => route.fulfill({ status: 200, contentType: 'video/webm', body: '' }));
@@ -311,7 +295,7 @@ test('supplied media uses native playback and reports failure without blocking t
     expect(Number(await video.getAttribute('data-pauses'))).toBeGreaterThan(pauses);
     await video.evaluate(element => element.dispatchEvent(new Event('error')));
     await expect(page.locator('.media-error')).toHaveText(content.ui.mediaError);
-    await expect(page.locator('.hero-proof .proof-link')).toHaveAttribute('href', '/work/dotnet-modernization/');
+    await expect(page.locator('.hero-proof .proof-link')).toHaveAttribute('href', `/work/${content.hero.proofSlug}/`);
     expect(network.errors).toEqual([]);
 });
 
@@ -321,7 +305,7 @@ test('supplied screenshots load with a useful alternative and a readable failure
     const figure = renderTemplate('{{> media item=media.featured slot="featured" eager=true}}', example);
     await page.route(`${development}/`, async route => {
         const response = await route.fetch();
-        await route.fulfill({ response, body: (await response.text()).replace(/<figure class="media-figure"[\s\S]*?<\/figure>/, figure) });
+        await route.fulfill({ response, body: replaceFirstMediaFigure(await response.text(), figure) });
     });
     await page.goto(development);
     const image = page.getByRole('img', { name: 'Supplied image fixture' });
@@ -330,6 +314,58 @@ test('supplied screenshots load with a useful alternative and a readable failure
     await expect(image.locator('..')).toHaveAttribute('href', '/assets/shaunalonzo.jpg');
     await image.evaluate(element => element.dispatchEvent(new Event('error')));
     await expect(page.locator('.media-error')).toHaveText(content.ui.mediaError);
+});
+
+test('supplied Redbook and Cards Guide PH galleries retain readable proportions and full-size links', async ({ page }) => {
+    for (const path of ['/', '/work/redbook-product-modernization/']) {
+        await page.goto(path);
+        await expect(page.locator('img[src="/assets/work/redbook-desktop-search.png"]')).toHaveCount(1);
+        await expect(page.locator('img[src="/assets/work/redbook-mobile-features.png"]')).toHaveCount(1);
+        if (path === '/') {
+            await expect(page.locator('.work-item--text-only .media-figure')).toHaveCount(0);
+            await expect(page.locator('.work-item--text-only .text-link')).toHaveAttribute('href', '/work/redbook-product-modernization/');
+        }
+        for (const width of [320, 390, 1440]) {
+            await page.setViewportSize({ width, height: 900 });
+            for (const theme of ['light', 'dark']) {
+                await page.evaluate(value => { document.documentElement.dataset.theme = value; }, theme);
+                for (const gallery of await page.locator('.media-gallery').all()) {
+                    await gallery.scrollIntoViewIfNeeded();
+                    await expect(gallery.locator('img')).toHaveCount(2);
+                    for (const image of await gallery.locator('img').all()) {
+                        await image.evaluate(element => element.decode());
+                        expect(await image.evaluate(element => {
+                            const style = getComputedStyle(element);
+                            return element.naturalWidth === Number(element.getAttribute('width')) &&
+                                element.naturalHeight === Number(element.getAttribute('height')) &&
+                                style.objectFit === 'contain' && element.alt.length > 0;
+                        })).toBe(true);
+                        await expect(image.locator('..')).toHaveAttribute('href', /^\/assets\/work\/.+\.png$/);
+                        await expect(image.locator('..')).toHaveAttribute('target', '_blank');
+                    }
+                }
+                expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+            }
+        }
+    }
+    await page.goto('/');
+    await page.setViewportSize({ width: 320, height: 900 });
+    const lastCard = page.locator('[data-media-slot="personal-project"] .gallery-image-link').last();
+    await lastCard.focus();
+    await expect(lastCard).toBeInViewport();
+    await expect(page.locator('.hero-proof .proof-link')).toHaveAttribute('href', '/work/redbook-product-modernization/');
+});
+
+test('gallery image failure reports once and preserves the written Redbook case path', async ({ page }) => {
+    await page.goto('/');
+    const figure = page.locator('.hero-proof [data-media-slot="featured"]');
+    for (const image of await figure.locator('img').all()) {
+        await image.evaluate(element => element.dispatchEvent(new Event('error')));
+    }
+    await expect(figure.locator('.media-error')).toHaveCount(1);
+    await expect(figure.locator('.media-error')).toHaveText(content.ui.mediaError);
+    await page.locator('.hero-proof .proof-link').click();
+    await expect(page).toHaveURL(`${preview}/work/redbook-product-modernization/`);
 });
 
 test('local official marks keep names, original colors, and readable theme variants', async ({ page, network }) => {
@@ -428,7 +464,7 @@ test('case-study directory paths redirect to a slash without a 404', async ({ pa
     expect(network.documents.map(item => item.status)).not.toContain(404);
 });
 
-test('conceptual case media stays complete in both themes and artifacts on phones', async ({ page }) => {
+test('case media stays complete in both themes and artifacts on phones', async ({ page }) => {
     for (const origin of [preview, review]) {
         for (const study of content.work.cases) {
             await page.goto(`${origin}/work/${study.slug}/`);
@@ -439,7 +475,10 @@ test('conceptual case media stays complete in both themes and artifacts on phone
                     await page.evaluate(value => { document.documentElement.dataset.theme = value; }, theme);
                     const frame = page.locator('.case-media .media-surface');
                     expect(await frame.evaluate(element => element.scrollHeight <= element.clientHeight + 1)).toBe(true);
-                    expect(await frame.evaluate(element => element.querySelector('.concept-node:last-child, .migration-system:last-child').getBoundingClientRect().bottom <= element.getBoundingClientRect().bottom - 8)).toBe(true);
+                    expect(await frame.evaluate(element => {
+                        const last = element.querySelector('.concept-node:last-child, .migration-system:last-child, .gallery-item:last-child');
+                        return last.getBoundingClientRect().bottom <= element.getBoundingClientRect().bottom - 8;
+                    })).toBe(true);
                     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
                 }
             }
@@ -600,8 +639,8 @@ test.describe('progressive enhancement', () => {
         await expect(page.locator('h1')).toContainText('bottlenecks');
         await expect(page.locator('#navLinks')).toBeVisible();
         await expect(page.locator('.hero-actions .btn')).toHaveAttribute('href', /^mailto:/);
-        await page.locator('.hero-proof a').click();
-        await expect(page.locator('h1')).toHaveText(content.work.cases[0].title);
+        await page.locator('.hero-proof .proof-link').click();
+        await expect(page.locator('h1')).toHaveText(content.work.cases.find(study => study.slug === content.hero.proofSlug).title);
         await expect(page.getByRole('heading', { name: content.ui.decisionHeading })).toBeVisible();
     });
 });

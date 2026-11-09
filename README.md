@@ -63,7 +63,7 @@ npm run review
 
 This builds **`dist-review/`** and serves it at `http://<your-LAN-IP>:5187`. It is local only: no commit, push, or deployment. Stop any earlier server on that port first. Rebuild with `npm run build:review` after edits; a running preview reads the updated artifact.
 
-The review artifact labels six screenshot/recording spaces. Ordinary `npm run build` output has no review labels and keeps clearly labeled conceptual diagrams until approved media is supplied. The personal-project space is omitted from the ordinary build while pending. Both builds preserve the static case-study and hiring paths.
+Six media spaces support supplied images, galleries, video, or honest illustrations. Redbook screenshots fill the hero and Redbook case; its homepage work entry omits the duplicate gallery. Cards Guide PH screenshots fill the personal-project space. The requested orchestration illustration clears the recording request. Two media decisions remain: modernization and integrations. Ordinary `npm run build` output has no review labels. Both builds preserve the static case-study and hiring paths.
 
 The review-only banner links to **Your update checklist**. Every pending media space says **Your input needed** and explicitly identifies itself as a note for Shaun, not visitor copy. The checklist separates optional media decisions from career-date, inquiry/availability, and case-disclosure confirmations; the relevant profile/work/hiring sections carry matching notes. These instructions are excluded from all normal-built pages and from print. Once a decision is agreed, set a media record's optional `reviewed: true`, or a `review` confirmation's `resolved: true`, in `content/site.json`. Counts and flags update on rebuild. Resolving a note does not publish an asset, change career facts, approve deployment, or hide public files.
 
@@ -71,7 +71,9 @@ See **[content/MEDIA.md](content/MEDIA.md)** for the slot map, file guidance, pu
 
 Diagram boxes remain fixed and upright, with no hover or entrance movement. The migration frames now illustrate **build → check → shared traffic → retirement** using HTML and SVG connections. `src/migration-state.js` defines the deterministic routing contract; `src/migration.js` plays a finite 14.4-second sequence once when visible, with Pause/Play/Replay and keyboard-selectable stages. Only one migration runs at a time. Offscreen/background playback pauses without automatic resumption. Reduced motion uses static selectable stages; without JavaScript the complete written sequence remains visible. Labels explicitly identify this as illustrative, not live traffic or measured rollout percentages.
 
-`src/motion.js` separately enhances the illustrative AI workflow on deliberate selection/replay. Native video never autoplays or loops; it pauses when offscreen or the document is hidden, and is not automatically resumed.
+`src/agent-workflow-state.js` and `src/agent-workflow.js` drive the separate orchestration illustration: developer → orchestrator (Sonnet) → planner (Claude Opus), then build/test or conditional research through the orchestrator and back to planning. Both finite routes end at developer approval. Controls, static stage selection, reduced motion, and complete no-JavaScript summaries are included; this is not live execution. Native video never autoplays or loops; it pauses when offscreen or the document is hidden, and is not automatically resumed.
+
+Supplied screenshot originals remain untouched in `my-inputs/`. Public delivery copies retain their pixels/compression and carry sourced-image provenance; see `public/assets/work/SOURCES.md`. Galleries use descriptive alternatives and full-size local links. Screenshot capture/work-period dates were not supplied, and the three career/availability/disclosure confirmations remain open.
 
 ## Checks
 

@@ -2,6 +2,10 @@
     <div class="media-surface media-surface--{{item.layout}}" style="--media-ratio: {{item.width}} / {{item.height}}">
         {{#if item.image}}
         <a class="media-image-link" href="{{base item.src}}" target="_blank" rel="noopener" aria-label="{{item.alt}}"><img class="project-image" src="{{base item.src}}" alt="{{item.alt}}" width="{{item.width}}" height="{{item.height}}" loading="{{#if eager}}eager{{else}}lazy{{/if}}" decoding="async"></a>
+        {{else if item.gallery}}
+        <div class="media-gallery media-gallery--{{item.galleryLayout}}">
+            {{#each item.images}}<figure class="gallery-item"><a class="gallery-image-link" href="{{base src}}" target="_blank" rel="noopener" aria-label="{{alt}}"><img class="gallery-image" src="{{base src}}" alt="{{alt}}" width="{{width}}" height="{{height}}" loading="{{#if ../eager}}eager{{else}}lazy{{/if}}" decoding="async"></a><figcaption>{{label}}</figcaption></figure>{{/each}}
+        </div>
         {{else if item.video}}
         <video class="project-video" controls playsinline preload="none" poster="{{base item.poster}}" width="{{item.width}}" height="{{item.height}}" aria-label="{{item.alt}}">
             <source src="{{base item.src}}" type="{{item.mime}}">
@@ -10,6 +14,8 @@
         </video>
         {{else if item.migration}}
         {{> migration}}
+        {{else if item.orchestration}}
+        {{> agentWorkflow}}
         {{else}}
         <div class="concept-visual concept-visual--{{item.layout}}">
             <p class="concept-title">{{item.title}}</p>
@@ -17,7 +23,7 @@
         </div>
         {{/if}}
     </div>
-    <figcaption class="media-caption">{{item.caption}}</figcaption>
+    <figcaption class="media-caption">{{item.caption}}{{#if item.gallery}}<span class="gallery-hint">{{@root.ui.mediaOpenFull}}</span>{{/if}}</figcaption>
     {{#if item.reviewPlaceholder}}<aside class="media-review" id="review-media-{{slot}}" data-review-slot="{{slot}}"><p class="review-title"><strong>{{@root.ui.reviewAction}}: {{item.placeholder}}</strong></p><p>{{item.brief}}</p><p class="review-helper">{{@root.ui.reviewLocalOnly}}</p></aside>{{/if}}
     {{#if item.video}}<p class="media-transcript">{{item.transcript}}</p>{{/if}}
 </figure>

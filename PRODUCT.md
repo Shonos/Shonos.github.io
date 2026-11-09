@@ -30,6 +30,8 @@ Practical AI and software engineering grounded in problem diagnosis, tradeoffs, 
 
 Career records in the separate `shauna-career` repository distinguish recollection from CV-derived claims. Use public-safe summaries only; never bundle private evidence or internal source documents. Application modernization, reusable HTTP integrations, React delivery, engineering AI tooling, and a personal credit-card information project are supported. No unmeasured AI productivity claims, absolute zero-impact claims, unsupported Principal title, or invented SQL-tuning results. Availability, confidential details, employment-date conflicts, and publication of new metrics remain unconfirmed. Do not invent a downloadable résumé.
 
+Owner clarification: Domain's Playwright backend feature suite contained more than 400 tests, covering reserving, booking, and agency/agent creation, update, and deletion. Failed tests blocked production deployment. EKS separately used rolling pod replacement as new-version pods became healthy; focus the experience on complete feature coverage and the deployment gate, not the rollout strategy. The suite count does not imply sole authorship of every test.
+
 ## Product Principles
 
 - Business problem before technology inventory.

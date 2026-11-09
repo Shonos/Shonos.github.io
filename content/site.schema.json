@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "additionalProperties": false,
-  "required": ["identity", "metadata", "media", "migration", "review", "navigation", "legacyRoutes", "ui", "hero", "services", "ai", "work", "approach", "experience", "contact", "social", "analytics"],
+  "required": ["identity", "metadata", "media", "migration", "orchestration", "review", "navigation", "legacyRoutes", "ui", "hero", "services", "ai", "work", "approach", "experience", "contact", "social", "analytics"],
   "properties": {
     "identity": {
       "type": "object", "additionalProperties": false,
@@ -20,6 +20,55 @@
     "brands": { "type": "object", "propertyNames": { "enum": ["Domain", "carsales", ".NET"] }, "additionalProperties": { "type": "object", "additionalProperties": false, "required": ["src", "width", "height"], "properties": { "src": { "$ref": "#/$defs/asset" }, "darkSrc": { "$ref": "#/$defs/asset" }, "width": { "type": "integer", "minimum": 1, "maximum": 4096 }, "height": { "type": "integer", "minimum": 1, "maximum": 4096 } } } },
     "media": { "type": "object", "required": ["featured", "agents", "personal-project"], "propertyNames": { "pattern": "^[a-z][a-z0-9-]*$" }, "additionalProperties": { "$ref": "#/$defs/media" } },
     "review": { "type": "object", "additionalProperties": false, "required": ["career", "availability", "case-studies"], "properties": { "career": { "$ref": "#/$defs/reviewCheck" }, "availability": { "$ref": "#/$defs/reviewCheck" }, "case-studies": { "$ref": "#/$defs/reviewCheck" } } },
+    "orchestration": {
+      "type": "object", "additionalProperties": false,
+      "required": ["title", "classification", "mapLabel", "explanation", "controls", "nodes", "routes"],
+      "properties": {
+        "title": { "$ref": "#/$defs/text" }, "classification": { "$ref": "#/$defs/text" },
+        "mapLabel": { "$ref": "#/$defs/text" }, "explanation": { "$ref": "#/$defs/text" },
+        "controls": {
+          "type": "object", "additionalProperties": false,
+          "required": ["play", "pause", "replay", "step", "routes", "stages", "written", "reducedMotion"],
+          "properties": {
+            "play": { "$ref": "#/$defs/text" }, "pause": { "$ref": "#/$defs/text" }, "replay": { "$ref": "#/$defs/text" }, "step": { "$ref": "#/$defs/text" },
+            "routes": { "$ref": "#/$defs/text" }, "stages": { "$ref": "#/$defs/text" }, "written": { "$ref": "#/$defs/text" }, "reducedMotion": { "$ref": "#/$defs/text" }
+          }
+        },
+        "nodes": {
+          "type": "array", "minItems": 6, "maxItems": 6,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["id", "title", "detail"],
+            "properties": {
+              "id": { "enum": ["developer", "orchestrator", "planner", "researcher", "builders", "testers"] },
+              "title": { "$ref": "#/$defs/text" }, "detail": { "$ref": "#/$defs/text" }
+            }
+          }
+        },
+        "routes": {
+          "type": "array", "minItems": 2, "maxItems": 2,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["id", "title", "summary", "stages"],
+            "properties": {
+              "id": { "enum": ["ready-to-build", "need-more-context"] }, "title": { "$ref": "#/$defs/text" }, "summary": { "$ref": "#/$defs/text" },
+              "stages": {
+                "type": "array", "minItems": 9, "maxItems": 13,
+                "items": {
+                  "type": "object", "additionalProperties": false, "required": ["id", "title", "description"],
+                  "properties": {
+                    "id": { "enum": ["brief", "plan", "plan-ready", "context-needed", "research", "findings", "replan", "revised-plan", "build", "implementation", "test", "verification", "review", "approval"] },
+                    "title": { "$ref": "#/$defs/text" }, "description": { "$ref": "#/$defs/text" }
+                  }
+                }
+              }
+            },
+            "allOf": [
+              { "if": { "properties": { "id": { "const": "ready-to-build" } } }, "then": { "properties": { "stages": { "type": "array", "minItems": 9, "maxItems": 9 } } } },
+              { "if": { "properties": { "id": { "const": "need-more-context" } } }, "then": { "properties": { "stages": { "type": "array", "minItems": 13, "maxItems": 13 } } } }
+            ]
+          }
+        }
+      }
+    },
     "migration": {
       "type": "object", "additionalProperties": false,
       "required": ["customers", "router", "existing", "replacement", "statuses", "stages"],
@@ -32,7 +81,7 @@
     "navigation": { "type": "array", "minItems": 1, "maxItems": 6, "items": { "type": "object", "additionalProperties": false, "required": ["id", "label"], "properties": { "id": { "$ref": "#/$defs/sectionId" }, "label": { "$ref": "#/$defs/text" } } } },
     "legacyRoutes": { "type": "object", "minProperties": 1, "propertyNames": { "pattern": "^/[a-z][a-z0-9-]*$" }, "additionalProperties": { "$ref": "#/$defs/sectionId" } },
     "ui": { "type": "object", "minProperties": 1, "additionalProperties": { "$ref": "#/$defs/text" } },
-    "hero": { "type": "object", "required": ["title", "focus", "close", "description", "stack", "employers"], "properties": { "stack": { "$ref": "#/$defs/textList" }, "employers": { "$ref": "#/$defs/textList" } }, "additionalProperties": { "$ref": "#/$defs/text" } },
+    "hero": { "type": "object", "required": ["title", "focus", "close", "description", "stack", "employers", "proofSlug"], "properties": { "stack": { "$ref": "#/$defs/textList" }, "employers": { "$ref": "#/$defs/textList" }, "proofSlug": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" } }, "additionalProperties": { "$ref": "#/$defs/text" } },
     "services": { "type": "object", "additionalProperties": false, "required": ["title", "intro", "items"], "properties": { "title": { "$ref": "#/$defs/text" }, "intro": { "$ref": "#/$defs/text" }, "items": { "type": "array", "minItems": 1, "items": { "type": "object", "additionalProperties": false, "required": ["icon", "title", "description", "offer", "deliverable", "link", "target"], "properties": { "icon": { "enum": ["workflow", "layers", "spark"] }, "title": { "$ref": "#/$defs/text" }, "description": { "$ref": "#/$defs/text" }, "offer": { "$ref": "#/$defs/text" }, "deliverable": { "$ref": "#/$defs/text" }, "link": { "$ref": "#/$defs/text" }, "target": { "$ref": "#/$defs/sectionId" } } } } } },
     "ai": { "type": "object", "required": ["title", "intro", "stories", "workflowTitle", "workflowLabel", "workflow", "boundary"], "properties": { "stories": { "type": "array", "minItems": 1, "items": { "type": "object", "additionalProperties": false, "required": ["kind", "title", "description", "detail", "tags"], "properties": { "kind": { "$ref": "#/$defs/text" }, "title": { "$ref": "#/$defs/text" }, "description": { "$ref": "#/$defs/text" }, "detail": { "$ref": "#/$defs/text" }, "tags": { "$ref": "#/$defs/textList" }, "url": { "$ref": "#/$defs/url" }, "link": { "$ref": "#/$defs/text" } } } }, "workflow": { "$ref": "#/$defs/blocks" } }, "additionalProperties": { "$ref": "#/$defs/text" } },
     "work": { "type": "object", "additionalProperties": false, "required": ["title", "intro", "cases"], "properties": { "title": { "$ref": "#/$defs/text" }, "intro": { "$ref": "#/$defs/text" }, "cases": { "type": "array", "minItems": 1, "items": { "type": "object", "required": ["slug", "client", "category", "title", "shortTitle", "summary", "problem", "decision", "context", "ownership", "outcomes", "result", "technical", "diagram", "takeaway", "technologies"], "properties": { "slug": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" }, "outcomes": { "$ref": "#/$defs/textList" }, "technical": { "$ref": "#/$defs/blocks" }, "diagram": { "type": "array", "minItems": 1, "items": { "type": "object", "additionalProperties": false, "required": ["label", "detail"], "properties": { "label": { "$ref": "#/$defs/text" }, "detail": { "$ref": "#/$defs/text" } } } }, "technologies": { "$ref": "#/$defs/textList" } }, "additionalProperties": { "$ref": "#/$defs/text" } } } } },
@@ -43,13 +92,18 @@
     "analytics": { "type": "object", "additionalProperties": false, "required": ["measurementId", "allowedHosts"], "properties": { "measurementId": { "type": "string", "pattern": "^G-[A-Z0-9]+$" }, "allowedHosts": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "maxLength": 253, "pattern": "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$" } } } }
   },
   "$defs": {
+    "galleryImage": { "type": "object", "additionalProperties": false, "required": ["src", "alt", "label", "width", "height"], "properties": {
+      "src": { "type": "string", "pattern": "^(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+\\.(?:avif|jpe?g|png|webp)$" }, "alt": { "$ref": "#/$defs/text" }, "label": { "$ref": "#/$defs/text" },
+      "width": { "type": "integer", "minimum": 1, "maximum": 8192 }, "height": { "type": "integer", "minimum": 1, "maximum": 8192 }
+    } },
     "reviewCheck": { "type": "object", "additionalProperties": false, "required": ["title", "description", "resolved"], "properties": { "title": { "$ref": "#/$defs/text" }, "description": { "$ref": "#/$defs/text" }, "resolved": { "type": "boolean" } } },
     "media": {
       "type": "object", "additionalProperties": false,
       "required": ["kind", "publish", "layout", "width", "height", "title", "caption", "placeholder", "brief", "nodes"],
       "properties": {
-        "kind": { "enum": ["pending", "image", "video"] }, "publish": { "type": "boolean" }, "reviewed": { "type": "boolean" },
-        "layout": { "enum": ["migration", "integration", "product", "workflow"] },
+        "kind": { "enum": ["pending", "image", "video", "gallery"] }, "publish": { "type": "boolean" }, "reviewed": { "type": "boolean" },
+        "layout": { "enum": ["migration", "integration", "product", "workflow", "orchestration"] },
+        "galleryLayout": { "enum": ["responsive", "mobile"] }, "images": { "type": "array", "minItems": 2, "maxItems": 6, "items": { "$ref": "#/$defs/galleryImage" } },
         "width": { "type": "integer", "minimum": 1, "maximum": 8192 }, "height": { "type": "integer", "minimum": 1, "maximum": 8192 },
         "title": { "$ref": "#/$defs/text" }, "caption": { "$ref": "#/$defs/text" }, "placeholder": { "$ref": "#/$defs/text" }, "brief": { "$ref": "#/$defs/text" },
         "nodes": { "type": "array", "minItems": 3, "maxItems": 4, "items": { "type": "object", "additionalProperties": false, "required": ["title", "detail"], "properties": { "title": { "$ref": "#/$defs/text" }, "detail": { "$ref": "#/$defs/text" } } } },
@@ -62,6 +116,7 @@
         { "if": { "properties": { "kind": { "const": "pending" } } }, "then": { "properties": { "publish": { "const": false } } } },
         { "if": { "properties": { "kind": { "const": "image" } } }, "then": { "required": ["src", "alt"] } },
         { "if": { "properties": { "kind": { "const": "video" } } }, "then": { "required": ["src", "alt", "poster", "mime", "hasAudio", "transcript"] } },
+        { "if": { "properties": { "kind": { "const": "gallery" } } }, "then": { "required": ["images", "galleryLayout"] } },
         { "if": { "required": ["hasAudio"], "properties": { "hasAudio": { "const": true } } }, "then": { "required": ["captions"] } }
       ]
     },

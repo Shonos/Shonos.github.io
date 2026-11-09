@@ -1,0 +1,47 @@
+<div class="agent-workflow" data-agent-workflow data-agent-route="ready-to-build" data-agent-state="brief" data-agent-playing="false"
+    data-agent-play-label="{{@root.orchestration.controls.play}}" data-agent-pause-label="{{@root.orchestration.controls.pause}}" data-agent-step-label="{{@root.orchestration.controls.step}}">
+    <div class="agent-workflow-header">
+        <div><p class="agent-workflow-title">{{@root.orchestration.title}}</p><p class="agent-workflow-classification">{{@root.orchestration.classification}}</p></div>
+        <div class="agent-workflow-playback" data-agent-playback hidden>
+            <button type="button" data-agent-play>{{@root.orchestration.controls.play}}</button>
+            <button type="button" data-agent-replay>{{@root.orchestration.controls.replay}}</button>
+        </div>
+    </div>
+    <div class="agent-workflow-route-picker" data-agent-enhancement hidden role="group" aria-label="{{@root.orchestration.controls.routes}}">
+        {{#each @root.orchestration.routes}}<button type="button" data-agent-route-choice="{{id}}" aria-pressed="false">{{title}}</button>{{/each}}
+    </div>
+    <div class="agent-workflow-map" data-agent-map role="group" aria-label="{{@root.orchestration.mapLabel}}">
+        <svg class="agent-workflow-connections" data-agent-connections aria-hidden="true" fill="none">
+            <defs><marker data-agent-arrow viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1L7 4L1 7"/></marker></defs>
+            <path class="agent-workflow-wire" data-agent-link="developer"/>
+            <path class="agent-workflow-wire" data-agent-link="planner"/>
+            <path class="agent-workflow-wire" data-agent-link="researcher"/>
+            <path class="agent-workflow-wire" data-agent-link="builders"/>
+            <path class="agent-workflow-wire" data-agent-link="testers"/>
+            <path class="agent-workflow-edge" data-agent-edge="developer-orchestrator"/>
+            <path class="agent-workflow-edge" data-agent-edge="orchestrator-developer"/>
+            <path class="agent-workflow-edge" data-agent-edge="orchestrator-planner"/>
+            <path class="agent-workflow-edge" data-agent-edge="planner-orchestrator"/>
+            <path class="agent-workflow-edge" data-agent-edge="orchestrator-researcher"/>
+            <path class="agent-workflow-edge" data-agent-edge="researcher-orchestrator"/>
+            <path class="agent-workflow-edge" data-agent-edge="orchestrator-builders"/>
+            <path class="agent-workflow-edge" data-agent-edge="builders-orchestrator"/>
+            <path class="agent-workflow-edge" data-agent-edge="orchestrator-testers"/>
+            <path class="agent-workflow-edge" data-agent-edge="testers-orchestrator"/>
+            <circle class="agent-workflow-signal" data-agent-signal r="4" hidden/>
+        </svg>
+        {{#each @root.orchestration.nodes}}<div class="agent-workflow-node" data-agent-node="{{id}}" data-agent-active="false"><strong>{{title}}</strong><span>{{detail}}</span></div>{{/each}}
+    </div>
+    <div class="agent-workflow-detail" data-agent-enhancement hidden>
+        <p data-agent-announcement aria-live="polite" aria-atomic="true"><span class="agent-workflow-count" data-agent-count></span><strong data-agent-current-title></strong><span data-agent-current-description></span></p>
+    </div>
+    <div class="agent-workflow-stage-panels" data-agent-enhancement hidden>
+        {{#each @root.orchestration.routes}}<div data-agent-route-panel="{{id}}"><ol class="agent-workflow-stages" aria-label="{{@root.orchestration.controls.stages}}">{{#each stages}}<li data-agent-stage="{{id}}"><button type="button" aria-pressed="false">{{title}}</button><p data-agent-stage-description hidden>{{description}}</p></li>{{/each}}</ol></div>{{/each}}
+    </div>
+    <p class="agent-workflow-reduced" data-agent-reduced hidden>{{@root.orchestration.controls.reducedMotion}}</p>
+    <details class="agent-workflow-written" data-agent-written open>
+        <summary>{{@root.orchestration.controls.written}}</summary>
+        <p>{{@root.orchestration.explanation}}</p>
+        {{#each @root.orchestration.routes}}<p><strong>{{title}}.</strong> {{summary}}</p>{{/each}}
+    </details>
+</div>

@@ -22,12 +22,16 @@
   },
   "media": {
     "featured": {
-      "kind": "pending", "publish": false, "layout": "migration", "width": 1600, "height": 1100,
-      "title": "Move forward. Keep the business moving.",
-      "caption": "Illustrative rollout · not live traffic",
+      "kind": "gallery", "publish": true, "layout": "product", "galleryLayout": "responsive", "width": 2553, "height": 1368,
+      "title": "A modern web experience for Redbook.",
+      "caption": "Supplied Redbook screenshots · desktop search and mobile vehicle features",
+      "images": [
+        { "src": "assets/work/redbook-desktop-search.png", "alt": "Redbook desktop homepage with vehicle research filters and a search action.", "label": "Desktop · vehicle search", "width": 2553, "height": 1368 },
+        { "src": "assets/work/redbook-mobile-features.png", "alt": "Redbook mobile vehicle-details page showing the Features tab and a list of standard features.", "label": "Mobile web · vehicle features", "width": 534, "height": 1144 }
+      ],
       "placeholder": "Featured project screenshot or walkthrough",
       "brief": "A clear product view or a short recording. Show the problem, the change, and your contribution.",
-      "nodes": [{ "title": "Existing system", "detail": ".NET Framework" }, { "title": "Shared behavior", "detail": "Compare before switching" }, { "title": "Next version", "detail": ".NET on AWS" }]
+      "nodes": [{ "title": "Desktop web", "detail": "React + TypeScript" }, { "title": "Mobile web", "detail": "Angular" }, { "title": "Product context", "detail": "Rendering, search, team conventions" }]
     },
     "modernization": {
       "kind": "pending", "publish": false, "layout": "migration", "width": 1600, "height": 1000,
@@ -46,28 +50,36 @@
       "nodes": [{ "title": "Applications", "detail": "APIs + background jobs" }, { "title": "Shared HTTP library", "detail": "OAuth + resilience" }, { "title": "Existing services", "detail": "Configurable client boundaries" }]
     },
     "product": {
-      "kind": "pending", "publish": false, "layout": "product", "width": 1600, "height": 1000,
+      "kind": "gallery", "publish": true, "layout": "product", "galleryLayout": "responsive", "width": 2553, "height": 1368,
       "title": "The product comes before the framework.",
-      "caption": "Desktop and mobile choices · conceptual illustration",
+      "caption": "Supplied Redbook screenshots · desktop search and mobile vehicle features",
+      "images": [
+        { "src": "assets/work/redbook-desktop-search.png", "alt": "Redbook desktop homepage with vehicle research filters and a search action.", "label": "Desktop · vehicle search", "width": 2553, "height": 1368 },
+        { "src": "assets/work/redbook-mobile-features.png", "alt": "Redbook mobile vehicle-details page showing the Features tab and a list of standard features.", "label": "Mobile web · vehicle features", "width": 534, "height": 1144 }
+      ],
       "placeholder": "Approved product screenshots",
       "brief": "Desktop and mobile views from the relevant work period, with your contribution identified.",
       "nodes": [{ "title": "Desktop web", "detail": "React + TypeScript" }, { "title": "Mobile web", "detail": "Angular" }, { "title": "Product context", "detail": "Rendering, search, team conventions" }]
     },
     "agents": {
-      "kind": "pending", "publish": false, "layout": "workflow", "width": 1600, "height": 1100,
-      "title": "Useful work. Visible checkpoints.",
-      "caption": "Illustrative workflow · not a live agent run",
-      "placeholder": "Agent workflow recording",
-      "brief": "A real task, approved tool use, checks, and a useful result. A labeled sandbox recording is welcome.",
+      "kind": "pending", "publish": false, "reviewed": true, "layout": "orchestration", "width": 1600, "height": 1100,
+      "title": "One task. The right agent at each step.",
+      "caption": "Illustrative agent orchestration · not a live agent run",
+      "placeholder": "Agent workflow illustration",
+      "brief": "Your requested orchestration animation replaces the recording space. No live agent execution is implied.",
       "nodes": [{ "title": "Context", "detail": "A bounded task" }, { "title": "Tools", "detail": "Approved access" }, { "title": "Checks", "detail": "Inspect the result" }, { "title": "Review", "detail": "Human approval" }]
     },
     "personal-project": {
-      "kind": "pending", "publish": false, "layout": "product", "width": 1600, "height": 1000,
+      "kind": "gallery", "publish": true, "layout": "product", "galleryLayout": "mobile", "width": 583, "height": 1266,
       "title": "From information to something useful.",
-      "caption": "Personal project visual space",
+      "caption": "Cards Guide PH · reward selection and card results · personal project",
+      "images": [
+        { "src": "assets/work/cards-guide-ph-home.png", "alt": "Cards Guide PH home screen with Cashback, Rewards, and Travel choices and a card-search action.", "label": "Choose reward preferences", "width": 583, "height": 1266 },
+        { "src": "assets/work/cards-guide-ph-results.png", "alt": "Cards Guide PH results screen with filters and a credit-card comparison result.", "label": "Compare card results", "width": 591, "height": 1281 }
+      ],
       "placeholder": "Personal project screenshot",
-      "brief": "A Card Guide PH screen or another personal project, with one sentence explaining the feature.",
-      "nodes": [{ "title": "Information", "detail": "AI-assisted extraction" }, { "title": "Interface", "detail": "React" }, { "title": "Personal project", "detail": "Card Guide PH" }]
+      "brief": "A Cards Guide PH screen or another personal project, with one sentence explaining the feature.",
+      "nodes": [{ "title": "Information", "detail": "AI-assisted extraction" }, { "title": "Interface", "detail": "React" }, { "title": "Personal project", "detail": "Cards Guide PH" }]
     }
   },
   "migration": {
@@ -79,6 +91,61 @@
       { "id": "check", "title": "Check", "description": "The replacement is checked before it receives customer traffic." },
       { "id": "share", "title": "Share", "description": "Both systems serve as traffic moves gradually to the replacement." },
       { "id": "retire", "title": "Retire", "description": "All traffic uses the new system. The old system is turned off." }
+    ]
+  },
+  "orchestration": {
+    "title": "One conversation. Deliberate handoffs.",
+    "classification": "Illustrative workflow · not a live run",
+    "mapLabel": "Developer and specialist agents connected through a central orchestrator",
+    "explanation": "The developer gives the orchestrator a task. The orchestrator asks the planner for a plan and receives the response. Every specialist hands its work back to the orchestrator; specialists do not pass tasks directly to one another.",
+    "controls": {
+      "play": "Play", "pause": "Pause", "replay": "Replay", "step": "Step",
+      "routes": "Choose an illustrative route", "stages": "Select a handoff", "written": "Read the workflow",
+      "reducedMotion": "Motion is off. Choose either route and select any handoff to explore it."
+    },
+    "nodes": [
+      { "id": "developer", "title": "Developer", "detail": "Brief / approval" },
+      { "id": "orchestrator", "title": "Orchestrator", "detail": "Sonnet" },
+      { "id": "planner", "title": "Planner", "detail": "Claude Opus" },
+      { "id": "researcher", "title": "Researcher", "detail": "Sonnet / Opus" },
+      { "id": "builders", "title": "Builders", "detail": "Build work" },
+      { "id": "testers", "title": "Testers", "detail": "Verification" }
+    ],
+    "routes": [
+      {
+        "id": "ready-to-build", "title": "Ready to build",
+        "summary": "The plan returns to the orchestrator, which hands implementation to builders and receives it back. It then calls testers and receives their review. Finally, the orchestrator returns to the developer for approval. Research is skipped when the plan has enough context.",
+        "stages": [
+          { "id": "brief", "title": "Share the task", "description": "The developer gives the task and its constraints to the orchestrator." },
+          { "id": "plan", "title": "Ask the planner", "description": "The orchestrator sends the initial task to the planner, Claude Opus." },
+          { "id": "plan-ready", "title": "Return the plan", "description": "The completed plan returns to the orchestrator. There is enough context to build; research is not needed." },
+          { "id": "build", "title": "Call builders", "description": "The orchestrator hands the planned implementation work to builder agents." },
+          { "id": "implementation", "title": "Return the work", "description": "The builders return their implementation to the orchestrator, not directly to the testers." },
+          { "id": "test", "title": "Call testers", "description": "The orchestrator hands the implementation and the plan's checks to tester agents." },
+          { "id": "verification", "title": "Return the review", "description": "The testers return their findings to the orchestrator. This illustration does not run checks or claim a test result." },
+          { "id": "review", "title": "Request approval", "description": "The orchestrator brings the work and review back to the developer for a decision." },
+          { "id": "approval", "title": "Developer decides", "description": "The sequence stops at developer approval. This is an explanation of handoffs, not live agent execution." }
+        ]
+      },
+      {
+        "id": "need-more-context", "title": "Need more context",
+        "summary": "If the planner needs information, its request returns to the orchestrator. The orchestrator calls the researcher, receives the findings, and sends them back to the planner. The revised plan returns through the orchestrator before building, testing, and developer approval. Research happens once on this example route, not in an endless loop.",
+        "stages": [
+          { "id": "brief", "title": "Share the task", "description": "The developer gives the task and its constraints to the orchestrator." },
+          { "id": "plan", "title": "Ask the planner", "description": "The orchestrator sends the initial task to the planner, Claude Opus." },
+          { "id": "context-needed", "title": "Request context", "description": "The planner needs more information. Its request returns to the orchestrator rather than going straight to the researcher." },
+          { "id": "research", "title": "Call researcher", "description": "The orchestrator sends the information request to the researcher, Sonnet / Opus. This branch is conditional." },
+          { "id": "findings", "title": "Return findings", "description": "The researcher returns its findings to the orchestrator, not directly to the planner." },
+          { "id": "replan", "title": "Revisit the plan", "description": "The orchestrator sends the new context back to the planner to revise the plan." },
+          { "id": "revised-plan", "title": "Return revised plan", "description": "The revised plan returns to the orchestrator. The example can now move on to implementation." },
+          { "id": "build", "title": "Call builders", "description": "The orchestrator hands the revised implementation plan to builder agents." },
+          { "id": "implementation", "title": "Return the work", "description": "The builders return their implementation to the orchestrator, not directly to the testers." },
+          { "id": "test", "title": "Call testers", "description": "The orchestrator hands the implementation and the plan's checks to tester agents." },
+          { "id": "verification", "title": "Return the review", "description": "The testers return their findings to the orchestrator. This illustration does not run checks or claim a test result." },
+          { "id": "review", "title": "Request approval", "description": "The orchestrator brings the work and review back to the developer for a decision." },
+          { "id": "approval", "title": "Developer decides", "description": "The sequence stops at developer approval. This is an explanation of handoffs, not live agent execution." }
+        ]
+      }
     ]
   },
   "review": {
@@ -149,6 +216,7 @@
     "workflowControls": "Explore the illustrative agent workflow",
     "motionReplay": "Replay the illustration",
     "mediaError": "This media couldn't load. The written explanation is still available below.",
+    "mediaOpenFull": "Select a screenshot to open the full-size image.",
     "migrationPlay": "Play migration", "migrationPause": "Pause migration", "migrationReplay": "Replay migration",
     "migrationStages": "Migration stages", "migrationReduced": "Motion is off. Select a stage to explore.",
     "reviewBanner": "Local visual review · your input needed",
@@ -180,7 +248,8 @@
     "proofModern": ".NET on AWS",
     "proofDecision": "Compare behavior. Move traffic in stages. Not one big leap.",
     "proofContext": "Application modernization",
-    "proofLink": "The thinking behind the migration",
+    "proofLink": "The thinking behind the Redbook work",
+    "proofSlug": "redbook-product-modernization",
     "credibility": "10+ years solving problems across fintech, property, and automotive marketplaces.",
     "employerLabel": "Employment experience",
     "employerNote": "Names and logos identify employment experience, not endorsement.",
@@ -237,7 +306,7 @@
         "detail": "A personal project using locally hosted models including Qwen: a practical exploration of extraction, data pipelines, and useful interfaces.",
         "tags": ["AI-assisted extraction", "React", "PostgreSQL"],
         "url": "https://ccwatcher.shaunalonzo.com/",
-        "link": "Explore Card Guide PH"
+        "link": "Explore Cards Guide PH"
       }
     ],
     "workflowTitle": "From a clear task to a checked result.",
@@ -257,26 +326,30 @@
       {
         "slug": "dotnet-modernization",
         "media": "modernization",
-        "preview": "Modern .NET on AWS. Shared behavior and staged traffic changes instead of a big-bang rewrite.",
+        "preview": "More than 400 Playwright backend feature tests. Failed tests blocked production deployment.",
         "client": "Property marketplace",
         "category": "Professional work · .NET / AWS",
         "title": "Move the platform forward. Bring existing customers with it.",
         "shortTitle": "Modernizing live .NET applications",
-        "summary": "A staged application migration, not a big-bang replacement. Compatibility checks and incremental traffic changes made the approach reusable for later upgrades.",
+        "summary": "Modernizing .NET applications meant checking complete backend features, not just successful builds. A Playwright suite of more than 400 feature tests covered business workflows and blocked production deployment when tests failed.",
         "problem": "Legacy .NET Framework applications and background workers needed to move to modern .NET, while existing clients continued to rely on the same behavior.",
         "decision": "Share compatible code, isolate framework-specific concerns, and run the new applications alongside the old ones. Check behavior before increasing traffic rather than assume a successful build means a safe release.",
         "context": "A rewrite would have coupled the framework change to unnecessary behavioral changes. Keeping compatibility explicit made it possible to investigate differences before asking customers to depend on the new version.",
         "ownership": "I owned the application migration design, implementation, CI/CD changes, and production deployment. Platform engineers supplied the container-platform golden path. The wider team contributed to the evolving test suite.",
         "outcomes": [
+          "More than 400 Playwright backend feature tests covered reserving, booking, and agency and agent data lifecycles: create test records, update them, and delete them.",
+          "Failed feature tests blocked production deployment. The suite checked backend business workflows, not just whether new pods were healthy.",
           "The initial migration moved .NET Framework applications on Windows to .NET 6 on ECS. Later upgrades moved to .NET 8 on ECS and then .NET 10 on EKS.",
           "Response comparisons caught differences that could be fixed before cutover. Later upgrades reused the staged rollout and API regression approach.",
           "During the initial cutover, no HTTP 500s or drop in incoming traffic were observed in the monitoring used for that release."
         ],
-        "result": "A repeatable migration approach, rather than a one-off rewrite.",
+        "result": "Complete backend feature checks as a production deployment gate.",
         "technical": [
+          { "title": "Complete backend feature coverage", "description": "The Playwright suite contained more than 400 backend feature tests, including reserving, booking, and agency and agent data lifecycles. Tests created test agencies and agents, updated their data, and deleted them, exercising complete workflows rather than only isolated endpoint checks." },
+          { "title": "A production deployment gate", "description": "The suite ran after staging deployments. If feature tests failed, production deployment was blocked. This gate was separate from the EKS rollout strategy." },
           { "title": "Compatibility first", "description": "Shared .NET Standard code bridged the applications. Controllers, dependency injection, and Windows-specific dependencies were handled separately." },
           { "title": "Validate before switching", "description": "API responses were compared. New workers initially logged event receipt without sending emails or applying updates, while legacy workers continued production processing." },
-          { "title": "Traffic moved in stages", "description": "Dependency checks preceded gradual load-balancer traffic changes. A later Playwright API suite ran after staging deployments and was required to pass before production canary deployment." }
+          { "title": "Rolling updates on EKS", "description": "During EKS rolling updates, previous-version pods were gradually switched off as new-version pods became healthy. Pod health governed that rollout; the Playwright feature suite was the separate gate before production deployment." }
         ],
         "diagram": [
           { "label": "Keep clients compatible", "detail": "Shared behavior, explicit boundaries" },
@@ -372,7 +445,7 @@
     "hiringTitle": "Building your engineering team?",
     "hiringDescription": "The same judgment and ownership, as part of your team.",
     "items": [
-      { "company": "Domain", "date": "2023 - Present", "position": "Senior Software Engineer", "summary": "Application modernization, service integrations, API testing, and practical engineering AI tooling." },
+      { "company": "Domain", "date": "2023 - Present", "position": "Senior Software Engineer", "summary": "Backend feature testing with more than 400 Playwright tests covering reserving, booking, and agency and agent create/update/delete workflows. Failed tests blocked production deployment. Also application modernization, service integrations, and practical engineering AI tooling." },
       { "company": "carsales", "date": "2021 - 2023", "position": "Senior Software Engineer", "summary": "Customer-facing web delivery, React/TypeScript, server-driven UI, and backend API design." },
       { "company": "MONEYME", "date": "2020 - 2021", "position": "Senior Software Engineer", "summary": "Lending APIs, .NET applications, and e-commerce integrations in a regulated fintech environment." },
       { "company": "Nowcom", "date": "2019 - 2020", "position": "Lead Software Engineer", "summary": "Team delivery, lender API integrations, and automotive finance applications." }

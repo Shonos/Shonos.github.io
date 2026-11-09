@@ -4,6 +4,7 @@ import { initNavigation } from './navigation.js';
 import { initTheme } from './theme.js';
 import { initMedia, initMotion } from './motion.js';
 import { initMigrations } from './migration.js';
+import { initAgentWorkflows } from './agent-workflow.js';
 
 export function readSiteConfig() {
     let value = {};
@@ -43,6 +44,7 @@ export function initialize() {
     initMedia();
     initMotion();
     initMigrations();
+    initAgentWorkflows();
     trackPageView(window.location.pathname, document.title);
     const allowedEvents = new Set(['case_study_open', 'hiring_path', 'profile_open']);
     document.querySelectorAll('a[data-track]').forEach(link => {

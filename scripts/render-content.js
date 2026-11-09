@@ -86,8 +86,9 @@ export function renderTemplate(html, content, base = '/', entry = '/', pageParti
         legacyRoutes: content.legacyRoutes
     };
     const media = Object.fromEntries(Object.entries(content.media).map(([key, item]) => {
-        const hasAsset = item.publish === true && item.kind !== 'pending' && Boolean(item.src);
+        const hasAsset = item.publish === true && item.kind !== 'pending' && Boolean(item.kind === 'gallery' ? item.images?.length : item.src);
         return [key, { ...item, hasAsset, image: hasAsset && item.kind === 'image', video: hasAsset && item.kind === 'video',
+            gallery: hasAsset && item.kind === 'gallery', orchestration: item.layout === 'orchestration',
             migration: item.layout === 'migration',
             reviewPlaceholder: page.review && !hasAsset && item.reviewed !== true }];
     }));
@@ -96,8 +97,11 @@ export function renderTemplate(html, content, base = '/', entry = '/', pageParti
         page.review && !check.resolved ? { ...check, key, href: reviewLinks[key] } : null]));
     const reviewItems = Object.values(reviewChecks).filter(Boolean);
     const pendingMedia = Object.entries(media).filter(([, item]) => item.reviewPlaceholder).map(([key, item]) => ({ key, ...item }));
+    const work = { ...content.work, cases: content.work.cases.map(item => ({ ...item,
+        featuredInHero: media.featured.hasAsset && media[item.media]?.hasAsset && item.slug === content.hero.proofSlug
+    })) };
     return templates.compile(html, { strict: true })({
-        ...content, media, brands: content.brands || {}, study, page, rootPath: base,
+        ...content, media, work, brands: content.brands || {}, study, page, rootPath: base,
         reviewChecks, reviewItems, pendingMedia, reviewOutstanding: reviewItems.length + pendingMedia.length > 0,
         openGraphImage: new URL(rootedAsset(content.identity.image.src), content.identity.url).href,
         structuredData: scriptJson(structuredData), runtimeConfig: scriptJson(runtimeConfig)

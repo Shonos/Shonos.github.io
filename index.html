@@ -17,7 +17,7 @@
                 </div>
                 <aside class="hero-proof" aria-label="A decision from a real project">
                     {{> media item=media.featured slot="featured" eager=true}}
-                    <a class="proof-link" href="{{rootPath}}work/dotnet-modernization/" data-track="case_study_open" data-study="dotnet-modernization">{{hero.proofLink}} {{icon "arrow"}}</a>
+                    <a class="proof-link" href="{{rootPath}}work/{{hero.proofSlug}}/" data-track="case_study_open" data-study="{{hero.proofSlug}}">{{hero.proofLink}} {{icon "arrow"}}</a>
                 </aside>
             </div>
             <div class="container credibility"><p>{{hero.credibility}}</p><div class="employer-proof"><span class="employer-label">{{hero.employerLabel}}</span><ul class="employers">{{#each hero.employers}}<li>{{> brand name=this mark=(lookup @root.brands this)}}</li>{{/each}}</ul><p class="employer-note">{{hero.employerNote}}</p></div></div>
@@ -29,8 +29,8 @@
                 <div class="section-heading"><h2 id="work-title">{{work.title}}</h2><p>{{work.intro}}</p></div>
                 {{> reviewNote check=reviewChecks.case-studies}}
                 <div class="work-list">{{#each work.cases}}
-                    <article class="work-item">
-                        {{> media item=(lookup @root.media media) slot=media}}
+                    <article class="work-item{{#if featuredInHero}} work-item--text-only{{/if}}">
+                        {{#unless featuredInHero}}{{> media item=(lookup @root.media media) slot=media}}{{/unless}}
                         <div class="work-main"><h3><a href="{{@root.rootPath}}work/{{slug}}/" data-track="case_study_open" data-study="{{slug}}">{{shortTitle}}</a></h3><p class="work-category">{{category}}</p><p>{{preview}}</p><p class="work-outcome">{{result}}</p><a href="{{@root.rootPath}}work/{{slug}}/" class="text-link" data-track="case_study_open" data-study="{{slug}}">{{@root.ui.readStory}} {{icon "arrow"}}</a></div>
                     </article>
                 {{/each}}</div>
@@ -45,10 +45,12 @@
 
         <section class="section ai-section" id="ai" aria-labelledby="ai-title">
             <div class="container"><div class="section-heading"><h2 id="ai-title">{{ai.title}}</h2><p>{{ai.intro}}</p></div>
+                {{#if media.agents.orchestration}}<div class="agent-showcase">{{> media item=media.agents slot="agents"}}</div>{{else}}
                 <div class="workflow-showcase" data-workflow>
                     <div class="workflow-stage">{{> media item=media.agents slot="agents"}}<button class="motion-replay" type="button" data-motion-replay hidden>{{icon "workflow"}} {{ui.motionReplay}}</button></div>
                     <div class="workflow-copy"><h3>{{ai.workflowTitle}}</h3><ol class="workflow-controls" aria-label="{{ui.workflowControls}}">{{#each ai.workflow}}<li data-workflow-step="{{@index}}"><h4>{{title}}</h4><p>{{description}}</p></li>{{/each}}</ol></div>
                 </div>
+                {{/if}}
                 <div class="ai-stories">{{#each ai.stories}}<article class="ai-story"><h3>{{title}}</h3><p class="evidence-type">{{kind}}</p><p>{{description}}</p>{{#if url}}<a href="{{url}}" class="text-link" target="_blank" rel="noopener noreferrer">{{link}} {{icon "external"}}</a>{{/if}}</article>{{/each}}</div>
                 {{#if media.personal-project.reviewPlaceholder}}<div class="personal-media-slot">{{> media item=media.personal-project slot="personal-project"}}</div>{{else if media.personal-project.hasAsset}}<div class="personal-media-slot">{{> media item=media.personal-project slot="personal-project"}}</div>{{/if}}
             </div>
